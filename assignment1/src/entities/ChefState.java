@@ -8,10 +8,9 @@ public enum ChefState {
 
     DISHING_THE_PORTIONS("DSPT"),
 
-    DELIVERING_THE_PORTIONS("DVTPT"),
+    DELIVERING_THE_PORTIONS("DTPT"),
 
-    CLOSING_SERVICE("CLSVC");
-
+    CLOSING_SERVICE("CLSV");
 
     private final String description;
     
