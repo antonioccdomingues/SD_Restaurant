@@ -6,6 +6,8 @@ import genclass.GenericIO;
 
 public class MainProgram 
 {
+    private static int students_number = 7;
+    private static int courses_number = 3;
     public static void main(String[] args)
     {
         Bar bar = new Bar();
@@ -18,7 +20,7 @@ public class MainProgram
         Waiter waiter = new Waiter(WaiterState.APPRAISING_SITUATION, kitchen, bar, table);
         waiter.start();
 
-        Student[] students = new Student[7];
+        Student[] students = new Student[students_number];
         for(int i=0;i<students.length;i++)
         {
             students[i] = new Student(i,StudentState.GOING_TO_THE_RESTAURANT, bar, table);

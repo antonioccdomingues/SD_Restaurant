@@ -5,16 +5,22 @@ import genclass.*;
 
 public class Table extends Thread
 {
+    private int firstStudentID;
+
     public Table(){} 
 
     public synchronized void saluteTheClient()
     {
     }
-    public synchronized void deliverPortions()
+    public synchronized void getThePad()
     {
     }
-    public synchronized void haveAllClientsBeenServed()
+    public synchronized void deliverPortion()
     {
+    }
+    public synchronized boolean haveAllClientsBeenServed()
+    {
+        return true;
     }
     public synchronized void presentTheBill()
     {
@@ -37,8 +43,9 @@ public class Table extends Thread
     public synchronized void joinTheTalk()
     {
     }
-    public synchronized void hasEverbodyFinished()
+    public synchronized boolean hasEverbodyFinished()
     {
+        return true;
     }
     public synchronized void startEating()
     {
@@ -49,19 +56,25 @@ public class Table extends Thread
     public synchronized void honourTheBill()
     {
     }
-    public synchronized void shouldHaveArrivedEarlier()
+    public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
+        return true; 
     }
     public synchronized void addUpOnesChoice()
     {
     }
-    public synchronized void hasEverybodyChosen()
+    public synchronized boolean hasEverybodyChosen()
     {
+        return true;
     }
     public synchronized void describeTheOrder()
     {
     }
     public synchronized void exit()
     {
+    }
+    public synchronized boolean FirstStudent(int sID)
+    {
+        return false;
     }
 }

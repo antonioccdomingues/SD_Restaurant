@@ -24,12 +24,14 @@ public class Bar extends Thread
     {
     }
 
-    public synchronized void lookAround()
+    public synchronized int lookAround()
     {
+        return 0;
     }
 
-    public synchronized void sayGoodbye()
+    public synchronized boolean sayGoodbye()
     {
+        return true;
     }
 
     public synchronized void signalTheWaiter()

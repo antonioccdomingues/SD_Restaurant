@@ -27,12 +27,14 @@ public class Kitchen extends Thread
     {
     }
 
-    public synchronized void hasTheOrderBeenCompleted()
+    public synchronized boolean hasTheOrderBeenCompleted()
     {
+        return true;
     }
 
-    public synchronized void haveAllPortionsBeenDelivered()
+    public synchronized boolean haveAllPortionsBeenDelivered()
     {
+        return true;
     }
 
     public synchronized void handNoteToTheChef()

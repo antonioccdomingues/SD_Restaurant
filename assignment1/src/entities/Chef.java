@@ -37,6 +37,29 @@ public class Chef extends Thread
     public void run()
     {
         boolean firstCourse = true;
+        bar.watchTheNews();
+        kitchen.startPreparation();
 
+        do
+        {
+            if(!firstCourse)
+            {
+                kitchen.continuePreparation();
+            }
+            else
+            {
+                firstCourse = false;
+            }
+            kitchen.proceedToPresentation();
+            bar.alertTheWaiter();
+
+            while(!kitchen.haveAllPortionsBeenDelivered())
+            {
+                kitchen.haveNextPortionReady();
+                bar.alertTheWaiter();
+            }
+
+        }while(!kitchen.hasTheOrderBeenCompleted());
+        kitchen.cleanUp();
     }
 }

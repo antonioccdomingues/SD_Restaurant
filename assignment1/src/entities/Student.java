@@ -42,6 +42,38 @@ public class Student extends Thread
     @Override
     public void run()
     {
+        int sID = 0;
+        table.walkABit();
+        table.enter();
+        table.readTheMenu();
 
+        if(table.FirstStudent(sID))
+        {
+            while(!table.hasEverybodyChosen())
+            {
+                table.addUpOnesChoice();
+            }
+            bar.callTheWaiter();
+            table.describeTheOrder();
+            table.joinTheTalk();
+        }
+        else
+        {
+            table.informCompanion();
+        }
+
+        table.startEating();
+        table.endEating();
+
+        while(!table.hasEverbodyFinished()); // blocking
+
+        bar.signalTheWaiter();
+
+        if(table.shouldHaveArrivedEarlier(sID))
+        {
+            table.honourTheBill();
+        }
+
+        table.exit();
     }
 }

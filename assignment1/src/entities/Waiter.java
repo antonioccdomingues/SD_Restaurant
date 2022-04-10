@@ -36,6 +36,31 @@ public class Waiter extends Thread
     @Override
     public void run()
     {
-
+        int action;
+        while(!bar.sayGoodbye())
+        {
+            action = bar.lookAround();
+            switch(action)
+            {
+                case 0:
+                    table.saluteTheClient();
+                    break;
+                case 1:
+                    table.getThePad();
+                    kitchen.handNoteToTheChef();
+                    break;
+                case 2:
+                    while(!table.haveAllClientsBeenServed())
+                    {
+                        kitchen.collectPortion();
+                        table.deliverPortion();
+                    }
+                    break;
+                case 3:
+                    bar.prepareTheBill();
+                    table.presentTheBill();
+            }
+            bar.returningToTheBar();
+        }
     }
 }
