@@ -1,8 +1,6 @@
 package entities;
 
-import genclass.GenericIO;
-
-public class Chef 
+public class Chef extends Thread
 {
     private ChefState state;
 
@@ -16,7 +14,7 @@ public class Chef
         this.state = state;
     }
 
-    public ChefState getState()
+    public ChefState getChefState()
     {
         return this.state;
     }
@@ -25,5 +23,11 @@ public class Chef
     public String toString() 
     {
         return this.state.toString();
+    }
+
+    @Override
+    public void run()
+    {
+
     }
 }

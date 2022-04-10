@@ -1,6 +1,6 @@
 package entities;
 
-public class Waiter 
+public class Waiter extends Thread
 {
     private WaiterState state;
 
@@ -14,7 +14,7 @@ public class Waiter
         this.state = state;
     }
 
-    public WaiterState getState()
+    public WaiterState getWaiterState()
     {
         return this.state;
     }
@@ -23,5 +23,11 @@ public class Waiter
     public String toString() 
     {
         return this.state.toString(); 
+    }
+
+    @Override
+    public void run()
+    {
+
     }
 }
