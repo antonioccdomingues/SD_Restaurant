@@ -1,10 +1,11 @@
-package sharedRegions.kitchen;
+package sharedRegions;
 
 import entities.*;
 import genclass.*;
 
 public class Kitchen extends Thread 
 {
+    public Kitchen(){}
 
     public synchronized void startPreparation()
     {

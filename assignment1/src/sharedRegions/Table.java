@@ -1,11 +1,12 @@
-package sharedRegions.table;
+package sharedRegions;
 
 import entities.*;
 import genclass.*;
 
 public class Table extends Thread
 {
-    
+    public Table(){} 
+
     public synchronized void saluteTheClient()
     {
     }

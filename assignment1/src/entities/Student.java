@@ -1,14 +1,21 @@
 package entities;
 
+import sharedRegions.Bar;
+import sharedRegions.Table;
+
 public class Student extends Thread
 {
     private StudentState state;
     private int sID;
+    private Bar bar;
+    private Table table;
 
-    public Student(int id, StudentState state)
+    public Student(int id, StudentState state, Bar bar, Table table)
     {
         this.sID=id;
         this.state = state;
+        this.bar = bar;
+        this.table = table;
     }
 
     public void setState(StudentState state)

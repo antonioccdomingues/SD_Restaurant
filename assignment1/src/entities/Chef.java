@@ -1,12 +1,20 @@
 package entities;
 
+import genclass.*;
+import sharedRegions.Bar;
+import sharedRegions.Kitchen;
+
 public class Chef extends Thread
 {
     private ChefState state;
+    private Bar bar;
+    private Kitchen kitchen;
 
-    public Chef(ChefState state)
+    public Chef(ChefState state, Kitchen kitchen, Bar bar)
     {
         this.state = state;
+        this.kitchen = kitchen;
+        this.bar = bar;
     }
 
     public void setState(ChefState state)
@@ -28,6 +36,7 @@ public class Chef extends Thread
     @Override
     public void run()
     {
+        boolean firstCourse = true;
 
     }
 }

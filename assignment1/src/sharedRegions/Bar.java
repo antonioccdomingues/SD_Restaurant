@@ -1,10 +1,12 @@
-package sharedRegions.bar;
+package sharedRegions;
 
 import entities.*;
 import genclass.*;
 
 public class Bar extends Thread
 {
+
+    public Bar(){}
 
     public synchronized void watchTheNews()
     {
