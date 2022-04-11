@@ -61,5 +61,6 @@ public class Chef extends Thread
 
         }while(!kitchen.hasTheOrderBeenCompleted());
         kitchen.cleanUp();
+        GenericIO.writelnString("\033[41m Chef End Of Life \033[0m");
     }
 }

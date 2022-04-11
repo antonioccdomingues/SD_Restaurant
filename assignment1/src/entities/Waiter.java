@@ -1,6 +1,7 @@
 package entities;
 
 import sharedRegions.*;
+import genclass.*;
 
 public class Waiter extends Thread
 {
@@ -62,5 +63,6 @@ public class Waiter extends Thread
             }
             bar.returningToTheBar();
         }
+        GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
     }
 }

@@ -6,8 +6,8 @@ import genclass.GenericIO;
 
 public class MainProgram 
 {
-    private static int students_number = 7;
-    private static int courses_number = 3;
+    public static int students_number = 7;
+    public static int courses_number = 3;
     public static void main(String[] args)
     {
         Bar bar = new Bar();
@@ -27,6 +27,5 @@ public class MainProgram
             students[i].start(); 
         }
 
-        GenericIO.writelnString(students[3].getStudentState().toString());
     }
 }
