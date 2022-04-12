@@ -2,15 +2,21 @@ package sharedRegions;
 
 import entities.*;
 import genclass.*;
+
+import javax.management.remote.SubjectDelegationPermission;
+import javax.sound.sampled.SourceDataLine;
+
 import FIFO.*;
 import main.*;
 
 public class Bar extends Thread
 {
     private int firstStudentID;
-    private int studentsServed=0;
-    private boolean allStudentsServed = false;
     private int lastStudentID;
+    private int studentsSaluted=0;
+    private int studentsEntered;
+    private int studentsDone;
+    private boolean allStudentsServed = false;
     private boolean firstStudent = true;
     private final Student[] students;
     private MemFIFO<Integer> queue;
@@ -48,7 +54,9 @@ public class Bar extends Thread
         ((Waiter) Thread.currentThread()).setState(WaiterState.PRESENTING_THE_MENU);
 
         students[student_saluted].setSalutedByWaiter();
-
+        // set the seat of the student upon being saluted
+        students[student_saluted].setTableSeat(this.studentsSaluted);
+        this.studentsSaluted++;
         notifyAll();
     }
 
@@ -62,6 +70,7 @@ public class Bar extends Thread
 
     public synchronized void returningToTheBar()
     {
+        ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
     }
 
     public synchronized void prepareTheBill()
@@ -72,9 +81,9 @@ public class Bar extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
 
-        if(this.studentsServed < 7)
+        if(this.studentsSaluted < 7)
         {
-            // While the queue is empty, continue to look around
+            // While the queue is empty, continue to look for the other students
             while(this.queue.getN()==0)
             {
                 try {
@@ -85,14 +94,15 @@ public class Bar extends Thread
             }
             return 0;
         }
-        else
+        else if(this.studentsDone==7)
         {
-            return 3;
+            return 4;
         }
+        return -1;
     }
-
     public synchronized boolean sayGoodbye()
     {
+        // While we haven't said goodbye to all students
         while(!this.allStudentsServed)
         {
             try {
@@ -102,6 +112,8 @@ public class Bar extends Thread
                 e.printStackTrace();
             }
         }
+        // If we've said goodbye to everyone, the waiter can go home
+        ((Waiter) Thread.currentThread()).setCanGoHome();
         return true;
     }
 
@@ -113,15 +125,6 @@ public class Bar extends Thread
     {
     }
 
-    public synchronized void walkABit() 
-    {
-        try {
-            sleep((long) (3 + 1000 * Math.random()));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public synchronized void enter()
     {
         int sID;
@@ -130,6 +133,7 @@ public class Bar extends Thread
 
         try {
             queue.write(sID);
+            this.studentsEntered++;
         } catch (MemException e1) {
             e1.printStackTrace();
         }
@@ -139,6 +143,12 @@ public class Bar extends Thread
             this.firstStudent = false;
             this.firstStudentID = sID;
             System.out.printf("First Student %d \n", this.firstStudentID);
+        }
+        // means this is the last student thread
+        if(this.studentsEntered==7)
+        {
+            this.lastStudentID = sID;
+            System.out.printf("Last Student %d \n", this.lastStudentID);
         }
 
         // Update the state
@@ -172,10 +182,16 @@ public class Bar extends Thread
     {
         int sID;
         sID = ((Student) Thread.currentThread()).getID();
-        this.studentsServed++;
-        System.out.printf("Student %d Was served\n", sID);
-        if(this.studentsServed==7)
+        students[sID].setState(StudentState.GOING_HOME);
+        this.studentsDone++;
+        System.out.printf("Student %d Exited \n", sID);
+        if(this.studentsDone==7)
+            // Change this variables name
             this.allStudentsServed = true;
         notifyAll();
+    }
+    public synchronized boolean shouldHaveArrivedEarlier(int sID)
+    {
+        return true; 
     }
 }

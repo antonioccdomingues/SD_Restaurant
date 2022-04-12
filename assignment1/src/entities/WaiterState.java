@@ -2,19 +2,19 @@ package entities;
 
 public enum WaiterState {
     
-    APPRAISING_SITUATION("APST"),
+    APPRAISING_SITUATION("APPST"),
 
-    PRESENTING_THE_MENU("PTMN"),
+    PRESENTING_THE_MENU("PRSMN"),
 
-    TAKING_THE_ORDER("TTOD"),
+    TAKING_THE_ORDER("TKODR"),
 
-    PLACING_THE_ORDER("PTOD"),
+    PLACING_THE_ORDER("PCODR"),
 
-    WAITING_FOR_PORTION("WFPT"),
+    WAITING_FOR_PORTION("WTFPT"),
 
-    PROCESSING_THE_BILL("PTBL"),
+    PROCESSING_THE_BILL("PRCBL"),
 
-    RECEIVING_PAYMENT("RCPT");
+    RECEIVING_PAYMENT("RECPM");
 
     private WaiterState(String description){
         this.description = description;

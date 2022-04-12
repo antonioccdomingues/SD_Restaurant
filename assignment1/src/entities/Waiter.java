@@ -9,6 +9,7 @@ public class Waiter extends Thread
     private Kitchen kitchen;
     private Bar bar;
     private Table table;
+    private boolean canGoHome = false;
 
     public Waiter(WaiterState state, Kitchen kitchen, Bar bar, Table table)
     {
@@ -16,6 +17,14 @@ public class Waiter extends Thread
         this.kitchen = kitchen;
         this.bar = bar;
         this.table = table;
+    }
+
+    public boolean CanGoHome() {
+        return canGoHome;
+    }
+
+    public void setCanGoHome() {
+        this.canGoHome = true;
     }
 
     public void setState(WaiterState state)
@@ -38,7 +47,7 @@ public class Waiter extends Thread
     public void run()
     {
         int action;
-        while(!bar.sayGoodbye())
+        while(!this.CanGoHome())
         {
             action = bar.lookAround();
             switch(action)
@@ -60,6 +69,13 @@ public class Waiter extends Thread
                 case 3:
                     bar.prepareTheBill();
                     table.presentTheBill();
+                    break;
+                case 4:
+                    bar.sayGoodbye();
+                    break;
+                default:
+                    // looking around
+
             }
             bar.returningToTheBar();
         }

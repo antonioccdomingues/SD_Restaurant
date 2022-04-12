@@ -8,7 +8,9 @@ public class Student extends Thread
 {
     private StudentState state;
     private boolean salutedByWaiter = false;
+    private boolean servedByWaiter = false;
     private int sID;
+    private int tableSeat;
     private Bar bar;
     private Table table;
 
@@ -18,6 +20,24 @@ public class Student extends Thread
         this.state = state;
         this.bar = bar;
         this.table = table;
+    }
+
+    public int getTableSeat() {
+        return tableSeat;
+    }
+
+    public void setTableSeat(int tableSeat) {
+        this.tableSeat = tableSeat;
+    }
+
+    public boolean servedByWaiter() 
+    {
+        return servedByWaiter;
+    }
+
+    public void setServedByWaiter() 
+    {
+        this.servedByWaiter = true;
     }
 
     public boolean getSalutedByWaiter() 
@@ -54,7 +74,7 @@ public class Student extends Thread
     @Override
     public void run()
     {
-        bar.walkABit();
+        walkABit();
         bar.enter();
 
         table.readTheMenu();
@@ -63,8 +83,11 @@ public class Student extends Thread
         {
             while(!table.hasEverybodyChosen())
             {
+                table.prepareTheOrder();
                 table.addUpOnesChoice();
             }
+            // Means the first student has registered everybody choice
+            System.out.println("Arrived here");
             bar.callTheWaiter();
             table.describeTheOrder();
             table.joinTheTalk();
@@ -80,12 +103,21 @@ public class Student extends Thread
         while(!table.hasEverbodyFinished()); // blocking
         bar.signalTheWaiter();
 
-        if(table.shouldHaveArrivedEarlier(this.sID))
+        if(bar.shouldHaveArrivedEarlier(this.sID))
         {
             table.honourTheBill();
         }
         bar.exit();
         String s = "\033[41m Student[ " + this.sID + "] End Of Life \033[0m";
         GenericIO.writelnString(s);
+    }    
+    
+    public synchronized void walkABit() 
+    {
+        try {
+            sleep((long) (3 + 1000 * Math.random()));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

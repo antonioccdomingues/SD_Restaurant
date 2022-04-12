@@ -2,21 +2,21 @@ package entities;
 
 public enum StudentState {
     
-    GOING_TO_THE_RESTAURANT("GTTR"),
+    GOING_TO_THE_RESTAURANT("GGTRT"),
 
-    TAKING_A_SEAT_AT_THE_TABLE("TKAS"),
+    TAKING_A_SEAT_AT_THE_TABLE("TKSTT"),
 
-    SELECTING_THE_COURSES("STCR"),
+    SELECTING_THE_COURSES("SELCS"),
 
-    ORGANIZING_THE_ORDER("OTOD"),
+    ORGANIZING_THE_ORDER("OGODR"),
 
-    CHATTING_WITH_COMPANIONS("CWCP"),
+    CHATTING_WITH_COMPANIONS("CHTWC"),
 
-    ENJOYING_THE_MEAL("ETML"),
+    ENJOYING_THE_MEAL("EJYML"),
 
-    PAYING_THE_MEAL("PTML"),
+    PAYING_THE_MEAL("PYTBL"),
 
-    GOING_HOME("GOHM");
+    GOING_HOME("GGHOM");
 
     private StudentState(String description){
         this.description = description;

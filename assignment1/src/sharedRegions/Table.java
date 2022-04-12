@@ -1,12 +1,13 @@
 package sharedRegions;
 
-import FIFO.MemException;
-import FIFO.MemFIFO;
 import entities.*;
 import genclass.*;
+import java.util.ArrayList;
 
 public class Table extends Thread
 {
+    private boolean everyStudentSelected = false;
+    private int studentSelectedCourses;
 
     public Table()
     {
@@ -27,12 +28,37 @@ public class Table extends Thread
     }
     public synchronized void readTheMenu()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
+        // Means he transitioned from previous state, having selected the course
+        this.studentSelectedCourses++;
+
+        // RETIRAR ISTO DAQUI NO FUTURO
+        // RETIRAR ISTO DAQUI NO FUTURO
+        // RETIRAR ISTO DAQUI NO FUTURO
+        // RETIRAR ISTO DAQUI NO FUTURO
+        // RETIRAR ISTO DAQUI NO FUTURO
+        ((Student) Thread.currentThread()).setServedByWaiter();
     }
     public synchronized void informCompanion()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+
+        notifyAll();
+        
+        boolean served = ((Student) Thread.currentThread()).servedByWaiter();
+        // Wait untill the course is served 
+        while(!served)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public synchronized void prepareTheOrder()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
     }
     public synchronized void joinTheTalk()
     {
@@ -49,17 +75,35 @@ public class Table extends Thread
     }
     public synchronized void honourTheBill()
     {
-    }
-    public synchronized boolean shouldHaveArrivedEarlier(int sID)
-    {
-        return true; 
+        this.everyStudentSelected = true;
     }
     public synchronized void addUpOnesChoice()
     {
+        int sID = ((Student) Thread.currentThread()).getID();
+        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+
+        notifyAll();
+
+        while(!this.everyStudentSelected)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public synchronized boolean hasEverybodyChosen()
     {
-        return true;
+        if(this.studentSelectedCourses==7)
+        {
+            this.everyStudentSelected = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public synchronized void describeTheOrder()
     {

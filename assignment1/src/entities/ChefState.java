@@ -2,15 +2,15 @@ package entities;
 
 public enum ChefState {
     
-    WAITING_FOR_AN_ORDER("WFAO"),
+    WAITING_FOR_AN_ORDER("WAFOR"),
 
-    PREPARING_THE_COURSE("PPTC"),
+    PREPARING_THE_COURSE("PRPCS"),
 
-    DISHING_THE_PORTIONS("DSPT"),
+    DISHING_THE_PORTIONS("DSHPT"),
 
-    DELIVERING_THE_PORTIONS("DTPT"),
+    DELIVERING_THE_PORTIONS("DLVPT"),
 
-    CLOSING_SERVICE("CLSV");
+    CLOSING_SERVICE("CLSSV");
 
     private final String description;
     
