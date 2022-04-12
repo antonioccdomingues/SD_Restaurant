@@ -44,7 +44,7 @@ public class Waiter extends Thread
             switch(action)
             {
                 case 0:
-                    table.saluteTheClient();
+                    bar.saluteTheClient();
                     break;
                 case 1:
                     table.getThePad();

@@ -25,9 +25,9 @@ public class Student extends Thread
         return salutedByWaiter;
     }
 
-    public void setSalutedByWaiter(boolean salutedByWaiter) 
+    public void setSalutedByWaiter() 
     {
-        this.salutedByWaiter = salutedByWaiter;
+        this.salutedByWaiter = true;
     }
 
     public void setState(StudentState state)
@@ -54,15 +54,12 @@ public class Student extends Thread
     @Override
     public void run()
     {
-        try {
-            table.walkABit();
-        } catch (InterruptedException e) {
-            System.exit(1);
-        }
-        table.enter();
+        bar.walkABit();
+        bar.enter();
+
         table.readTheMenu();
 
-        if(table.FirstStudent(this.sID))
+        if(bar.FirstStudent(this.sID))
         {
             while(!table.hasEverybodyChosen())
             {
@@ -87,7 +84,7 @@ public class Student extends Thread
         {
             table.honourTheBill();
         }
-        table.exit();
+        bar.exit();
         String s = "\033[41m Student[ " + this.sID + "] End Of Life \033[0m";
         GenericIO.writelnString(s);
     }
