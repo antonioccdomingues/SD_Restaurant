@@ -87,7 +87,6 @@ public class Student extends Thread
                 table.addUpOnesChoice();
             }
             // Means the first student has registered everybody choice
-            System.out.println("Arrived here");
             bar.callTheWaiter();
             table.describeTheOrder();
             table.joinTheTalk();
@@ -105,6 +104,7 @@ public class Student extends Thread
 
         if(bar.shouldHaveArrivedEarlier(this.sID))
         {
+            System.out.printf("I was the last student %d\n",this.sID);
             table.honourTheBill();
         }
         bar.exit();

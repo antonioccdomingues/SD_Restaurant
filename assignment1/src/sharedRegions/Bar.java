@@ -12,7 +12,7 @@ import main.*;
 public class Bar extends Thread
 {
     private int firstStudentID;
-    private int lastStudentID;
+    private int lastStudentID=-1;
     private int studentsSaluted=0;
     private int studentsEntered;
     private int studentsDone;
@@ -192,6 +192,9 @@ public class Bar extends Thread
     }
     public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
-        return true; 
+        if(this.lastStudentID == sID)
+            return true; 
+        else
+            return false;
     }
 }

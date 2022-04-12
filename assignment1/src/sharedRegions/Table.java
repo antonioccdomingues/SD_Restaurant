@@ -75,6 +75,7 @@ public class Table extends Thread
     }
     public synchronized void honourTheBill()
     {
+        notifyAll();
         this.everyStudentSelected = true;
     }
     public synchronized void addUpOnesChoice()
