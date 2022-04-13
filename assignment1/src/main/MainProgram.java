@@ -2,7 +2,6 @@ package main;
 
 import entities.*;
 import sharedRegions.*;
-import genclass.GenericIO;
 
 public class MainProgram 
 {

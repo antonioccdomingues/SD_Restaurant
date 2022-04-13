@@ -8,6 +8,7 @@ public class Student extends Thread
 {
     private StudentState state;
     private boolean salutedByWaiter = false;
+    private boolean readTheMenu = false;
     private boolean servedByWaiter = false;
     private int sID;
     private int tableSeat;
@@ -20,6 +21,14 @@ public class Student extends Thread
         this.state = state;
         this.bar = bar;
         this.table = table;
+    }
+
+    public boolean getReadTheMenu() {
+        return readTheMenu;
+    }
+
+    public void setReadTheMenu() {
+        this.readTheMenu = true;
     }
 
     public int getTableSeat() {
@@ -76,14 +85,13 @@ public class Student extends Thread
     {
         walkABit();
         bar.enter();
-
-        table.readTheMenu();
+        bar.readTheMenu();
 
         if(bar.FirstStudent(this.sID))
         {
+            table.prepareTheOrder();
             while(!table.hasEverybodyChosen())
             {
-                table.prepareTheOrder();
                 table.addUpOnesChoice();
             }
             // Means the first student has registered everybody choice
@@ -96,17 +104,18 @@ public class Student extends Thread
             table.informCompanion();
         }
 
-        table.startEating();
-        table.endEating();
+     //  table.startEating();
+     //  table.endEating();
+// 
+     //  while(!table.hasEverbodyFinished()); // blocking
+     //  bar.signalTheWaiter();
+// 
+     //  if(bar.shouldHaveArrivedEarlier(this.sID))
+     //  {
+     //      System.out.printf("I was the last student %d\n",this.sID);
+     //      table.honourTheBill();
+     //  }
 
-        while(!table.hasEverbodyFinished()); // blocking
-        bar.signalTheWaiter();
-
-        if(bar.shouldHaveArrivedEarlier(this.sID))
-        {
-            System.out.printf("I was the last student %d\n",this.sID);
-            table.honourTheBill();
-        }
         bar.exit();
         String s = "\033[41m Student[ " + this.sID + "] End Of Life \033[0m";
         GenericIO.writelnString(s);
@@ -115,7 +124,7 @@ public class Student extends Thread
     public synchronized void walkABit() 
     {
         try {
-            sleep((long) (3 + 1000 * Math.random()));
+            sleep((long) (5 + 1000 * Math.random()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

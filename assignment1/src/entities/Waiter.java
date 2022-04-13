@@ -60,25 +60,27 @@ public class Waiter extends Thread
                     kitchen.handNoteToTheChef();
                     break;
                 case 2:
-                    while(!table.haveAllClientsBeenServed())
-                    {
-                        kitchen.collectPortion();
-                        table.deliverPortion();
-                    }
-                    break;
-                case 3:
-                    bar.prepareTheBill();
-                    table.presentTheBill();
-                    break;
-                case 4:
-                    bar.sayGoodbye();
-                    break;
+                 while(!table.haveAllClientsBeenServed())
+                {
+                    kitchen.collectPortion();
+                    table.deliverPortion();
+                    System.out.println("preso x3");
+                }
+                System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
+                System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
+                break;
+            //  case 3:
+            //      bar.prepareTheBill();
+            //      table.presentTheBill();
+            //      break;
+            //  case 4:
+            //      bar.sayGoodbye();
+            //      break;
                 default:
                     // looking around
-
             }
             bar.returningToTheBar();
         }
-        GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
+        GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m\n");
     }
 }

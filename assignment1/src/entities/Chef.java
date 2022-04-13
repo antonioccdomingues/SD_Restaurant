@@ -37,7 +37,7 @@ public class Chef extends Thread
     public void run()
     {
         boolean firstCourse = true;
-        bar.watchTheNews();
+        kitchen.watchTheNews();
         kitchen.startPreparation();
 
         do
@@ -58,7 +58,6 @@ public class Chef extends Thread
                 kitchen.haveNextPortionReady();
                 bar.alertTheWaiter();
             }
-
         }while(!kitchen.hasTheOrderBeenCompleted());
         kitchen.cleanUp();
         GenericIO.writelnString("\033[41m Chef End Of Life \033[0m");
