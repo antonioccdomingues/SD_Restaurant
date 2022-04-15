@@ -30,11 +30,6 @@ public class MainProgram
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        try {
-            waiter.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         for(int i=0;i<students.length;i++)
         {
             try {
@@ -42,6 +37,11 @@ public class MainProgram
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } 
+        }
+        try {
+            waiter.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

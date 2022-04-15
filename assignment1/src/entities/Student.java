@@ -104,12 +104,17 @@ public class Student extends Thread
             table.informCompanion();
         }
 
-     //  table.startEating();
-     //  table.endEating();
-// 
-     //  while(!table.hasEverbodyFinished()); // blocking
-     //  bar.signalTheWaiter();
-// 
+        do
+        {
+            table.startEating();
+            table.endEating();
+
+            table.hasEverbodyFinished();
+            bar.signalTheWaiter();
+
+        }while(!bar.isOrderDone());
+
+
      //  if(bar.shouldHaveArrivedEarlier(this.sID))
      //  {
      //      System.out.printf("I was the last student %d\n",this.sID);
@@ -121,10 +126,19 @@ public class Student extends Thread
         GenericIO.writelnString(s);
     }    
     
-    public synchronized void walkABit() 
+    public void walkABit() 
     {
         try {
-            sleep((long) (5 + 1000 * Math.random()));
+            sleep((long) (3 + 1000 * Math.random()));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void studentEating() 
+    {
+        try {
+            sleep((long) (5 + 100 * Math.random()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

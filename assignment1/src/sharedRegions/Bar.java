@@ -11,6 +11,7 @@ public class Bar extends Thread
     private int studentsSeat=0;
     private int studentsEntered;
     private int studentsDone;
+    private int coursesEaten=0;
     private boolean allStudentsServed = false;
     private boolean firstStudent = true;
     private boolean orderDone = false;
@@ -126,6 +127,7 @@ public class Bar extends Thread
         while(!this.allStudentsServed)
         {
             try {
+                System.out.printf("goodbye");
                 wait();
                 return false;
             } catch (InterruptedException e) {
@@ -139,6 +141,8 @@ public class Bar extends Thread
 
     public synchronized void signalTheWaiter()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        this.coursesEaten++;
     }
 
     public synchronized void callTheWaiter()
@@ -208,7 +212,6 @@ public class Bar extends Thread
         sID = ((Student) Thread.currentThread()).getID();
         students[sID].setState(StudentState.GOING_HOME);
         this.studentsDone++;
-        System.out.printf("Student %d Exited \n", sID);
         notifyAll();
     }
 
@@ -229,5 +232,11 @@ public class Bar extends Thread
         notifyAll();
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
+    }
+
+    public synchronized boolean isOrderDone()
+    {
+        // Here we will check if the 3 courses have been eaten
+        return true;
     }
 }

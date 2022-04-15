@@ -64,10 +64,7 @@ public class Waiter extends Thread
                 {
                     kitchen.collectPortion();
                     table.deliverPortion();
-                    System.out.println("preso x3");
                 }
-                System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
-                System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
                 break;
             //  case 3:
             //      bar.prepareTheBill();
@@ -81,6 +78,7 @@ public class Waiter extends Thread
             }
             bar.returningToTheBar();
         }
-        GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m\n");
+        System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
+        GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
     }
 }

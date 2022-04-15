@@ -8,6 +8,7 @@ public class Kitchen extends Thread
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
     private boolean portionReady = false;
+    private boolean serviceDone = false;
     private boolean allPortionsDelivered = false;
 
     public Kitchen(){}
@@ -38,6 +39,7 @@ public class Kitchen extends Thread
 
     public synchronized void cleanUp()
     {
+        this.serviceDone = true;
         notifyAll();
         // END
     }
@@ -80,12 +82,15 @@ public class Kitchen extends Thread
 
         notifyAll();
 
-        while(!this.portionReady)
+        if(!this.serviceDone)
         {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while(!this.portionReady)
+            {
+                try {
+                    wait(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

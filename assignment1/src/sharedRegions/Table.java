@@ -9,8 +9,10 @@ public class Table extends Thread
 {
     private boolean orderDescribed = false;
     private boolean informStudent = false;
+    private boolean everyBodyFinished = false;
     private int studentSelectedCourses;
     private int studentServed = 0;
+    private int studentFinishedEating;
     private final Student[] students;
     private MemFIFO<Integer> queue;
 
@@ -65,7 +67,6 @@ public class Table extends Thread
     public synchronized boolean haveAllClientsBeenServed()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
-        notifyAll();
         if(this.studentServed==7)
         {
             return true;
@@ -148,17 +149,38 @@ public class Table extends Thread
         System.out.printf("First student[%d] has been served\n",sID);
     }
 
-    public synchronized boolean hasEverbodyFinished()
+    public synchronized void hasEverbodyFinished()
     {
-        return true;
+        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+
+        while(!this.everyBodyFinished)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public synchronized void startEating()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.ENJOYING_THE_MEAL);
+
+        // Simulate eating
+        ((Student) Thread.currentThread()).studentEating();
     }
 
     public synchronized void endEating()
     {
+        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        this.studentFinishedEating++;
+        if(this.studentFinishedEating==7)
+        {
+            this.everyBodyFinished = true;
+            System.out.println("Everybody finished");
+        }
+        notifyAll();
     }
 
     public synchronized void honourTheBill()
@@ -175,7 +197,7 @@ public class Table extends Thread
         while(!this.informStudent)
         {
             try {
-                wait(200);
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
