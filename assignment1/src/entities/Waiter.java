@@ -61,19 +61,19 @@ public class Waiter extends Thread
                     kitchen.handNoteToTheChef();
                     break;
                 case 2:
-                 while(!table.haveAllClientsBeenServed())
-                {
-                    kitchen.collectPortion();
-                    table.deliverPortion();
-                }
-                break;
-            //  case 3:
-            //      bar.prepareTheBill();
-            //      table.presentTheBill();
-            //      break;
-            //  case 4:
-            //      bar.sayGoodbye();
-            //      break;
+                    while(!table.haveAllClientsBeenServed())
+                    {
+                        kitchen.collectPortion();
+                        table.deliverPortion();
+                    }
+                    break;
+                case 3:
+                    bar.prepareTheBill();
+                    table.presentTheBill();
+                    break;
+                case 4:
+                    bar.sayGoodbye();
+                    break;
             }
             bar.returningToTheBar();
         }

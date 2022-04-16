@@ -11,6 +11,7 @@ public class Kitchen extends Thread
     private boolean portionReady = false;
     private boolean serviceDone = false;
     private boolean allPortionsDelivered = false;
+    private boolean courseDone = false;
 
     public Kitchen(){}
 
@@ -37,10 +38,12 @@ public class Kitchen extends Thread
     public synchronized void continuePreparation()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.PREPARING_THE_COURSE);
+        this.courseDone = false;
     }
 
     public synchronized void cleanUp()
     {
+        ((Chef) Thread.currentThread()).setState(ChefState.CLOSING_SERVICE);
         this.serviceDone = true;
         notifyAll();
         // END
@@ -63,10 +66,14 @@ public class Kitchen extends Thread
         {
             this.coursesDelievered++;
             this.portionsDelivered=0;
+            this.courseDone = true;
+            notifyAll();
             return true;
         }
         else
+        {
             return false;
+        }
     }
 
     public synchronized void handNoteToTheChef()
@@ -91,7 +98,7 @@ public class Kitchen extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
 
-        while(!this.portionReady)
+        while(!this.portionReady & !this.courseDone)
         {
             try {
                 wait();
@@ -100,7 +107,6 @@ public class Kitchen extends Thread
             }
         }
 
-        notifyAll();
         this.portionReady = false;
         this.portionsDelivered++;
     }

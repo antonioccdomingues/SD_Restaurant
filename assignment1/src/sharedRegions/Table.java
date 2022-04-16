@@ -12,6 +12,8 @@ public class Table extends Thread
     private boolean everyBodyFinished = false;
     private boolean firstStudentJoinedTalk = false;
     private boolean orderIsDone = false;
+    private boolean billIsReady = false;
+    private boolean billIsPaid = false;
     private int studentSelectedCourses;
     private int studentServed = 0;
     private int studentFinishedEating;
@@ -78,7 +80,6 @@ public class Table extends Thread
             if(this.coursesDelivered==3)
             {
                 this.orderIsDone = true;
-                notifyAll();
             }
             return true;
         }
@@ -88,6 +89,20 @@ public class Table extends Thread
 
     public synchronized void presentTheBill()
     {
+        this.billIsReady = true;
+        // wake up the student waiting for the biill
+        notifyAll();
+        ((Waiter) Thread.currentThread()).setState(WaiterState.RECEIVING_PAYMENT);
+
+        // wait while the bill is not paid
+        while(!this.billIsPaid)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public synchronized void informCompanion()
@@ -195,6 +210,19 @@ public class Table extends Thread
 
     public synchronized void honourTheBill()
     {
+
+        // wait untill the bill is ready
+        while(!this.billIsReady)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // after the waiting cycle, we pay it
+        this.billIsPaid = true;
         notifyAll();
     }
 

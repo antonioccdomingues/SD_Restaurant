@@ -14,7 +14,7 @@ public enum StudentState {
 
     ENJOYING_THE_MEAL("EJYML"),
 
-    PAYING_THE_MEAL("PYTBL"),
+    PAYING_THE_BILL("PYTBL"),
 
     GOING_HOME("GGHOM");
 

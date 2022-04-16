@@ -113,19 +113,18 @@ public class Student extends Thread
             table.endEating();
             System.out.printf("Student[%d] finshed eating\n", this.sID);
 
-            bar.signalTheWaiter(this.sID);
             table.hasEverbodyFinished();
+            bar.signalTheWaiter(this.sID);
         }
 
-     //  if(bar.shouldHaveArrivedEarlier(this.sID))
-     //  {
-     //      System.out.printf("I was the last student %d\n",this.sID);
-     //      table.honourTheBill();
-     //  }
+        if(bar.shouldHaveArrivedEarlier(this.sID))
+        {
+            table.honourTheBill();
+            System.out.printf("Student[%d] payed the bill !!!\n", this.sID);
+        }
 
         bar.exit();
-        String s = "\033[41m Student[ " + this.sID + "] End Of Life \033[0m";
-        GenericIO.writelnString(s);
+        System.out.printf("\033[41m Student[ " + this.sID + "] End Of Life \033[0m\n");
     }    
     
     public void walkABit() 

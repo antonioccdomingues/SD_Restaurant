@@ -15,6 +15,7 @@ public class Bar extends Thread
     private boolean allStudentsServed = false;
     private boolean firstStudent = true;
     private boolean orderDone = false;
+    private boolean payBill = false;
     private boolean portionCollected = false;
     private boolean portionReady = false;
     private boolean nextCourseIsReady = false;
@@ -23,6 +24,7 @@ public class Bar extends Thread
     private boolean nextPortionReady = false;
     private boolean lastStudentSignaled = false;
     private boolean orderIsDone = false;
+    private boolean allStudentsLeft = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
 
@@ -94,12 +96,12 @@ public class Bar extends Thread
 
     public synchronized void prepareTheBill()
     {
+        ((Waiter) Thread.currentThread()).setState(WaiterState.PROCESSING_THE_BILL);
     }
 
     public synchronized int lookAround()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
-
 
         // while the waiter is not called to be 
         // awakened by other events, he simply waits here
@@ -120,6 +122,7 @@ public class Bar extends Thread
         //means there's students at the door, waiting to be saluted
         if(this.queue.getN()!=0)
         {
+            this.waiterIsRequested = false;
             return 0;
         }
         else if(this.orderDone)
@@ -134,7 +137,12 @@ public class Bar extends Thread
             this.nextCourseIsReady = true;
             return 2;
         }
-        else if(this.studentsDone==7)
+        else if(this.payBill == true)
+        {
+            this.payBill = false;
+            return 3;
+        }
+        else if(this.allStudentsLeft)
         {
             ((Waiter) Thread.currentThread()).setCanGoHome();
             return 4;
@@ -148,19 +156,8 @@ public class Bar extends Thread
 
     public synchronized boolean sayGoodbye()
     {
-
-        notifyAll();
+        ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
         // While we haven't said goodbye to all students
-        while(!this.allStudentsServed)
-        {
-            try {
-                System.out.printf("goodbye");
-                wait();
-                return false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         // If we've said goodbye to everyone, the waiter can go home
         ((Waiter) Thread.currentThread()).setCanGoHome();
         return true;
@@ -179,7 +176,7 @@ public class Bar extends Thread
             this.coursesEaten++;
             if(this.coursesEaten==3)
                 this.orderIsDone = true;
-            System.out.printf("ultimo foi %d\n",sID);
+            System.out.printf("Student[%d] was last to eat, will alert the waiter\n", sID);
             //notify the waiter
             this.waiterIsRequested = true;
             notifyAll();
@@ -252,17 +249,27 @@ public class Bar extends Thread
 
     public synchronized void exit()
     {
-        int sID;
-        sID = ((Student) Thread.currentThread()).getID();
-        students[sID].setState(StudentState.GOING_HOME);
+        ((Student) Thread.currentThread()).setState(StudentState.GOING_HOME);
         this.studentsDone++;
-        notifyAll();
+
+        if(this.studentsDone==7)
+        {
+            this.allStudentsLeft = true;
+            this.waiterIsRequested = true;
+            notifyAll();
+        }
     }
 
     public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
+        ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
         if(this.lastStudentID == sID)
+        {
+            this.waiterIsRequested = true;
+            this.payBill = true;
+            notifyAll();
             return true; 
+        }
         else
             return false;
     }
@@ -278,5 +285,4 @@ public class Bar extends Thread
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
     }
-
 }
