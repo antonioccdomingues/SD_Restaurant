@@ -17,6 +17,12 @@ public class Bar extends Thread
     private boolean orderDone = false;
     private boolean portionCollected = false;
     private boolean portionReady = false;
+    private boolean nextCourseIsReady = false;
+    private boolean waiterIsRequested = false;
+    private boolean waitingForCourse = false;
+    private boolean nextPortionReady = false;
+    private boolean lastStudentSignaled = false;
+    private boolean orderIsDone = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
 
@@ -75,9 +81,9 @@ public class Bar extends Thread
 
     public synchronized void alertTheWaiter()
     {
-        //alert the waiter , but dont block here  i think
         ((Chef) Thread.currentThread()).setState(ChefState.DELIVERING_THE_PORTIONS);
         this.portionReady = true;
+        this.waiterIsRequested = true;
         notifyAll();
     }
 
@@ -94,7 +100,22 @@ public class Bar extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
 
-        notifyAll();
+
+        // while the waiter is not called to be 
+        // awakened by other events, he simply waits here
+
+        while(!this.waiterIsRequested)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) 
+            {
+            }
+        }
+        
+        // After the wait block, means he is requested
+        // Depending on the flag that is activated, he will 
+        // do some action
 
         //means there's students at the door, waiting to be saluted
         if(this.queue.getN()!=0)
@@ -106,9 +127,11 @@ public class Bar extends Thread
             this.orderDone = false;
             return 1;
         }
-        else if(this.portionReady)
+        else if(this.portionReady & this.waitingForCourse)
         {
             this.portionReady = false;
+            this.waitingForCourse = false;
+            this.nextCourseIsReady = true;
             return 2;
         }
         else if(this.studentsDone==7)
@@ -116,7 +139,11 @@ public class Bar extends Thread
             ((Waiter) Thread.currentThread()).setCanGoHome();
             return 4;
         }
-        return -1;
+        else
+        {
+            this.waiterIsRequested = false;
+            return -1;
+        }
     }
 
     public synchronized boolean sayGoodbye()
@@ -139,17 +166,33 @@ public class Bar extends Thread
         return true;
     }
 
-    public synchronized void signalTheWaiter()
+    public synchronized void signalTheWaiter(int sID)
     {
         ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
-        this.coursesEaten++;
+        boolean last = ((Student) Thread.currentThread()).lastStudent;
+        // lasr student notified the waiter, and thus
+        // wont be waiting in the cycle
+        if(last)
+        {
+            ((Student) Thread.currentThread()).lastStudent = false;
+            this.waitingForCourse = true;
+            this.coursesEaten++;
+            if(this.coursesEaten==3)
+                this.orderIsDone = true;
+            System.out.printf("ultimo foi %d\n",sID);
+            //notify the waiter
+            this.waiterIsRequested = true;
+            notifyAll();
+        }
     }
 
     public synchronized void callTheWaiter()
     {
         ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
         this.orderDone = true;
+        this.waitingForCourse = true;
         // wake up waiter
+        this.waiterIsRequested = true;
         notifyAll();
     }
 
@@ -180,6 +223,7 @@ public class Bar extends Thread
         }
 
         // Wake waiter
+        this.waiterIsRequested = true;
         notifyAll();
 
         // Update the state
@@ -229,14 +273,10 @@ public class Bar extends Thread
         int sID;
         sID = ((Student) Thread.currentThread()).getID();
         students[sID].setReadTheMenu();
+
         notifyAll();
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
     }
 
-    public synchronized boolean isOrderDone()
-    {
-        // Here we will check if the 3 courses have been eaten
-        return true;
-    }
 }

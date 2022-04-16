@@ -5,6 +5,7 @@ import entities.*;
 public class Kitchen extends Thread 
 {
     private int portionsDelivered;
+    private int coursesDelievered;
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
     private boolean portionReady = false;
@@ -23,6 +24,7 @@ public class Kitchen extends Thread
     public synchronized void proceedToPresentation()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.DISHING_THE_PORTIONS);
+        this.portionsDelivered=0;
     }
 
     public synchronized void haveNextPortionReady()
@@ -34,7 +36,7 @@ public class Kitchen extends Thread
     
     public synchronized void continuePreparation()
     {
-        this.portionsDelivered=0;
+        ((Chef) Thread.currentThread()).setState(ChefState.PREPARING_THE_COURSE);
     }
 
     public synchronized void cleanUp()
@@ -47,15 +49,24 @@ public class Kitchen extends Thread
     public synchronized boolean hasTheOrderBeenCompleted()
     {
         // Only when the 3 course meal has been delivered
-        return true;
+        if(this.coursesDelievered==3)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     public synchronized boolean haveAllPortionsBeenDelivered()
     {
-        if(this.portionsDelivered < 7)
-            return false;
-        else
+        if(this.portionsDelivered == 7)
+        {
+            this.coursesDelievered++;
+            this.portionsDelivered=0;
             return true;
+        }
+        else
+            return false;
     }
 
     public synchronized void handNoteToTheChef()
@@ -80,20 +91,16 @@ public class Kitchen extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
 
-        notifyAll();
-
-        if(!this.serviceDone)
+        while(!this.portionReady)
         {
-            while(!this.portionReady)
-            {
-                try {
-                    wait(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
+        notifyAll();
         this.portionReady = false;
         this.portionsDelivered++;
     }

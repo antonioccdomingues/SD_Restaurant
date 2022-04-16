@@ -14,6 +14,7 @@ public class Student extends Thread
     private int tableSeat;
     private Bar bar;
     private Table table;
+    public boolean lastStudent = false;
 
     public Student(int id, StudentState state, Bar bar, Table table)
     {
@@ -44,9 +45,9 @@ public class Student extends Thread
         return servedByWaiter;
     }
 
-    public void setServedByWaiter() 
+    public void setServedByWaiter(boolean served) 
     {
-        this.servedByWaiter = true;
+        this.servedByWaiter = served;
     }
 
     public boolean getSalutedByWaiter() 
@@ -104,16 +105,17 @@ public class Student extends Thread
             table.informCompanion();
         }
 
-        do
+        while(!table.isOrderDone())
         {
+            // wait while it's not served
+            table.waitingToBeServed(this.sID);
             table.startEating();
             table.endEating();
+            System.out.printf("Student[%d] finshed eating\n", this.sID);
 
+            bar.signalTheWaiter(this.sID);
             table.hasEverbodyFinished();
-            bar.signalTheWaiter();
-
-        }while(!bar.isOrderDone());
-
+        }
 
      //  if(bar.shouldHaveArrivedEarlier(this.sID))
      //  {

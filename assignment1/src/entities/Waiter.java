@@ -47,6 +47,7 @@ public class Waiter extends Thread
     public void run()
     {
         int action;
+
         while(!this.CanGoHome())
         {
             action = bar.lookAround();
@@ -73,8 +74,6 @@ public class Waiter extends Thread
             //  case 4:
             //      bar.sayGoodbye();
             //      break;
-                default:
-                    // looking around
             }
             bar.returningToTheBar();
         }

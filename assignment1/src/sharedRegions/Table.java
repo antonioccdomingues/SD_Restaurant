@@ -10,9 +10,12 @@ public class Table extends Thread
     private boolean orderDescribed = false;
     private boolean informStudent = false;
     private boolean everyBodyFinished = false;
+    private boolean firstStudentJoinedTalk = false;
+    private boolean orderIsDone = false;
     private int studentSelectedCourses;
     private int studentServed = 0;
     private int studentFinishedEating;
+    private int coursesDelivered = 0;
     private final Student[] students;
     private MemFIFO<Integer> queue;
 
@@ -52,7 +55,6 @@ public class Table extends Thread
     public synchronized void deliverPortion()
     {
         int student_served=0;
-        notifyAll();
 
         // Dequeue the student
         try {
@@ -61,7 +63,9 @@ public class Table extends Thread
         {
         }
 
-        students[student_served].setServedByWaiter();
+        students[student_served].setServedByWaiter(true);
+        this.studentServed++;
+        notifyAll();
     }
 
     public synchronized boolean haveAllClientsBeenServed()
@@ -69,6 +73,13 @@ public class Table extends Thread
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
         if(this.studentServed==7)
         {
+            this.studentServed=0;
+            this.coursesDelivered++;
+            if(this.coursesDelivered==3)
+            {
+                this.orderIsDone = true;
+                notifyAll();
+            }
             return true;
         }
         else
@@ -99,7 +110,7 @@ public class Table extends Thread
         notifyAll();
         
         // Wait untill the course is served 
-        while(!students[sID].servedByWaiter())
+        while(!this.firstStudentJoinedTalk)
         {
             try 
             {
@@ -108,8 +119,6 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
-        this.studentServed++;
-        System.out.printf("[%d] has been served\n",sID);
     }
 
     public synchronized void prepareTheOrder()
@@ -131,22 +140,10 @@ public class Table extends Thread
             e1.printStackTrace();
         }
 
+        this.firstStudentJoinedTalk = true;
         // Has to be waiting here 
         // for everybody to be served
         notifyAll();
-        
-        // Wait untill the course is served 
-        while(!students[sID].servedByWaiter())
-        {
-            try 
-            {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        this.studentServed++;
-        System.out.printf("First student[%d] has been served\n",sID);
     }
 
     public synchronized void hasEverbodyFinished()
@@ -166,7 +163,6 @@ public class Table extends Thread
     public synchronized void startEating()
     {
         ((Student) Thread.currentThread()).setState(StudentState.ENJOYING_THE_MEAL);
-
         // Simulate eating
         ((Student) Thread.currentThread()).studentEating();
     }
@@ -174,13 +170,27 @@ public class Table extends Thread
     public synchronized void endEating()
     {
         ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        int sID = ((Student) Thread.currentThread()).getID();
         this.studentFinishedEating++;
+        students[sID].setServedByWaiter(false);
+
+        // Add the student which has finished eating, to the
+        // waiting to be served queue
+        try {
+            queue.write(sID);
+        } catch (MemException e1) {
+            e1.printStackTrace();
+        }
+
         if(this.studentFinishedEating==7)
         {
+            // means he was the last one
+            ((Student) Thread.currentThread()).lastStudent = true;
             this.everyBodyFinished = true;
-            System.out.println("Everybody finished");
+            this.studentFinishedEating=0;
+            notifyAll();
         }
-        notifyAll();
+        
     }
 
     public synchronized void honourTheBill()
@@ -192,7 +202,6 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
 
-        notifyAll();
         
         while(!this.informStudent)
         {
@@ -222,5 +231,29 @@ public class Table extends Thread
         ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
         this.orderDescribed = true;
         notifyAll();
+    }
+
+    public synchronized void waitingToBeServed(int sID)
+    {
+        // block while it is not served
+        while(!students[sID].servedByWaiter())
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public synchronized boolean isOrderDone()
+    {
+        // Here we will check if the 3 courses have been eaten
+        if(this.orderIsDone)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }
