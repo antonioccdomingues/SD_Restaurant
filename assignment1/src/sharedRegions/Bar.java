@@ -27,9 +27,14 @@ public class Bar extends Thread
     private boolean allStudentsLeft = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
+    private final GeneralRepos repos;   //references to general repository
 
-
-    public Bar()
+    /**
+	*  Bar instantiation.
+	*
+	*    @param repos reference to the general repository
+	*/
+    public Bar(GeneralRepos repos)
     {
         students = new Student[MainProgram.students_number];
         for(int i=0; i<MainProgram.students_number;i++)
@@ -44,6 +49,7 @@ public class Bar extends Thread
         {
             e.printStackTrace();
         }
+        this.repos = repos;
     }
 
     public synchronized void saluteTheClient()
@@ -60,6 +66,7 @@ public class Bar extends Thread
         }
 
         ((Waiter) Thread.currentThread()).setState(WaiterState.PRESENTING_THE_MENU);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         students[student_saluted].setSalutedByWaiter();
         // set the seat of the student upon being saluted
@@ -84,6 +91,7 @@ public class Bar extends Thread
     public synchronized void alertTheWaiter()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.DELIVERING_THE_PORTIONS);
+        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
         this.portionReady = true;
         this.waiterIsRequested = true;
         notifyAll();
@@ -92,16 +100,19 @@ public class Bar extends Thread
     public synchronized void returningToTheBar()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
     }
 
     public synchronized void prepareTheBill()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.PROCESSING_THE_BILL);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
     }
 
     public synchronized int lookAround()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         // while the waiter is not called to be 
         // awakened by other events, he simply waits here
@@ -157,6 +168,7 @@ public class Bar extends Thread
     public synchronized boolean sayGoodbye()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         // While we haven't said goodbye to all students
         // If we've said goodbye to everyone, the waiter can go home
         ((Waiter) Thread.currentThread()).setCanGoHome();
@@ -166,6 +178,8 @@ public class Bar extends Thread
     public synchronized void signalTheWaiter(int sID)
     {
         ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        int studentId = ((Student) Thread.currentThread ()).getID();
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         boolean last = ((Student) Thread.currentThread()).lastStudent;
         // lasr student notified the waiter, and thus
         // wont be waiting in the cycle
@@ -186,6 +200,8 @@ public class Bar extends Thread
     public synchronized void callTheWaiter()
     {
         ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+        int studentId = ((Student) Thread.currentThread ()).getID();
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDone = true;
         this.waitingForCourse = true;
         // wake up waiter
@@ -225,6 +241,7 @@ public class Bar extends Thread
 
         // Update the state
         students[sID].setState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
 
         // block while it is not saluted
         while(!students[sID].getSalutedByWaiter())
@@ -250,6 +267,8 @@ public class Bar extends Thread
     public synchronized void exit()
     {
         ((Student) Thread.currentThread()).setState(StudentState.GOING_HOME);
+        int studentId = ((Student) Thread.currentThread ()).getID();
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.studentsDone++;
 
         if(this.studentsDone==7)
@@ -263,6 +282,8 @@ public class Bar extends Thread
     public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
         ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
+        int studentId = ((Student) Thread.currentThread ()).getID();
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         if(this.lastStudentID == sID)
         {
             this.waiterIsRequested = true;
@@ -284,5 +305,7 @@ public class Bar extends Thread
         notifyAll();
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
+        int studentId = ((Student) Thread.currentThread ()).getID();
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
     }
 }

@@ -48,6 +48,7 @@ public class GeneralRepos
             studentState[i] = StudentState.GOING_TO_THE_RESTAURANT;
 
         reportInitialStatus ();
+        
     }
 
     /**
@@ -113,7 +114,7 @@ public class GeneralRepos
            System.exit (1);
          }
       log.writelnString ("                                          The Restaurant - Description of the internal state");
-      log.writelnString (" Chef Waiter Stu0 Stu1 Stu2 Stu3 Stu4 Stu5 Stu6 NCourse NPortion Table");
+      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6 NCourse NPortion Table");
       if (!log.close ())
          { GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
            System.exit (1);
