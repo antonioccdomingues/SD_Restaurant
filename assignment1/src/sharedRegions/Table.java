@@ -181,6 +181,7 @@ public class Table extends Thread
         ((Student) Thread.currentThread()).setState(StudentState.ENJOYING_THE_MEAL);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        this.everyBodyFinished = false;
         // Simulate eating
         ((Student) Thread.currentThread()).studentEating();
     }
@@ -273,7 +274,8 @@ public class Table extends Thread
         } catch (MemException e1) {
             e1.printStackTrace();
         }
-        this.everyBodyFinished = false;
+        
+        notifyAll();
         // block while it is not served
         while(!students[sID].servedByWaiter())
         {
