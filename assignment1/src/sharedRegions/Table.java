@@ -74,6 +74,7 @@ public class Table extends Thread
 
         students[student_served].setServedByWaiter(true);
         this.studentServed++;
+        //repos.setNCourse(1);
         notifyAll();
     }
 
@@ -85,6 +86,7 @@ public class Table extends Thread
         {
             this.studentServed=0;
             this.coursesDelivered++;
+            //repos.setNCourse(1);
             if(this.coursesDelivered==3)
             {
                 this.orderIsDone = true;
@@ -204,6 +206,7 @@ public class Table extends Thread
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         int sID = ((Student) Thread.currentThread()).getID();
         this.studentFinishedEating++;
+        //repos.setNPortion(1);
         students[sID].setServedByWaiter(false);
 
         // Add the student which has finished eating, to the
@@ -220,6 +223,7 @@ public class Table extends Thread
             ((Student) Thread.currentThread()).lastStudent = true;
             this.everyBodyFinished = true;
             this.studentFinishedEating=0;
+            //repos.setNPortion(10000);
             notifyAll();
         }
         

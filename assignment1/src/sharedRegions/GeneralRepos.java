@@ -1,6 +1,8 @@
 package sharedRegions;
 
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+
 import main.*;
 import entities.*;
 import genclass.GenericIO;
@@ -28,6 +30,14 @@ public class GeneralRepos
 
     //number of a portion of a course
     private int NPortion = 0;
+
+    //flag for students order
+    private int orderID = -1;
+
+    //array with seat order
+    private int[] order = new int[MainProgram.students_number];
+
+    private int orderFlag = 0;
     
     /**
    *   Instantiation of a general repository object.
@@ -72,8 +82,15 @@ public class GeneralRepos
 
     public synchronized void setStudentState (int id, StudentState state)
     {
-		studentState[id] = state;
-		reportStatus ();
+        //System.out.println(state);
+        if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE){
+            studentState[id] = state;
+            setStudentsOrder(id);
+        }else
+        {
+            studentState[id] = state;
+		    reportStatus ();
+        }
 	}
 
      /**
@@ -102,7 +119,28 @@ public class GeneralRepos
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNPortion (int number){NPortion += number;}
+	public synchronized void setNPortion (int number)
+    {
+        if(number == 10000) NPortion = 0;
+        else NPortion += number;
+    }
+
+    /**
+	 *   Set passenger state.
+	 *
+	 *     @param id passenger id
+	 */
+
+	public synchronized void setStudentsOrder (int id){
+		if (id != orderID)
+        {
+            order[orderFlag] = id;
+            orderFlag++;
+            orderID = id; // isto secalhar nao funciona, tem de se verificar com todos os valores do array
+            reportStatus ();
+        }
+		
+	}
 
 
     private void reportInitialStatus ()
@@ -114,7 +152,7 @@ public class GeneralRepos
            System.exit (1);
          }
       log.writelnString ("                                          The Restaurant - Description of the internal state");
-      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6 NCourse NPortion Table");
+      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6 NCourse NPortion                Table");
       if (!log.close ())
          { GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
            System.exit (1);
@@ -169,10 +207,13 @@ public class GeneralRepos
             case GOING_HOME:   lineStatus += " GGHOM ";break;
             }
 
-        lineStatus += String.format(" %2s  %2s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
+        lineStatus += String.format(" %4s  %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
+
+        lineStatus += String.format("         %2s  %2s  %2s  %2s  %2s  %2s  %2s  ", order[0], order[1], order[2], order[3], order[4], order[5], order[6]);
+
         log.writelnString (lineStatus);
         if (!log.close ())
         { 

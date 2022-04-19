@@ -188,6 +188,7 @@ public class Bar extends Thread
             ((Student) Thread.currentThread()).lastStudent = false;
             this.waitingForCourse = true;
             this.coursesEaten++;
+            //repos.setNCourse(1);
             if(this.coursesEaten==3)
                 this.orderIsDone = true;
             System.out.printf("Student[%d] was last to eat, will alert the waiter\n", sID);
