@@ -74,7 +74,7 @@ public class Table extends Thread
 
         students[student_served].setServedByWaiter(true);
         this.studentServed++;
-        //repos.setNCourse(1);
+        repos.setNPortion(1);
         notifyAll();
     }
 
@@ -86,7 +86,7 @@ public class Table extends Thread
         {
             this.studentServed=0;
             this.coursesDelivered++;
-            //repos.setNCourse(1);
+            repos.setNCourse(1);
             if(this.coursesDelivered==3)
             {
                 this.orderIsDone = true;
