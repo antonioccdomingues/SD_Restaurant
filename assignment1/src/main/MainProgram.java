@@ -21,7 +21,7 @@ public class MainProgram
         GenericIO.writelnString ("\n" + "Problem of the Restaurant\n");
 		do{
 			GenericIO.writeString ("Logging file name? ");
-			fileName = GenericIO.readlnString ();
+			fileName = GenericIO.readlnString () + ".txt";
 			if (FileOp.exists (".", fileName)){ 
 				do{
 					GenericIO.writeString ("There is already a file with this name. Delete it (y - yes; n - no)? ");

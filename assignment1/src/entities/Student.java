@@ -105,7 +105,8 @@ public class Student extends Thread
             table.informCompanion();
         }
 
-        while(!table.isOrderDone())
+        int courses = 0;
+        while(courses < 3)//while(!table.isOrderDone());
         {
             // wait while it's not served
             table.waitingToBeServed(this.sID);
@@ -115,6 +116,7 @@ public class Student extends Thread
 
             table.hasEverbodyFinished();
             bar.signalTheWaiter(this.sID);
+            courses++;
         }
 
         if(bar.shouldHaveArrivedEarlier(this.sID))

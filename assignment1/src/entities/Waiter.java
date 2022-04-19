@@ -61,7 +61,7 @@ public class Waiter extends Thread
                     kitchen.handNoteToTheChef();
                     break;
                 case 2:
-                    while(!table.haveAllClientsBeenServed())
+                    if(!table.haveAllClientsBeenServed())
                     {
                         kitchen.collectPortion();
                         table.deliverPortion();
@@ -77,7 +77,7 @@ public class Waiter extends Thread
             }
             bar.returningToTheBar();
         }
-        System.out.println("FECHEI O TASCO CRLH!!!!!!!!");
+        System.out.println("FECHEI O TASCO !!!!");
         GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
     }
 }

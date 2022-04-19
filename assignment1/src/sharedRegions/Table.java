@@ -9,7 +9,7 @@ public class Table extends Thread
 {
     private boolean orderDescribed = false;
     private boolean informStudent = false;
-    private boolean everyBodyFinished = false;
+    public boolean everyBodyFinished = false;
     private boolean firstStudentJoinedTalk = false;
     private boolean orderIsDone = false;
     private boolean billIsReady = false;
@@ -49,7 +49,7 @@ public class Table extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.TAKING_THE_ORDER);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
-        notifyAll();
+        //notifyAll();
 
         while(!this.orderDescribed)
         {
@@ -122,17 +122,9 @@ public class Table extends Thread
         sID = ((Student) Thread.currentThread()).getID();
         students[sID] =  ((Student) Thread.currentThread());
         students[sID].setState(StudentState.CHATTING_WITH_COMPANIONS);
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
         
-
-        try {
-            queue.write(sID);
-        } catch (MemException e1) {
-            e1.printStackTrace();
-        }
-        
-        this.studentSelectedCourses++;
         this.informStudent=true;
-
         // Wake the student taking the order
         notifyAll();
         
@@ -163,12 +155,6 @@ public class Table extends Thread
         students[sID] =  ((Student) Thread.currentThread());
         students[sID].setState(StudentState.CHATTING_WITH_COMPANIONS);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
-
-        try {
-            queue.write(sID);
-        } catch (MemException e1) {
-            e1.printStackTrace();
-        }
 
         this.firstStudentJoinedTalk = true;
         // Has to be waiting here 
@@ -208,14 +194,6 @@ public class Table extends Thread
         this.studentFinishedEating++;
         //repos.setNPortion(1);
         students[sID].setServedByWaiter(false);
-
-        // Add the student which has finished eating, to the
-        // waiting to be served queue
-        try {
-            queue.write(sID);
-        } catch (MemException e1) {
-            e1.printStackTrace();
-        }
 
         if(this.studentFinishedEating==7)
         {
@@ -262,6 +240,7 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+        this.studentSelectedCourses++;
         this.informStudent = false;
     }
 
@@ -288,6 +267,13 @@ public class Table extends Thread
 
     public synchronized void waitingToBeServed(int sID)
     {
+        // Add the student to the waiting to be served queue 
+        try {
+            queue.write(sID);
+        } catch (MemException e1) {
+            e1.printStackTrace();
+        }
+        this.everyBodyFinished = false;
         // block while it is not served
         while(!students[sID].servedByWaiter())
         {

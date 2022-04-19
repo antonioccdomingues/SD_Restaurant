@@ -5,10 +5,11 @@ import entities.*;
 public class Kitchen extends Thread 
 {
     private int portionsDelivered;
-    private int coursesDelievered;
+    private int coursesDelievered=0;
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
     private boolean portionReady = false;
+    private boolean portionCollected = false;
     private boolean serviceDone = false;
     private boolean allPortionsDelivered = false;
     private boolean courseDone = false;
@@ -33,13 +34,14 @@ public class Kitchen extends Thread
     {
         ((Chef) Thread.currentThread()).setState(ChefState.DISHING_THE_PORTIONS);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
-        this.portionsDelivered=0;
+        this.portionsDelivered = 0;
     }
 
     public synchronized void haveNextPortionReady()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.DISHING_THE_PORTIONS);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        this.portionCollected = false;
         this.portionReady = true;
         notifyAll();
     }
@@ -55,20 +57,14 @@ public class Kitchen extends Thread
     {
         ((Chef) Thread.currentThread()).setState(ChefState.CLOSING_SERVICE);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
-        this.serviceDone = true;
-        notifyAll();
+        //notifyAll();
         // END
     }
 
     public synchronized boolean hasTheOrderBeenCompleted()
     {
         // Only when the 3 course meal has been delivered
-        if(this.coursesDelievered==3)
-        {
-            return true;
-        }
-        else
-            return false;
+        return this.courseDone;
     }
 
     public synchronized boolean haveAllPortionsBeenDelivered()
@@ -76,13 +72,24 @@ public class Kitchen extends Thread
         if(this.portionsDelivered == 7)
         {
             this.coursesDelievered++;
+            if (this.coursesDelievered==3)
+            {
+                this.courseDone = true;
+            }
             this.portionsDelivered=0;
-            this.courseDone = true;
             notifyAll();
             return true;
         }
         else
         {
+           while(!this.portionCollected)
+            {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return false;
         }
     }
@@ -110,17 +117,19 @@ public class Kitchen extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
 
-        while(!this.portionReady & !this.courseDone)
-        {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+     //   while(!this.portionReady & !this.courseDone)
+     //   {
+     //       try {
+     //           wait();
+     //       } catch (InterruptedException e) {
+     //           e.printStackTrace();
+     //       }
+     //   }
 
+        this.portionCollected = true;
         this.portionReady = false;
         this.portionsDelivered++;
+        notifyAll();
     }
 
     public synchronized void watchTheNews()
@@ -129,9 +138,9 @@ public class Kitchen extends Thread
         ((Chef) Thread.currentThread()).setState(ChefState.WAITING_FOR_AN_ORDER);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
 
-        notifyAll();
+        //notifyAll();
 
-        while(!handedNoteToChef)
+        while(!this.handedNoteToChef)
         {
             try {
                 wait();

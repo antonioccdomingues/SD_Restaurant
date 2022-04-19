@@ -16,6 +16,7 @@ public class Bar extends Thread
     private boolean firstStudent = true;
     private boolean orderDone = false;
     private boolean payBill = false;
+    private boolean studentAtDoor = false;
     private boolean portionCollected = false;
     private boolean portionReady = false;
     private boolean nextCourseIsReady = false;
@@ -131,8 +132,9 @@ public class Bar extends Thread
         // do some action
 
         //means there's students at the door, waiting to be saluted
-        if(this.queue.getN()!=0)
+        if(this.studentAtDoor)
         {
+            this.studentAtDoor = false;
             this.waiterIsRequested = false;
             return 0;
         }
@@ -141,7 +143,7 @@ public class Bar extends Thread
             this.orderDone = false;
             return 1;
         }
-        else if(this.portionReady & this.waitingForCourse)
+        else if(this.portionReady )// && this.waitingForCourse)
         {
             this.portionReady = false;
             this.waitingForCourse = false;
@@ -237,12 +239,10 @@ public class Bar extends Thread
         }
 
         // Wake waiter
+        this.studentAtDoor = true;
         this.waiterIsRequested = true;
         notifyAll();
 
-        // Update the state
-        students[sID].setState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
 
         // block while it is not saluted
         while(!students[sID].getSalutedByWaiter())
@@ -253,6 +253,10 @@ public class Bar extends Thread
                 e.printStackTrace();
             }
         }
+
+        // Update the state
+        students[sID].setState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
     }
 
     public synchronized boolean FirstStudent(int sID)
@@ -282,11 +286,11 @@ public class Bar extends Thread
 
     public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
-        ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         if(this.lastStudentID == sID)
         {
+            ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
+            int studentId = ((Student) Thread.currentThread ()).getID();
+            repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
             this.waiterIsRequested = true;
             this.payBill = true;
             notifyAll();
@@ -306,7 +310,17 @@ public class Bar extends Thread
         notifyAll();
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+    }
+
+    public synchronized boolean isOrderDone()
+    {
+        // Here we will check if the 3 courses have been eaten
+        if(this.orderIsDone)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }
