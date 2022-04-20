@@ -1,0 +1,366 @@
+                                          The Restaurant - Description of the internal state
+Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6 NCourse NPortion                Table
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT     0     0           _   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT     0     0           _   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT     0     0           _   _   _   _   _   _   _  
+WAFOR  PRSMN  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT  GGTRT     0     0           _   _   _   _   _   _   _  
+WAFOR  PRSMN  GGTRT  GGTRT  GGTRT  TKSTT  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  PRSMN  GGTRT  GGTRT  GGTRT  TKSTT  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+
+Student:3 gathering individual plate choices
+WAFOR  PRSMN  GGTRT  GGTRT  GGTRT  SELCS  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  SELCS  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  APPST  GGTRT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  PRSMN  GGTRT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   _   _   _   _   _   _  
+WAFOR  PRSMN  TKSTT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  PRSMN  TKSTT  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  PRSMN  SELCS  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  APPST  SELCS  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  GGTRT     0     0           3   0   _   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  TKSTT     0     0           3   0   6   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  TKSTT     0     0           3   0   6   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  SELCS     0     0           3   0   6   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  CHTWC     0     0           3   0   6   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  CHTWC     0     0           3   0   6   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  CHTWC     0     0           3   0   6   _   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  CHTWC     0     0           3   0   6   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  GGTRT  CHTWC     0     0           3   0   6   _   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  TKSTT  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  TKSTT  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  SELCS  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  APPST  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  PRSMN  CHTWC  GGTRT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   _   _   _  
+WAFOR  PRSMN  CHTWC  TKSTT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  PRSMN  CHTWC  TKSTT  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  PRSMN  CHTWC  SELCS  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  GGTRT  CHTWC  CHTWC     0     0           3   0   6   5   1   _   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  TKSTT  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  TKSTT  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  SELCS  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  APPST  CHTWC  CHTWC  GGTRT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  PRSMN  CHTWC  CHTWC  GGTRT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   _  
+WAFOR  PRSMN  CHTWC  CHTWC  TKSTT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  PRSMN  CHTWC  CHTWC  TKSTT  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  PRSMN  CHTWC  CHTWC  SELCS  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  PRSMN  CHTWC  CHTWC  CHTWC  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  APPST  CHTWC  CHTWC  CHTWC  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  APPST  CHTWC  CHTWC  CHTWC  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  APPST  CHTWC  CHTWC  CHTWC  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  APPST  CHTWC  CHTWC  CHTWC  OGODR  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  TKODR  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+WAFOR  PCODR  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+PRPCS  PCODR  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+PRPCS  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     0     0           3   0   6   5   1   4   2  
+
+Course:1
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     1           3   0   6   5   1   4   2  
+
+Student 3 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     1     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     1     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     1           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+
+Student 2 eating
+DSHPT  WTFPT  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     2           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+
+Student 1 eating
+DSHPT  WTFPT  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     4           3   0   6   5   1   4   2  
+
+Student 6 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     1     4           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     1     4           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     1     4           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     1     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     1     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     4           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+
+Student 0 eating
+DLVPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DLVPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DLVPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     5           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     6           3   0   6   5   1   4   2  
+
+Student 5 eating
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     1     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     6           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     6           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+
+Student 4 eating
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+PRPCS  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     1     7           3   0   6   5   1   4   2  
+
+Course:2
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     1           3   0   6   5   1   4   2  
+
+Student 2 eating
+DLVPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     2     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     2     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     1           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+
+Student 0 eating
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DLVPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+
+Student 1 eating
+DSHPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+
+Student 6 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     2     4           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     2     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     2     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     4           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     5           3   0   6   5   1   4   2  
+
+Student 5 eating
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     2     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     2     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     2     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     2     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     2     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     5           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+
+Student 3 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+PRPCS  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+
+Student 4 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     2     7           3   0   6   5   1   4   2  
+
+Course:3
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+
+Student 0 eating
+DSHPT  WTFPT  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DLVPT  APPST  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     1           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+
+Student 4 eating
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     2           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     3           3   0   6   5   1   4   2  
+
+Student 5 eating
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML  CHTWC     3     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     3           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     3           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+
+Student 2 eating
+DLVPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     4           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+
+Student 6 eating
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     3     5           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     3     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  EJYML     3     5           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     5           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+
+Student 1 eating
+DLVPT  APPST  CHTWC  EJYML  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DLVPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     6           3   0   6   5   1   4   2  
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+
+Student 3 eating
+DSHPT  WTFPT  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+DSHPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+DLVPT  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  EJYML  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC     3     7           3   0   6   5   1   4   2  
+
+Leaving the Restaurant
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM     3     7           3   0   6   5   1   4   _  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM     3     7           3   0   6   5   1   4   _  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM  GGHOM     3     7           3   0   6   5   1   _   _  
+CLSSV  APPST  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM  GGHOM     3     7           3   0   6   5   1   _   _  
+CLSSV  WTFPT  CHTWC  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM  GGHOM     3     7           3   0   6   5   1   _   _  
+CLSSV  WTFPT  GGHOM  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM  GGHOM     3     7           _   0   6   5   1   _   _  
+CLSSV  WTFPT  GGHOM  CHTWC  CHTWC  CHTWC  CHTWC  GGHOM  GGHOM     3     7           _   0   6   5   1   _   _  
+CLSSV  WTFPT  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  CHTWC  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+
+Student: 2 Paying the Bill
+CLSSV  APPST  GGHOM  CHTWC  PYTBL  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  PYTBL  GGHOM  CHTWC  GGHOM  GGHOM     3     7           _   0   6   _   1   _   _  
+CLSSV  APPST  GGHOM  CHTWC  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   0   6   _   _   _   _  
+CLSSV  APPST  GGHOM  CHTWC  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   0   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  PRCBL  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  RECPM  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  PYTBL  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   6   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   _   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   _   _   _   _   _  
+CLSSV  APPST  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM  GGHOM     3     7           _   _   _   _   _   _   _  

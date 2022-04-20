@@ -86,7 +86,6 @@ public class Table extends Thread
         {
             this.studentServed=0;
             this.coursesDelivered++;
-            repos.setNCourse(1);
             if(this.coursesDelivered==3)
             {
                 this.orderIsDone = true;
@@ -202,7 +201,6 @@ public class Table extends Thread
             ((Student) Thread.currentThread()).lastStudent = true;
             this.everyBodyFinished = true;
             this.studentFinishedEating=0;
-            //repos.setNPortion(10000);
             notifyAll();
         }
         

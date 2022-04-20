@@ -1,13 +1,12 @@
 package sharedRegions;
 
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
 
 import main.*;
 import entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
-//import java.util.Objects;
+import java.util.*;
 
 
 public class GeneralRepos 
@@ -35,10 +34,16 @@ public class GeneralRepos
     private int orderID = -1;
 
     //array with seat order
-    private int[] order = new int[MainProgram.students_number];
-
+    private String[] order = new String[MainProgram.students_number];
     private int orderFlag = 0;
+
+    boolean match = false;
+    private int sair = 0;
+    private int pagar = 0;
+    private int escolher = 0;
+
     
+
     /**
    *   Instantiation of a general repository object.
    *
@@ -47,6 +52,10 @@ public class GeneralRepos
 
     public GeneralRepos (String logFileName)
     {
+        for(int y =0; y< MainProgram.students_number; y++)
+        {
+            order[y] = "_";
+        }
         if ((logFileName == null) || Objects.equals(logFileName, ""))
             this.logFileName = "logger";
             else this.logFileName = logFileName;
@@ -83,15 +92,40 @@ public class GeneralRepos
     public synchronized void setStudentState (int id, StudentState state)
     {
         //System.out.println(state);
-        if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE){
-            studentState[id] = state;
-            setStudentsOrder(id);
-        }else
+        if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE)
         {
             studentState[id] = state;
-		    reportStatus ();
+            setStudentsOrder(id);
         }
-	}
+        if(state == StudentState.PAYING_THE_BILL && pagar == 0)
+        {
+            pagar =1;
+            reportSpecificStatus("\nStudent: " + id + " Paying the Bill");
+        }
+        if (state == StudentState.GOING_HOME && sair == 0)
+        {
+            reportSpecificStatus("\nLeaving the Restaurant");
+            sair = 1;
+        }
+        if(state == StudentState.GOING_HOME)
+        {
+            
+            order[id] = "_";
+        }
+        if(state == StudentState.SELECTING_THE_COURSES && escolher == 0)
+        {
+            reportSpecificStatus("\nStudent:" + id + " gathering individual plate choices");
+            escolher =1;
+        }
+        if(state == StudentState.ENJOYING_THE_MEAL)
+        {
+            reportSpecificStatus("\nStudent " + id + " eating");
+        }
+        studentState[id] = state;
+		reportStatus ();
+        
+        
+    }
 
      /**
 	 *   Set chef state.
@@ -121,8 +155,19 @@ public class GeneralRepos
 
 	public synchronized void setNPortion (int number)
     {
-        if(number == 10000) NPortion = 0;
-        else NPortion += number;
+
+        if(NCourse == 0 && NPortion == 0 && number == 1){
+            NCourse++;
+            reportSpecificStatus("\nCourse:" + NCourse);
+        }
+        NPortion +=number;
+
+        if(NPortion == 8)
+        {
+            NPortion = 1;
+            NCourse++;
+            reportSpecificStatus("\nCourse:" + NCourse);
+        }
     }
 
     /**
@@ -134,14 +179,14 @@ public class GeneralRepos
 	public synchronized void setStudentsOrder (int id){
 		if (id != orderID)
         {
-            order[orderFlag] = id;
+            String s=Integer.toString(id);  
+            order[orderFlag] = s;
             orderFlag++;
             orderID = id; // isto secalhar nao funciona, tem de se verificar com todos os valores do array
             reportStatus ();
         }
 		
 	}
-
 
     private void reportInitialStatus ()
    {
