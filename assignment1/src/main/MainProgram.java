@@ -19,22 +19,22 @@ public class MainProgram
         
 
         GenericIO.writelnString ("\n" + "Problem of the Restaurant\n");
-		do{
-			GenericIO.writeString ("Logging file name? ");
-			fileName = GenericIO.readlnString () + ".txt";
-			if (FileOp.exists (".", fileName)){ 
-				do{
-					GenericIO.writeString ("There is already a file with this name. Delete it (y - yes; n - no)? ");
-					opt = GenericIO.readlnChar ();
-				} while ((opt != 'y') && (opt != 'n'));
-				if (opt == 'y')
-					success = true;
-				else success = false;
-			}
-			else success = true;
-		} while (!success);
+		// do{
+		// 	GenericIO.writeString ("Logging file name? ");
+		// 	fileName = GenericIO.readlnString () + ".txt";
+		// 	if (FileOp.exists (".", fileName)){ 
+		// 		do{
+		// 			GenericIO.writeString ("There is already a file with this name. Delete it (y - yes; n - no)? ");
+		// 			opt = GenericIO.readlnChar ();
+		// 		} while ((opt != 'y') && (opt != 'n'));
+		// 		if (opt == 'y')
+		// 			success = true;
+		// 		else success = false;
+		// 	}
+		// 	else success = true;
+		// } while (!success);
 
-        repos = new GeneralRepos (fileName);
+        repos = new GeneralRepos ("log.txt");
 
         Bar bar = new Bar(repos);
         Kitchen kitchen = new Kitchen(repos);

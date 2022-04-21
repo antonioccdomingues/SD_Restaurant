@@ -97,30 +97,30 @@ public class GeneralRepos
             studentState[id] = state;
             setStudentsOrder(id);
         }
-        if(state == StudentState.PAYING_THE_BILL && pagar == 0)
-        {
-            pagar =1;
-            reportSpecificStatus("\nStudent: " + id + " Paying the Bill");
-        }
-        if (state == StudentState.GOING_HOME && sair == 0)
-        {
-            reportSpecificStatus("\nLeaving the Restaurant");
-            sair = 1;
-        }
-        if(state == StudentState.GOING_HOME)
-        {
+        // if(state == StudentState.PAYING_THE_BILL && pagar == 0)
+        // {
+        //     pagar =1;
+        //     reportSpecificStatus("\nStudent: " + id + " Paying the Bill");
+        // }
+        // if (state == StudentState.GOING_HOME && sair == 0)
+        // {
+        //     reportSpecificStatus("\nLeaving the Restaurant");
+        //     sair = 1;
+        // }
+        // if(state == StudentState.GOING_HOME)
+        // {
             
-            order[id] = "_";
-        }
-        if(state == StudentState.SELECTING_THE_COURSES && escolher == 0)
-        {
-            reportSpecificStatus("\nStudent:" + id + " gathering individual plate choices");
-            escolher =1;
-        }
-        if(state == StudentState.ENJOYING_THE_MEAL)
-        {
-            reportSpecificStatus("\nStudent " + id + " eating");
-        }
+        //     order[id] = "_";
+        // }
+        // if(state == StudentState.SELECTING_THE_COURSES && escolher == 0)
+        // {
+        //     reportSpecificStatus("\nStudent:" + id + " gathering individual plate choices");
+        //     escolher =1;
+        // }
+        // if(state == StudentState.ENJOYING_THE_MEAL)
+        // {
+        //     reportSpecificStatus("\nStudent " + id + " eating");
+        // }
         studentState[id] = state;
 		reportStatus ();
         
@@ -156,18 +156,18 @@ public class GeneralRepos
 	public synchronized void setNPortion (int number)
     {
 
-        if(NCourse == 0 && NPortion == 0 && number == 1){
-            NCourse++;
-            reportSpecificStatus("\nCourse:" + NCourse);
-        }
-        NPortion +=number;
+        // if(NCourse == 0 && NPortion == 0 && number == 1){
+        //     NCourse++;
+        //     reportSpecificStatus("\nCourse:" + NCourse);
+        // }
+        // NPortion +=number;
 
-        if(NPortion == 8)
-        {
-            NPortion = 1;
-            NCourse++;
-            reportSpecificStatus("\nCourse:" + NCourse);
-        }
+        // if(NPortion == 8)
+        // {
+        //     NPortion = 1;
+        //     NCourse++;
+        //     reportSpecificStatus("\nCourse:" + NCourse);
+        // }
     }
 
     /**
@@ -196,8 +196,9 @@ public class GeneralRepos
          { GenericIO.writelnString ("The operation of creating the file " + logFileName + " failed!");
            System.exit (1);
          }
-      log.writelnString ("                                          The Restaurant - Description of the internal state");
-      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6 NCourse NPortion                Table");
+      log.writelnString ("                                          The Restaurant - Description of the internal state\n");
+      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6  NCourse  NPortion           Table");
+      log.writelnString("State  State  State  State  State  State  State  State  State                     Seat0 Seat1 Seat2 Seat3 Seat4 Seat5 Seat6");
       if (!log.close ())
          { GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
            System.exit (1);
@@ -252,12 +253,12 @@ public class GeneralRepos
             case GOING_HOME:   lineStatus += " GGHOM ";break;
             }
 
-        lineStatus += String.format(" %4s  %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
+        lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
         // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
 
-        lineStatus += String.format("         %2s  %2s  %2s  %2s  %2s  %2s  %2s  ", order[0], order[1], order[2], order[3], order[4], order[5], order[6]);
+        lineStatus += String.format("    %4s  %4s  %4s  %4s  %4s  %4s  %4s  ", order[0], order[1], order[2], order[3], order[4], order[5], order[6]);
 
         log.writelnString (lineStatus);
         if (!log.close ())
