@@ -17,6 +17,7 @@ public class Bar extends Thread
     private boolean portionReady = false;
     private boolean waiterIsRequested = false;
     private boolean allStudentsLeft = false;
+    private boolean studentAtDoor = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
     private final GeneralRepos repos;   //references to general repository
@@ -126,8 +127,9 @@ public class Bar extends Thread
         // do some action
 
         //means there's students at the door, waiting to be saluted
-        if(this.queue.getN()!=0)
+        if(this.studentAtDoor)
         {
+            this.studentAtDoor = false;
             return 0;
         }
         else if(this.orderDone)
@@ -208,6 +210,7 @@ public class Bar extends Thread
         }
 
         // Wake waiter
+        this.studentAtDoor = true;
         this.waiterIsRequested = true;
         notifyAll();
 
