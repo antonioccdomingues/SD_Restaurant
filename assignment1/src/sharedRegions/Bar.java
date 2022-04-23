@@ -2,7 +2,6 @@ package sharedRegions;
 
 import entities.*;
 import FIFO.*;
-import main.*;
 import main.Constants;
 
 public class Bar extends Thread
@@ -29,15 +28,15 @@ public class Bar extends Thread
 	*/
     public Bar(GeneralRepos repos)
     {
-        students = new Student[MainProgram.students_number];
-        for(int i=0; i<MainProgram.students_number;i++)
+        students = new Student[Constants.students_number];
+        for(int i=0; i<Constants.students_number;i++)
         {
             students[i] = null;
         }
 
         try 
         {
-            queue = new MemFIFO<>(new Integer[MainProgram.students_number]);
+            queue = new MemFIFO<>(new Integer[Constants.students_number]);
         } catch (MemException e) 
         {
             e.printStackTrace();
@@ -219,7 +218,7 @@ public class Bar extends Thread
             System.out.printf("First Student %d \n", this.firstStudentID);
         }
         // means this is the last student thread
-        if(this.studentsEntered==7)
+        if(this.studentsEntered==Constants.students_number)
         {
             this.lastStudentID = sID;
             System.out.printf("Last Student %d \n", this.lastStudentID);
@@ -258,7 +257,7 @@ public class Bar extends Thread
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.studentsDone++;
 
-        if(this.studentsDone==7)
+        if(this.studentsDone==Constants.students_number)
         {
             this.allStudentsLeft = true;
             this.waiterIsRequested = true;

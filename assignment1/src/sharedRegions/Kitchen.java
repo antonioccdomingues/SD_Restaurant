@@ -1,6 +1,7 @@
 package sharedRegions;
 
 import entities.*;
+import main.Constants;
 
 public class Kitchen extends Thread 
 {
@@ -46,7 +47,7 @@ public class Kitchen extends Thread
         ((Chef) Thread.currentThread()).setState(ChefState.PREPARING_THE_COURSE);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
         this.coursesDelievered++;
-        if(this.coursesDelievered==2)
+        if(this.coursesDelievered==(Constants.courses_number-1))
         {
             this.courseDone = true;
         }
@@ -67,7 +68,7 @@ public class Kitchen extends Thread
 
     public synchronized boolean haveAllPortionsBeenDelivered()
     {
-        if(this.portionsDelivered == 7)
+        if(this.portionsDelivered == Constants.students_number)
         {
             return true;
         }
@@ -133,7 +134,7 @@ public class Kitchen extends Thread
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         
-        if(this.portionsDelivered==7)
+        if(this.portionsDelivered==Constants.students_number)
         {
             return true;
         }

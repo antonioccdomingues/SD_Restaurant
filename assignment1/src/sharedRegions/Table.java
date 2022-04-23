@@ -1,7 +1,7 @@
 package sharedRegions;
 
 import entities.*;
-import main.*;
+import main.Constants;
 import FIFO.*;
 
 
@@ -28,15 +28,15 @@ public class Table extends Thread
 	*/
     public Table(GeneralRepos repos)
     {
-        students = new Student[MainProgram.students_number];
-        for(int i=0; i<MainProgram.students_number;i++)
+        students = new Student[Constants.students_number];
+        for(int i=0; i<Constants.students_number;i++)
         {
             students[i] = null;
         }
 
         try 
         {
-            queue = new MemFIFO<>(new Integer[MainProgram.students_number]);
+            queue = new MemFIFO<>(new Integer[Constants.students_number]);
         } catch (MemException e) 
         {
             e.printStackTrace();
@@ -88,10 +88,10 @@ public class Table extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
-        if(this.studentServed==7)
+        if(this.studentServed==Constants.students_number)
         {
             this.coursesDelivered++;
-            if(this.coursesDelivered<3)
+            if(this.coursesDelivered<Constants.courses_number)
             {
                 this.studentServed=0;
             }
@@ -200,7 +200,7 @@ public class Table extends Thread
         //repos.setNPortion(1);
         students[sID].setServedByWaiter(false);
 
-        if(this.studentFinishedEating==7)
+        if(this.studentFinishedEating==Constants.students_number)
         {
             // means he was the last one
             ((Student) Thread.currentThread()).lastStudent = true;
@@ -250,7 +250,7 @@ public class Table extends Thread
 
     public synchronized boolean hasEverybodyChosen()
     {
-        if(this.studentSelectedCourses==7)
+        if(this.studentSelectedCourses==Constants.students_number)
         {
             return true;
         }
