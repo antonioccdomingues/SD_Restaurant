@@ -2,7 +2,7 @@ package entities;
 
 import sharedRegions.Bar;
 import sharedRegions.Table;
-import genclass.*;
+import main.Constants;
 
 public class Student extends Thread
 {
@@ -106,7 +106,7 @@ public class Student extends Thread
         }
 
         int courses = 0;
-        while(courses < 3)//while(!table.isOrderDone());
+        while(courses < Constants.courses_number)//while(!table.isOrderDone());
         {
             // wait while it's not served
             table.waitingToBeServed(this.sID);
@@ -132,7 +132,7 @@ public class Student extends Thread
     public void walkABit() 
     {
         try {
-            sleep((long) (3 + 1000 * Math.random()));
+            sleep((long) (2 + 1000 * Math.random()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

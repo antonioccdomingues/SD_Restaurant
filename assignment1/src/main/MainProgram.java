@@ -2,38 +2,17 @@ package main;
 
 import entities.*;
 import sharedRegions.*;
-import genclass.FileOp;
 import genclass.GenericIO;
 
 public class MainProgram 
 {
-    public static int students_number = 7;
-    public static int courses_number = 3;
+    public static final int students_number = 7;
+    public static final int courses_number = 3;
     public static void main(String[] args)
     {
         
         GeneralRepos repos;
-        String fileName;                    // logging file name
-		char opt;                           // selected option
-		boolean success;                    // end of operation flag
-        
-
         GenericIO.writelnString ("\n" + "Problem of the Restaurant\n");
-		// do{
-		// 	GenericIO.writeString ("Logging file name? ");
-		// 	fileName = GenericIO.readlnString () + ".txt";
-		// 	if (FileOp.exists (".", fileName)){ 
-		// 		do{
-		// 			GenericIO.writeString ("There is already a file with this name. Delete it (y - yes; n - no)? ");
-		// 			opt = GenericIO.readlnChar ();
-		// 		} while ((opt != 'y') && (opt != 'n'));
-		// 		if (opt == 'y')
-		// 			success = true;
-		// 		else success = false;
-		// 	}
-		// 	else success = true;
-		// } while (!success);
-
         repos = new GeneralRepos ("log.txt");
 
         Bar bar = new Bar(repos);
@@ -52,11 +31,6 @@ public class MainProgram
             students[i].start();
 
 
-        try {
-            chef.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         for(int i=0;i<students.length;i++)
         {
             try {
@@ -64,6 +38,11 @@ public class MainProgram
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } 
+        }
+        try {
+            chef.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         try {
             waiter.join();

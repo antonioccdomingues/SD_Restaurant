@@ -6,7 +6,6 @@ import main.*;
 import entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
-import java.util.*;
 
 
 public class GeneralRepos 
@@ -38,11 +37,6 @@ public class GeneralRepos
     private int orderFlag = 0;
 
     boolean match = false;
-    private int sair = 0;
-    private int pagar = 0;
-    private int escolher = 0;
-
-    
 
     /**
    *   Instantiation of a general repository object.
@@ -156,18 +150,16 @@ public class GeneralRepos
 	public synchronized void setNPortion (int number)
     {
 
-        // if(NCourse == 0 && NPortion == 0 && number == 1){
-        //     NCourse++;
-        //     reportSpecificStatus("\nCourse:" + NCourse);
-        // }
-        // NPortion +=number;
+         if(NCourse == 0 && NPortion == 0 && number == 1){
+             NCourse++;
+         }
+         NPortion +=number;
 
-        // if(NPortion == 8)
-        // {
-        //     NPortion = 1;
-        //     NCourse++;
-        //     reportSpecificStatus("\nCourse:" + NCourse);
-        // }
+         if(NPortion == 8)
+         {
+             NPortion = 1;
+             NCourse++;
+         }
     }
 
     /**

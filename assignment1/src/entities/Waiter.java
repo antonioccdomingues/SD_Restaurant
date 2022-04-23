@@ -55,29 +55,32 @@ public class Waiter extends Thread
             {
                 case 0:
                     bar.saluteTheClient();
+                    bar.returningToTheBar();
                     break;
                 case 1:
                     table.getThePad();
                     kitchen.handNoteToTheChef();
+                    bar.returningToTheBar();
                     break;
                 case 2:
-                    if(!table.haveAllClientsBeenServed())
+                    if(!kitchen.haveAllClientsBeenServed())
                     {
                         kitchen.collectPortion();
                         table.deliverPortion();
                     }
+                    bar.returningToTheBar();
                     break;
                 case 3:
                     bar.prepareTheBill();
                     table.presentTheBill();
+                    bar.returningToTheBar();
                     break;
                 case 4:
                     bar.sayGoodbye();
                     break;
             }
-            bar.returningToTheBar();
         }
-        System.out.println("FECHEI O TASCO !!!!");
+        System.out.println("Waiter fechou o estabelecimento");
         GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
     }
 }

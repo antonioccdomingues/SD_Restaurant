@@ -8,10 +8,7 @@ public class Kitchen extends Thread
     private int coursesDelievered=0;
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
-    private boolean portionReady = false;
     private boolean portionCollected = false;
-    private boolean serviceDone = false;
-    private boolean allPortionsDelivered = false;
     private boolean courseDone = false;
     private final GeneralRepos repos;   //references to general repository
 
@@ -42,22 +39,23 @@ public class Kitchen extends Thread
         ((Chef) Thread.currentThread()).setState(ChefState.DISHING_THE_PORTIONS);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
         this.portionCollected = false;
-        this.portionReady = true;
-        notifyAll();
     }
     
     public synchronized void continuePreparation()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.PREPARING_THE_COURSE);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
-        this.courseDone = false;
+        this.coursesDelievered++;
+        if(this.coursesDelievered==2)
+        {
+            this.courseDone = true;
+        }
     }
 
     public synchronized void cleanUp()
     {
         ((Chef) Thread.currentThread()).setState(ChefState.CLOSING_SERVICE);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
-        //notifyAll();
         // END
     }
 
@@ -71,13 +69,6 @@ public class Kitchen extends Thread
     {
         if(this.portionsDelivered == 7)
         {
-            this.coursesDelievered++;
-            if (this.coursesDelievered==3)
-            {
-                this.courseDone = true;
-            }
-            this.portionsDelivered=0;
-            notifyAll();
             return true;
         }
         else
@@ -90,6 +81,7 @@ public class Kitchen extends Thread
                     e.printStackTrace();
                 }
             }
+            this.portionsDelivered++;
             return false;
         }
     }
@@ -100,7 +92,6 @@ public class Kitchen extends Thread
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         this.handedNoteToChef = true;
-
         notifyAll();
 
         while(!this.StartedPrep)
@@ -117,18 +108,7 @@ public class Kitchen extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
 
-     //   while(!this.portionReady & !this.courseDone)
-     //   {
-     //       try {
-     //           wait();
-     //       } catch (InterruptedException e) {
-     //           e.printStackTrace();
-     //       }
-     //   }
-
         this.portionCollected = true;
-        this.portionReady = false;
-        this.portionsDelivered++;
         notifyAll();
     }
 
@@ -138,8 +118,6 @@ public class Kitchen extends Thread
         ((Chef) Thread.currentThread()).setState(ChefState.WAITING_FOR_AN_ORDER);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
 
-        //notifyAll();
-
         while(!this.handedNoteToChef)
         {
             try {
@@ -148,5 +126,18 @@ public class Kitchen extends Thread
                 e.printStackTrace();
             }
         }
+    }
+
+    public synchronized boolean haveAllClientsBeenServed()
+    {
+        ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        
+        if(this.portionsDelivered==7)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }

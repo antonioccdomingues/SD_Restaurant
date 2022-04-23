@@ -11,7 +11,6 @@ public class Table extends Thread
     private boolean informStudent = false;
     public boolean everyBodyFinished = false;
     private boolean firstStudentJoinedTalk = false;
-    private boolean orderIsDone = false;
     private boolean billIsReady = false;
     private boolean billIsPaid = false;
     private int studentSelectedCourses;
@@ -49,7 +48,6 @@ public class Table extends Thread
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.TAKING_THE_ORDER);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
-        //notifyAll();
 
         while(!this.orderDescribed)
         {
@@ -65,16 +63,24 @@ public class Table extends Thread
     {
         int student_served=0;
 
+        while(this.queue.getN()==0)
+        {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         // Dequeue the student
         try {
             student_served = queue.read();
         } catch (MemException e) 
         {
+            System.out.println("No One to be served");
+            System.out.println("But counted one as delivered");
         }
 
         students[student_served].setServedByWaiter(true);
-        this.studentServed++;
-        repos.setNPortion(1);
         notifyAll();
     }
 
@@ -84,11 +90,10 @@ public class Table extends Thread
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         if(this.studentServed==7)
         {
-            this.studentServed=0;
             this.coursesDelivered++;
-            if(this.coursesDelivered==3)
+            if(this.coursesDelivered<3)
             {
-                this.orderIsDone = true;
+                this.studentServed=0;
             }
             return true;
         }
@@ -272,7 +277,7 @@ public class Table extends Thread
         } catch (MemException e1) {
             e1.printStackTrace();
         }
-        
+        // wake waiter waiting to serve 
         notifyAll();
         // block while it is not served
         while(!students[sID].servedByWaiter())
@@ -283,16 +288,7 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
-    }
-
-    public synchronized boolean isOrderDone()
-    {
-        // Here we will check if the 3 courses have been eaten
-        if(this.orderIsDone)
-        {
-            return true;
-        }
-        else
-            return false;
+        this.studentServed++;
+        repos.setNPortion(1);
     }
 }

@@ -3,6 +3,7 @@ package sharedRegions;
 import entities.*;
 import FIFO.*;
 import main.*;
+import main.Constants;
 
 public class Bar extends Thread
 {
@@ -11,20 +12,11 @@ public class Bar extends Thread
     private int studentsSeat=0;
     private int studentsEntered;
     private int studentsDone;
-    private int coursesEaten=0;
-    private boolean allStudentsServed = false;
     private boolean firstStudent = true;
     private boolean orderDone = false;
     private boolean payBill = false;
-    private boolean studentAtDoor = false;
-    private boolean portionCollected = false;
     private boolean portionReady = false;
-    private boolean nextCourseIsReady = false;
     private boolean waiterIsRequested = false;
-    private boolean waitingForCourse = false;
-    private boolean nextPortionReady = false;
-    private boolean lastStudentSignaled = false;
-    private boolean orderIsDone = false;
     private boolean allStudentsLeft = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
@@ -70,11 +62,13 @@ public class Bar extends Thread
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         students[student_saluted].setSalutedByWaiter();
+        // wake student
+        notifyAll();
+
         // set the seat of the student upon being saluted
         students[student_saluted].setTableSeat(this.studentsSeat);
         this.studentsSeat++;
 
-        notifyAll();
 
         // After being in presenting the menu state
         // we wait here, before returning to the bar
@@ -126,16 +120,15 @@ public class Bar extends Thread
             {
             }
         }
+        this.waiterIsRequested = false;
         
         // After the wait block, means he is requested
         // Depending on the flag that is activated, he will 
         // do some action
 
         //means there's students at the door, waiting to be saluted
-        if(this.studentAtDoor)
+        if(this.queue.getN()!=0)
         {
-            this.studentAtDoor = false;
-            this.waiterIsRequested = false;
             return 0;
         }
         else if(this.orderDone)
@@ -146,8 +139,6 @@ public class Bar extends Thread
         else if(this.portionReady )// && this.waitingForCourse)
         {
             this.portionReady = false;
-            this.waitingForCourse = false;
-            this.nextCourseIsReady = true;
             return 2;
         }
         else if(this.payBill == true)
@@ -162,19 +153,17 @@ public class Bar extends Thread
         }
         else
         {
-            this.waiterIsRequested = false;
             return -1;
         }
     }
 
-    public synchronized boolean sayGoodbye()
+    public synchronized void sayGoodbye()
     {
         ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         // While we haven't said goodbye to all students
         // If we've said goodbye to everyone, the waiter can go home
         ((Waiter) Thread.currentThread()).setCanGoHome();
-        return true;
     }
 
     public synchronized void signalTheWaiter(int sID)
@@ -188,11 +177,6 @@ public class Bar extends Thread
         if(last)
         {
             ((Student) Thread.currentThread()).lastStudent = false;
-            this.waitingForCourse = true;
-            this.coursesEaten++;
-            //repos.setNCourse(1);
-            if(this.coursesEaten==3)
-                this.orderIsDone = true;
             System.out.printf("Student[%d] was last to eat, will alert the waiter\n", sID);
             //notify the waiter
             this.waiterIsRequested = true;
@@ -206,7 +190,6 @@ public class Bar extends Thread
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDone = true;
-        this.waitingForCourse = true;
         // wake up waiter
         this.waiterIsRequested = true;
         notifyAll();
@@ -225,6 +208,10 @@ public class Bar extends Thread
             e1.printStackTrace();
         }
 
+        // Wake waiter
+        this.waiterIsRequested = true;
+        notifyAll();
+
         if(firstStudent)
         {
             this.firstStudent = false;
@@ -237,11 +224,6 @@ public class Bar extends Thread
             this.lastStudentID = sID;
             System.out.printf("Last Student %d \n", this.lastStudentID);
         }
-
-        // Wake waiter
-        this.studentAtDoor = true;
-        this.waiterIsRequested = true;
-        notifyAll();
 
 
         // block while it is not saluted
@@ -311,16 +293,5 @@ public class Bar extends Thread
 
         ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
-    }
-
-    public synchronized boolean isOrderDone()
-    {
-        // Here we will check if the 3 courses have been eaten
-        if(this.orderIsDone)
-        {
-            return true;
-        }
-        else
-            return false;
     }
 }
