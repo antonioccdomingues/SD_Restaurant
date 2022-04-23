@@ -2,7 +2,7 @@ package sharedRegions;
 
 import java.util.Objects;
 
-import main.*;
+import main.Constants;
 import entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
@@ -33,7 +33,7 @@ public class GeneralRepos
     private int orderID = -1;
 
     //array with seat order
-    private String[] order = new String[MainProgram.students_number];
+    private String[] order = new String[Constants.students_number];
     private int orderFlag = 0;
 
     boolean match = false;
@@ -46,7 +46,7 @@ public class GeneralRepos
 
     public GeneralRepos (String logFileName)
     {
-        for(int y =0; y< MainProgram.students_number; y++)
+        for(int y =0; y< Constants.students_number; y++)
         {
             order[y] = "_";
         }
@@ -56,8 +56,8 @@ public class GeneralRepos
 
         waiterState = WaiterState.APPRAISING_SITUATION;
         chefState = ChefState.WAITING_FOR_AN_ORDER;
-        studentState = new StudentState[7];
-        for (int i= 0; i < MainProgram.students_number;i ++)
+        studentState = new StudentState[Constants.students_number];
+        for (int i= 0; i < Constants.students_number;i ++)
             studentState[i] = StudentState.GOING_TO_THE_RESTAURANT;
 
         reportInitialStatus ();
@@ -232,7 +232,7 @@ public class GeneralRepos
         case RECEIVING_PAYMENT:         lineStatus += " RECPM ";break;
         }
 
-        for (int i = 0; i < MainProgram.students_number; i++)
+        for (int i = 0; i < Constants.students_number; i++)
             switch (studentState[i])
             { 
             case GOING_TO_THE_RESTAURANT:  lineStatus += " GGTRT ";break;
