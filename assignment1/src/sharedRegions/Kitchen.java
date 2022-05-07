@@ -7,10 +7,12 @@ public class Kitchen extends Thread
 {
     private int portionsDelivered;
     private int coursesDelievered=0;
+    private double delay = 0;
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
     private boolean portionCollected = false;
-    private boolean courseDone = false;
+    private boolean orderDone = false;
+    private boolean notifyWaiter = false;
     private final GeneralRepos repos;   //references to general repository
 
     /**
@@ -18,7 +20,11 @@ public class Kitchen extends Thread
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Kitchen(GeneralRepos repos){this.repos = repos;}
+    public Kitchen(GeneralRepos repos)
+    {
+        this.repos = repos;
+        this.delay = 300 * Math.random();
+    }
 
     public synchronized void startPreparation()
     {
@@ -49,7 +55,7 @@ public class Kitchen extends Thread
         this.coursesDelievered++;
         if(this.coursesDelievered==(Constants.courses_number-1))
         {
-            this.courseDone = true;
+            this.orderDone = true;
         }
     }
 
@@ -63,12 +69,13 @@ public class Kitchen extends Thread
     public synchronized boolean hasTheOrderBeenCompleted()
     {
         // Only when the 3 course meal has been delivered
-        return this.courseDone;
+        return this.orderDone;
     }
 
     public synchronized boolean haveAllPortionsBeenDelivered()
     {
-        if(this.portionsDelivered == Constants.students_number)
+        //System.out.println(this.portionsDelivered);
+        if(this.portionsDelivered == (Constants.students_number-1))
         {
             return true;
         }
@@ -134,11 +141,13 @@ public class Kitchen extends Thread
         ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         
-        if(this.portionsDelivered==Constants.students_number)
+        if(this.portionsDelivered==(Constants.students_number))
         {
             return true;
         }
         else
+        {
             return false;
+        }
     }
 }

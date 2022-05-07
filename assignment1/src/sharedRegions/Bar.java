@@ -11,13 +11,18 @@ public class Bar extends Thread
     private int studentsSeat=0;
     private int studentsEntered;
     private int studentsDone;
+    private int waiterIsRequested = 0;
+    private int studentAtDoor = 0;
+    private int portionReady = 0;
+    private int courses = 0;
+    private double delay = 0;
     private boolean firstStudent = true;
     private boolean orderDone = false;
     private boolean payBill = false;
-    private boolean portionReady = false;
-    private boolean waiterIsRequested = false;
+    //private boolean portionReady = false;
+    //private boolean waiterIsRequested = false;
     private boolean allStudentsLeft = false;
-    private boolean studentAtDoor = false;
+    //private boolean studentAtDoor = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
     private final GeneralRepos repos;   //references to general repository
@@ -43,6 +48,7 @@ public class Bar extends Thread
             e.printStackTrace();
         }
         this.repos = repos;
+        this.delay = 300 * Math.random();
     }
 
     public synchronized void saluteTheClient()
@@ -87,8 +93,8 @@ public class Bar extends Thread
     {
         ((Chef) Thread.currentThread()).setState(ChefState.DELIVERING_THE_PORTIONS);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
-        this.portionReady = true;
-        this.waiterIsRequested = true;
+        this.portionReady++;
+        this.waiterIsRequested++; 
         notifyAll();
     }
 
@@ -112,7 +118,7 @@ public class Bar extends Thread
         // while the waiter is not called to be 
         // awakened by other events, he simply waits here
 
-        while(!this.waiterIsRequested)
+        while(this.waiterIsRequested == 0)
         {
             try {
                 wait();
@@ -120,16 +126,16 @@ public class Bar extends Thread
             {
             }
         }
-        this.waiterIsRequested = false;
+        this.waiterIsRequested--; 
         
         // After the wait block, means he is requested
         // Depending on the flag that is activated, he will 
         // do some action
 
         //means there's students at the door, waiting to be saluted
-        if(this.studentAtDoor)
+        if(this.studentAtDoor > 0)
         {
-            this.studentAtDoor = false;
+            this.studentAtDoor--; 
             return 0;
         }
         else if(this.orderDone)
@@ -137,9 +143,9 @@ public class Bar extends Thread
             this.orderDone = false;
             return 1;
         }
-        else if(this.portionReady )// && this.waitingForCourse)
+        else if(this.portionReady > 0)// && this.waitingForCourse)
         {
-            this.portionReady = false;
+            this.portionReady--; 
             return 2;
         }
         else if(this.payBill == true)
@@ -173,14 +179,15 @@ public class Bar extends Thread
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         boolean last = ((Student) Thread.currentThread()).lastStudent;
-        // lasr student notified the waiter, and thus
+        // last student notified the waiter, and thus
         // wont be waiting in the cycle
         if(last)
         {
             ((Student) Thread.currentThread()).lastStudent = false;
             System.out.printf("Student[%d] was last to eat, will alert the waiter\n", sID);
             //notify the waiter
-            this.waiterIsRequested = true;
+            this.courses ++;
+            this.waiterIsRequested++; 
             notifyAll();
         }
     }
@@ -192,7 +199,7 @@ public class Bar extends Thread
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDone = true;
         // wake up waiter
-        this.waiterIsRequested = true;
+        this.waiterIsRequested++;
         notifyAll();
     }
 
@@ -210,8 +217,8 @@ public class Bar extends Thread
         }
 
         // Wake waiter
-        this.studentAtDoor = true;
-        this.waiterIsRequested = true;
+        this.studentAtDoor++; 
+        this.waiterIsRequested++; 
         notifyAll();
 
         if(firstStudent)
@@ -263,7 +270,7 @@ public class Bar extends Thread
         if(this.studentsDone==Constants.students_number)
         {
             this.allStudentsLeft = true;
-            this.waiterIsRequested = true;
+            this.waiterIsRequested++; 
             notifyAll();
         }
     }
@@ -275,7 +282,7 @@ public class Bar extends Thread
             ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
             int studentId = ((Student) Thread.currentThread ()).getID();
             repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
-            this.waiterIsRequested = true;
+            this.waiterIsRequested++;
             this.payBill = true;
             notifyAll();
             return true; 

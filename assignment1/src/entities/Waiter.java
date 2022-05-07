@@ -3,13 +3,34 @@ package entities;
 import sharedRegions.*;
 import genclass.*;
 
+    /**
+    *       Waiter Thread
+    *
+    *       Class used to simulate a Waiter's life cycle   
+    *    
+    */
 public class Waiter extends Thread
 {
+    /**
+    *       Waiter State
+    */
     private WaiterState state;
+    /**
+    *       Reference to the kitchen
+    */
     private Kitchen kitchen;
-    private Bar bar;
-    private Table table;
+    /**
+    *       Flag to determine if the waiter can close the restaurant or not
+    */
     private boolean canGoHome = false;
+    /**
+    *       Reference to the Bar
+    */
+    private Bar bar;
+    /**
+    *       Reference to the Table
+    */
+    private Table table;
 
     public Waiter(WaiterState state, Kitchen kitchen, Bar bar, Table table)
     {

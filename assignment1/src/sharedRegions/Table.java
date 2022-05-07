@@ -8,7 +8,6 @@ import FIFO.*;
 public class Table extends Thread
 {
     private boolean orderDescribed = false;
-    private boolean informStudent = false;
     public boolean everyBodyFinished = false;
     private boolean firstStudentJoinedTalk = false;
     private boolean billIsReady = false;
@@ -17,6 +16,8 @@ public class Table extends Thread
     private int studentServed = 0;
     private int studentFinishedEating;
     private int coursesDelivered = 0;
+    private int studentWaiting = 0;
+    private double delay = 0;
     private final Student[] students;
     private MemFIFO<Integer> queue;
     private final GeneralRepos repos;   //references to general repository    
@@ -42,6 +43,7 @@ public class Table extends Thread
             e.printStackTrace();
         }
         this.repos = repos;
+        this.delay = 300 * Math.random();
     } 
 
     public synchronized void getThePad()
@@ -63,7 +65,7 @@ public class Table extends Thread
     {
         int student_served=0;
 
-        while(this.queue.getN()==0)
+        while(this.studentWaiting == 0)
         {
             try {
                 wait();
@@ -71,6 +73,7 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+        this.studentWaiting--;
         // Dequeue the student
         try {
             student_served = queue.read();
@@ -90,11 +93,7 @@ public class Table extends Thread
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         if(this.studentServed==Constants.students_number)
         {
-            this.coursesDelivered++;
-            if(this.coursesDelivered<Constants.courses_number)
-            {
-                this.studentServed=0;
-            }
+            this.studentServed=0;
             return true;
         }
         else
@@ -128,7 +127,7 @@ public class Table extends Thread
         students[sID].setState(StudentState.CHATTING_WITH_COMPANIONS);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
         
-        this.informStudent=true;
+        this.studentSelectedCourses++;
         // Wake the student taking the order
         notifyAll();
         
@@ -170,7 +169,7 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
 
-        while(!this.everyBodyFinished)
+        while(!this.everyBodyFinished) 
         {
             try {
                 wait();
@@ -185,7 +184,6 @@ public class Table extends Thread
         ((Student) Thread.currentThread()).setState(StudentState.ENJOYING_THE_MEAL);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
-        this.everyBodyFinished = false;
         // Simulate eating
         ((Student) Thread.currentThread()).studentEating();
     }
@@ -213,7 +211,6 @@ public class Table extends Thread
 
     public synchronized void honourTheBill()
     {
-
         // wait untill the bill is ready
         while(!this.billIsReady)
         {
@@ -236,7 +233,7 @@ public class Table extends Thread
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
 
         
-        while(!this.informStudent)
+        while(this.studentSelectedCourses < Constants.students_number)
         {
             try {
                 wait();
@@ -244,8 +241,6 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
-        this.studentSelectedCourses++;
-        this.informStudent = false;
     }
 
     public synchronized boolean hasEverybodyChosen()
@@ -277,6 +272,7 @@ public class Table extends Thread
         } catch (MemException e1) {
             e1.printStackTrace();
         }
+        this.studentWaiting++;
         // wake waiter waiting to serve 
         notifyAll();
         // block while it is not served
@@ -288,6 +284,7 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+        this.everyBodyFinished = false;
         this.studentServed++;
         repos.setNPortion(1);
     }

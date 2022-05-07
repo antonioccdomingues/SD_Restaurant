@@ -24,9 +24,14 @@ public class MainProgram
             students[i] = new Student(i,StudentState.GOING_TO_THE_RESTAURANT, bar, table);
         
         chef.start();
+        chef.setName("Chef");
         waiter.start();
+        waiter.setName("Waiter");
         for(int i=0;i<students.length;i++)
+        {
             students[i].start();
+            students[i].setName("Student["+i+"]");
+        }
 
 
         for(int i=0;i<students.length;i++)
