@@ -1,8 +1,8 @@
-package sharedRegions;
+package serverSide.sharedRegions;
 
-import entities.*;
-import FIFO.*;
-import main.Constants;
+import serverSide.entities.*;
+import commInfra.*;
+import serverSide.main.Constants;
 
 public class Bar extends Thread
 {

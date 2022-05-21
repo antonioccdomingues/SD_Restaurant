@@ -1,14 +1,14 @@
-package sharedRegions;
+package serverSide.stub;
 
 import java.util.Objects;
 
-import main.Constants;
-import entities.*;
+import serverSide.main.Constants;
+import serverSide.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
 
-public class GeneralRepos 
+public class GeneralReposStub 
 {
     
     //name of logFile
@@ -44,7 +44,7 @@ public class GeneralRepos
    *     @param logFileName name of the logging file
    */
 
-    public GeneralRepos (String logFileName)
+    public GeneralReposStub (String logFileName)
     {
         for(int y =0; y< Constants.students_number; y++)
         {
@@ -52,7 +52,7 @@ public class GeneralRepos
         }
         if ((logFileName == null) || Objects.equals(logFileName, ""))
             this.logFileName = "logger";
-        else this.logFileName = logFileName;
+            else this.logFileName = logFileName;
 
         waiterState = WaiterState.APPRAISING_SITUATION;
         chefState = ChefState.WAITING_FOR_AN_ORDER;

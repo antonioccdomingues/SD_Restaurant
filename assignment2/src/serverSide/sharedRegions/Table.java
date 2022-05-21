@@ -1,8 +1,8 @@
-package sharedRegions;
+package serverSide.sharedRegions;
 
-import entities.*;
-import main.Constants;
-import FIFO.*;
+import serverSide.entities.*;
+import serverSide.main.Constants;
+import commInfra.*;
 
 
 public class Table extends Thread

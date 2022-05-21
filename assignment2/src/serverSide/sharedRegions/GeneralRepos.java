@@ -1,9 +1,9 @@
-package sharedRegions;
+package serverSide.sharedRegions;
 
 import java.util.Objects;
 
-import main.Constants;
-import entities.*;
+import serverSide.main.Constants;
+import serverSide.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
@@ -52,7 +52,7 @@ public class GeneralRepos
         }
         if ((logFileName == null) || Objects.equals(logFileName, ""))
             this.logFileName = "logger";
-        else this.logFileName = logFileName;
+            else this.logFileName = logFileName;
 
         waiterState = WaiterState.APPRAISING_SITUATION;
         chefState = ChefState.WAITING_FOR_AN_ORDER;
