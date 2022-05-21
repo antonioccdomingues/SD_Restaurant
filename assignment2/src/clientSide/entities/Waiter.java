@@ -11,6 +11,12 @@ import genclass.*;
     */
 public class Waiter extends Thread
 {
+
+    /**
+    *       Waiter id
+    */
+    private int waiterID;
+
     /**
     *       Waiter State
     */
@@ -32,12 +38,21 @@ public class Waiter extends Thread
     */
     private TableStub table;
 
-    public Waiter(WaiterState state, KitchenStub kitchen, BarStub bar, TableStub table)
+    public Waiter(int waiterID, WaiterState state, KitchenStub kitchen, BarStub bar, TableStub table)
     {
+        this.setWaiterID(waiterID);
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
         this.table = table;
+    }
+
+    public int getWaiterID() {
+        return waiterID;
+    }
+
+    public void setWaiterID(int waiterID) {
+        this.waiterID = waiterID;
     }
 
     public boolean CanGoHome() {

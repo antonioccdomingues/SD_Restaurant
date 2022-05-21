@@ -6,15 +6,28 @@ import clientSide.stubs.KitchenStub;
 
 public class Chef extends Thread
 {
+    /**
+    *       Chef id
+    */
+    private int chefID;
+
     private ChefState state;
     private BarStub bar;
     private KitchenStub kitchen;
 
-    public Chef(ChefState state, KitchenStub kitchen, BarStub bar)
+    public Chef(int chefID, ChefState state, KitchenStub kitchen, BarStub bar)
     {
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
+    }
+
+    public int getChefID() {
+        return chefID;
+    }
+
+    public void setChefID(int chefID) {
+        this.chefID = chefID;
     }
 
     public void setState(ChefState state)
@@ -61,5 +74,7 @@ public class Chef extends Thread
         }while(!kitchen.hasTheOrderBeenCompleted());
         kitchen.cleanUp();
         GenericIO.writelnString("\033[41m Chef End Of Life \033[0m");
+
+        //NÃO ESQUECER DE DAR SHUTDOWN
     }
 }
