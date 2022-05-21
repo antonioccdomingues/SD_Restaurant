@@ -299,10 +299,11 @@ public class BarStub
         com.close ();
     }
 
-    // public synchronized boolean FirstStudent(int sID)
-    // {
-    //     return true;
-    // }
+    public synchronized boolean FirstStudent(int sID)
+    {
+        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
+        return true;
+    }
 
     public synchronized void exit()
     {
