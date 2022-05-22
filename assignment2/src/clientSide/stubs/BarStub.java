@@ -2,8 +2,6 @@ package clientSide.stubs;
 
 import clientSide.entities.*;
 import commInfra.*;
-import genclass.GenericIO;
-import serverSide.entities.WaiterState;
 
 /**
  *  Stub to the Bar.

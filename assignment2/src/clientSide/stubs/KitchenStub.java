@@ -2,7 +2,6 @@ package clientSide.stubs;
 
 import clientSide.entities.*;
 import commInfra.*;
-import genclass.GenericIO;
 
 public class KitchenStub 
 {
