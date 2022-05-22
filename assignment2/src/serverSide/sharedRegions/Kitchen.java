@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import serverSide.entities.*;
 import serverSide.main.Constants;
+import serverSide.stub.*;
 
 public class Kitchen extends Thread 
 {
@@ -13,14 +14,14 @@ public class Kitchen extends Thread
     private boolean portionCollected = false;
     private boolean orderDone = false;
     private boolean notifyWaiter = false;
-    private final GeneralRepos repos;   //references to general repository
+    private final GeneralReposStub repos;   //references to general repository
 
     /**
 	*  Kitchen instantiation.
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Kitchen(GeneralRepos repos)
+    public Kitchen(GeneralReposStub repos)
     {
         this.repos = repos;
         this.delay = 300 * Math.random();

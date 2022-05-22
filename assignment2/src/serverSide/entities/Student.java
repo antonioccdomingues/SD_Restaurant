@@ -68,7 +68,7 @@ public interface Student
     /**
     *   Simulate a walk to the bar of a student with a random time interval 
     */
-    public void walkABit(); 
+    //public void walkABit(); 
 
     /**
     *   Simulate the student eating with a random time interval 

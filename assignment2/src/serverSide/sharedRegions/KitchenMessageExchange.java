@@ -4,7 +4,7 @@ import genclass.GenericIO;
 import commInfra.Message;
 import serverSide.entities.*;;
 
-public class KitchenMessageExchange
+public class KitchenMessageExchange implements SharedRegionInterface
 {
     private Kitchen kitchen;
 

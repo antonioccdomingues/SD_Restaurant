@@ -4,7 +4,7 @@ import genclass.GenericIO;
 import commInfra.Message;
 import serverSide.entities.*;;
 
-public class GeneralReposMessageExchange
+public class GeneralReposMessageExchange implements SharedRegionInterface
 {
     private GeneralRepos generalRepos;
 

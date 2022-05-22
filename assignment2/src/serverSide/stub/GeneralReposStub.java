@@ -2,68 +2,40 @@ package serverSide.stub;
 
 import java.util.Objects;
 
-import serverSide.main.Constants;
-import serverSide.entities.*;
+import commInfra.Message;
+import commInfra.CommunicationChannel;
 import genclass.GenericIO;
 import genclass.TextFile;
+import serverSide.entities.*;
 
 
 public class GeneralReposStub 
 {
-    
-    //name of logFile
-    private final String logFileName;
+	/**
+    *  Name of the computational system where the server is located.
+    */
 
-    //state of the pilot
-    private ChefState chefState;
-
-    //state of the waiter
-    private WaiterState waiterState;
-
-    //state of the students
-    private StudentState[] studentState;
-
-    //Number of the course
-    private int NCourse = 0;
-
-    //number of a portion of a course
-    private int NPortion = 0;
-
-    //flag for students order
-    private int orderID = -1;
-
-    //array with seat order
-    private String[] order = new String[Constants.students_number];
-    private int orderFlag = 0;
-
-    boolean match = false;
+    private String serverHostName;
 
     /**
-   *   Instantiation of a general repository object.
-   *
-   *     @param logFileName name of the logging file
-   */
+    *  Number of the listening port at the computational system where the server is located.
+    */
 
-    public GeneralReposStub (String logFileName)
+    private int serverPortNumb;
+
+    /**
+    *  Instantiation of a remote reference
+    *
+    *    @param hostName name of the computational system where the server is located
+    *    @param port number of the listening port at the computational system where the server is located
+    */
+
+    public GeneralReposStub (String hostName, int port)
     {
-        for(int y =0; y< Constants.students_number; y++)
-        {
-            order[y] = "_";
-        }
-        if ((logFileName == null) || Objects.equals(logFileName, ""))
-            this.logFileName = "logger";
-            else this.logFileName = logFileName;
-
-        waiterState = WaiterState.APPRAISING_SITUATION;
-        chefState = ChefState.WAITING_FOR_AN_ORDER;
-        studentState = new StudentState[Constants.students_number];
-        for (int i= 0; i < Constants.students_number;i ++)
-            studentState[i] = StudentState.GOING_TO_THE_RESTAURANT;
-
-        reportInitialStatus ();
-        
+       serverHostName = hostName;
+       serverPortNumb = port;
     }
-
+    
     /**
 	 *   Set waiter state.
 	 *
@@ -72,8 +44,26 @@ public class GeneralReposStub
 
 	public synchronized void setWaiterState (WaiterState state)
     {
-		waiterState = state;
-		reportStatus ();
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = state;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
 	}
 
     /**
@@ -85,40 +75,26 @@ public class GeneralReposStub
 
     public synchronized void setStudentState (int id, StudentState state)
     {
-        //System.out.println(state);
-        if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE)
-        {
-            studentState[id] = state;
-            setStudentsOrder(id);
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = state;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
         }
-        // if(state == StudentState.PAYING_THE_BILL && pagar == 0)
-        // {
-        //     pagar =1;
-        //     reportSpecificStatus("\nStudent: " + id + " Paying the Bill");
-        // }
-        // if (state == StudentState.GOING_HOME && sair == 0)
-        // {
-        //     reportSpecificStatus("\nLeaving the Restaurant");
-        //     sair = 1;
-        // }
-        // if(state == StudentState.GOING_HOME)
-        // {
-            
-        //     order[id] = "_";
-        // }
-        // if(state == StudentState.SELECTING_THE_COURSES && escolher == 0)
-        // {
-        //     reportSpecificStatus("\nStudent:" + id + " gathering individual plate choices");
-        //     escolher =1;
-        // }
-        // if(state == StudentState.ENJOYING_THE_MEAL)
-        // {
-        //     reportSpecificStatus("\nStudent " + id + " eating");
-        // }
-        studentState[id] = state;
-		reportStatus ();
         
+        com.writeObject (m_toServer);
         
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
     }
 
      /**
@@ -129,8 +105,26 @@ public class GeneralReposStub
 
 	public synchronized void setChefState (ChefState state)
     {
-		chefState = state;
-		reportStatus ();
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = state;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
 	}
 
     /**
@@ -139,7 +133,29 @@ public class GeneralReposStub
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNCourse (int number){NCourse += number;}
+	public synchronized void setNCourse (int number)
+    {
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = number;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
+    }
 
     /**
 	 *   Set Nportion number.
@@ -149,17 +165,26 @@ public class GeneralReposStub
 
 	public synchronized void setNPortion (int number)
     {
-
-         if(NCourse == 0 && NPortion == 0 && number == 1){
-             NCourse++;
-         }
-         NPortion +=number;
-
-         if(NPortion == 8)
-         {
-             NPortion = 1;
-             NCourse++;
-         }
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = number;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
     }
 
     /**
@@ -168,96 +193,76 @@ public class GeneralReposStub
 	 *     @param id passenger id
 	 */
 
-	public synchronized void setStudentsOrder (int id){
-		if (id != orderID)
-        {
-            String s=Integer.toString(id);  
-            order[orderFlag] = s;
-            orderFlag++;
-            orderID = id; // isto secalhar nao funciona, tem de se verificar com todos os valores do array
-            reportStatus ();
+	public synchronized void setStudentsOrder (int id)
+    {
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = id;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
         }
-		
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
 	}
 
     private void reportInitialStatus ()
    {
-      TextFile log = new TextFile ();                      // instantiation of a text file handler
-
-      if (!log.openForWriting (".", logFileName))
-         { GenericIO.writelnString ("The operation of creating the file " + logFileName + " failed!");
-           System.exit (1);
-         }
-      log.writelnString ("                                          The Restaurant - Description of the internal state\n");
-      log.writelnString ("Chef   Waiter  Stu0   Stu1   Stu2   Stu3   Stu4   Stu5   Stu6  NCourse  NPortion           Table");
-      log.writelnString("State  State  State  State  State  State  State  State  State                     Seat0 Seat1 Seat2 Seat3 Seat4 Seat5 Seat6");
-      if (!log.close ())
-         { GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-           System.exit (1);
-         }
-      reportStatus ();
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[0];
+    	Object[] state_fields = new Object[0];
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
    }
 
 
    //WORK TO DO 
     private void reportStatus ()
     {
-        TextFile log = new TextFile ();                      // instantiation of a text file handler
-
-        String lineStatus = "";                              // state line to be printed
-
-        if (!log.openForAppending (".", logFileName))
-        {
-            GenericIO.writelnString ("The operation of opening for appending the file " + logFileName + " failed!");
-            System.exit (1);
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[0];
+    	Object[] state_fields = new Object[0];
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
         }
-
-        switch (chefState)
-        { 
-        case WAITING_FOR_AN_ORDER:     lineStatus += "WAFOR ";break;
-        case PREPARING_THE_COURSE:   lineStatus += "PRPCS ";break;
-        case DISHING_THE_PORTIONS: lineStatus += "DSHPT ";break;
-        case DELIVERING_THE_PORTIONS:      lineStatus += "DLVPT ";break;
-        case CLOSING_SERVICE:         lineStatus += "CLSSV ";break;
-        }
-
-        switch (waiterState)
-        { 
-        case APPRAISING_SITUATION:     lineStatus += " APPST ";break;
-        case PRESENTING_THE_MENU:   lineStatus += " PRSMN ";break;
-        case TAKING_THE_ORDER:         lineStatus += " TKODR ";break;
-        case PLACING_THE_ORDER:      lineStatus += " PCODR ";break;
-        case WAITING_FOR_PORTION:     lineStatus += " WTFPT ";break;
-        case PROCESSING_THE_BILL:   lineStatus += " PRCBL ";break;
-        case RECEIVING_PAYMENT:         lineStatus += " RECPM ";break;
-        }
-
-        for (int i = 0; i < Constants.students_number; i++)
-            switch (studentState[i])
-            { 
-            case GOING_TO_THE_RESTAURANT:  lineStatus += " GGTRT ";break;
-            case TAKING_A_SEAT_AT_THE_TABLE:         lineStatus += " TKSTT ";break;
-            case SELECTING_THE_COURSES:        lineStatus += " SELCS ";break;
-            case ORGANIZING_THE_ORDER:   lineStatus += " OGODR ";break;
-            case CHATTING_WITH_COMPANIONS:  lineStatus += " CHTWC ";break;
-            case ENJOYING_THE_MEAL:         lineStatus += " EJYML ";break;
-            case PAYING_THE_BILL:        lineStatus += " PYTBL ";break;
-            case GOING_HOME:   lineStatus += " GGHOM ";break;
-            }
-
-        lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
-
-        lineStatus += String.format("    %4s  %4s  %4s  %4s  %4s  %4s  %4s  ", order[0], order[1], order[2], order[3], order[4], order[5], order[6]);
-
-        log.writelnString (lineStatus);
-        if (!log.close ())
-        { 
-            GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-            System.exit (1);
-        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
     }
 
     /**
@@ -268,19 +273,26 @@ public class GeneralReposStub
 	 */
 
 	public synchronized void reportSpecificStatus (String message){
-		TextFile log = new TextFile ();                      // instantiation of a text file handler
-
-		if (!log.openForAppending (".", logFileName)){
-			GenericIO.writelnString ("The operation of opening for appending the file " + logFileName + " failed!");
-			System.exit (1);
-		}
-
-		log.writelnString (message);
-		if (!log.close ()){ 
-			GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-			System.exit (1);
-		}
-
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[1];
+    	Object[] state_fields = new Object[0];
+    	params[0] = message;
+    	
+        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+        
+        com.close ();                                  
 	}
 }
 

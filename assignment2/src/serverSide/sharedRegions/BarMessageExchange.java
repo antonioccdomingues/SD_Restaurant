@@ -4,7 +4,7 @@ import genclass.GenericIO;
 import commInfra.Message;
 import serverSide.entities.*;;
 
-public class BarMessageExchange
+public class BarMessageExchange implements SharedRegionInterface
 {
     private Bar bar;
 

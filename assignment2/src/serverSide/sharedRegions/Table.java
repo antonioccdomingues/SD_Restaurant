@@ -3,6 +3,7 @@ package serverSide.sharedRegions;
 import serverSide.entities.*;
 import serverSide.main.Constants;
 import commInfra.*;
+import serverSide.stub.*;
 
 
 public class Table extends Thread
@@ -20,14 +21,14 @@ public class Table extends Thread
     private double delay = 0;
     private final Student[] students;
     private MemFIFO<Integer> queue;
-    private final GeneralRepos repos;   //references to general repository    
+    private final GeneralReposStub repos;   //references to general repository    
 
     /**
 	*  Table instantiation.
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Table(GeneralRepos repos)
+    public Table(GeneralReposStub repos)
     {
         students = new Student[Constants.students_number];
         for(int i=0; i<Constants.students_number;i++)

@@ -3,6 +3,7 @@ package serverSide.sharedRegions;
 import serverSide.entities.*;
 import commInfra.*;
 import serverSide.main.Constants;
+import serverSide.stub.*;;
 
 public class Bar extends Thread
 {
@@ -25,14 +26,14 @@ public class Bar extends Thread
     //private boolean studentAtDoor = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
-    private final GeneralRepos repos;   //references to general repository
+    private final GeneralReposStub repos;   //references to general repository
 
     /**
 	*  Bar instantiation.
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Bar(GeneralRepos repos)
+    public Bar(GeneralReposStub repos)
     {
         students = new Student[Constants.students_number];
         for(int i=0; i<Constants.students_number;i++)

@@ -4,7 +4,7 @@ import genclass.GenericIO;
 import commInfra.Message;
 import serverSide.entities.*;;
 
-public class TableMessageExchange
+public class TableMessageExchange implements SharedRegionInterface
 {
     private Table table;
 
