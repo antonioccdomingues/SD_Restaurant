@@ -1,10 +1,8 @@
-echo "Transfering data to the general repository node."
-sshpass -f password ssh ruib@l040101-ws07.ua.pt 'mkdir -p test/SleepingBarbers'
-sshpass -f password ssh ruib@l040101-ws07.ua.pt 'rm -rf test/SleepingBarbers/*'
-sshpass -f password scp dirGeneralRepos.zip ruib@l040101-ws07.ua.pt:test/SleepingBarbers
-echo "Decompressing data sent to the general repository node."
-sshpass -f password ssh ruib@l040101-ws07.ua.pt 'cd test/SleepingBarbers ; unzip -uq dirGeneralRepos.zip'
-echo "Executing program at the server general repository."
-sshpass -f password ssh ruib@l040101-ws07.ua.pt 'cd test/SleepingBarbers/dirGeneralRepos ; java serverSide.main.ServerSleepingBarbersGeneralRepos 22000'
-echo "Server shutdown."
-sshpass -f password ssh ruib@l040101-ws07.ua.pt 'cd test/SleepingBarbers/dirGeneralRepos ; less stat'
+echo "Transfering data to the Bar node."
+sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'mkdir -p assignment2/restaurant'
+sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'rm -rf assignment2/restaurant/*'
+sshpass -p "qwerty" scp genclass.jar generalRepos.zip sd205@l040101-ws10.ua.pt:/home/sd205/assignment2/restaurant
+echo "Decompressing data sent to the bar node."
+sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'cd assignment2/restaurant ; unzip -qo generalRepos.zip'
+echo "Executing program at the customers node."
+sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'java -classpath "genclass.jar:." serverSide.main.GeneralReposMain' 

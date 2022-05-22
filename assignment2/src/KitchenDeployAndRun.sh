@@ -1,8 +1,8 @@
-echo "Transfering data to the barbers node."
-sshpass -f password ssh ruib@l040101-ws05.ua.pt 'mkdir -p test/SleepingBarbers'
-sshpass -f password ssh ruib@l040101-ws05.ua.pt 'rm -rf test/SleepingBarbers/*'
-sshpass -f password scp dirBarbers.zip ruib@l040101-ws05.ua.pt:test/SleepingBarbers
-echo "Decompressing data sent to the barbers node."
-sshpass -f password ssh ruib@l040101-ws05.ua.pt 'cd test/SleepingBarbers ; unzip -uq dirBarbers.zip'
-echo "Executing program at the barbers node."
-sshpass -f password ssh ruib@l040101-ws05.ua.pt 'cd test/SleepingBarbers/dirBarbers ; java clientSide.main.ClientSleepingBarbersBarber l040101-ws06.ua.pt 22001 l040101-ws07.ua.pt 22000'
+echo "Transfering data to the Kitchen node."
+sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'mkdir -p assignment2/restaurant'
+sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'rm -rf assignment2/restaurant/*'
+sshpass -p "qwerty" scp genclass.jar kitchen.zip sd205@l040101-ws02.ua.pt:/home/sd205/assignment2/restaurant
+echo "Decompressing data sent to the bar node."
+sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'cd assignment2/restaurant ; unzip -qo  kitchen.zip'
+echo "Executing program at the customers node."
+sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'java -classpath "genclass.jar:." serverSide.main.KitchenMain' 
