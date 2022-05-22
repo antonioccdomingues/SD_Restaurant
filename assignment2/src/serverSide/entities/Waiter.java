@@ -9,6 +9,10 @@ package serverSide.entities;
 public interface Waiter 
 {
 
+    public void setWaiterID(int id);
+
+    public int getWaiterID();
+
     public boolean CanGoHome();
 
     public void setCanGoHome();

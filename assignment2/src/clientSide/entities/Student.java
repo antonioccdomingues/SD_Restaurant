@@ -157,6 +157,11 @@ public class Student extends Thread
     {
         return this.sID;
     }
+
+    public void setID(int id)
+    {
+        this.sID = id;
+    }
     
     @Override
     public String toString() 

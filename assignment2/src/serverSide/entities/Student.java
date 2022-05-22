@@ -64,7 +64,7 @@ public interface Student
     */
     public int getID();
     
-    
+    public void setID(int id);
     /**
     *   Simulate a walk to the bar of a student with a random time interval 
     */
