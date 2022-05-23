@@ -6,31 +6,25 @@ import sharedRegions.Kitchen;
 
 public class Chef extends Thread
 {
-    private ChefState state;
+    private int state;
     private Bar bar;
     private Kitchen kitchen;
 
-    public Chef(ChefState state, Kitchen kitchen, Bar bar)
+    public Chef(int state, Kitchen kitchen, Bar bar)
     {
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
     }
 
-    public void setState(ChefState state)
+    public void setState(int state)
     {
         this.state = state;
     }
 
-    public ChefState getChefState()
+    public int getChefState()
     {
         return this.state;
-    }
-
-    @Override
-    public String toString() 
-    {
-        return this.state.toString();
     }
 
     @Override

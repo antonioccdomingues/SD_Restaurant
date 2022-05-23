@@ -6,9 +6,7 @@ import java.net.SocketTimeoutException;
 import commInfra.ServerCom;
 import genclass.GenericIO;
 import serverSide.entities.ServiceProviderAgent;
-import serverSide.sharedRegions.GeneralRepos;
-import serverSide.sharedRegions.GeneralReposMessageExchange;
-import serverSide.sharedRegions.SharedRegionInterface;
+import serverSide.sharedRegions.*;
 
 /**
  *    Server side of the General Information Repository Shared Region.
@@ -30,7 +28,7 @@ public class GeneralReposMain
       /* service is established */
 
        ServerCom serverCom, sconi;                                        // communication channels
-       int portNumb = 22341;                                          // port nunber for listening to service requests
+       int portNumb = 22345;                                          // port nunber for listening to service requests
 
        serverCom = new ServerCom (portNumb);
        serverCom.start ();                             // service is instantiated

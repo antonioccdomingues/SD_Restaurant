@@ -31,7 +31,7 @@ public class KitchenMain
       /* service is established */
 
        ServerCom serverCom, sconi;                                        // communication channels
-       int portNumb = 22340;                                          // port nunber for listening to service requests
+       int portNumb = 22342;                                          // port nunber for listening to service requests
 
        serverCom = new ServerCom (portNumb);
        serverCom.start ();                             // service is instantiated
@@ -39,7 +39,7 @@ public class KitchenMain
        GenericIO.writelnString ("Service is established!");
        GenericIO.writelnString ("Server is listening for service requests.");
 
-       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22341);
+       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22345);
        Kitchen kitchen = new Kitchen(generalReposStub);
        SharedRegionInterface sharedRegionInterface = new KitchenMessageExchange(kitchen);
        

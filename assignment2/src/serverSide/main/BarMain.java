@@ -39,7 +39,7 @@ public class BarMain
        GenericIO.writelnString ("Service is established!");
        GenericIO.writelnString ("Server is listening for service requests.");
 
-       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22341);
+       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22345);
        Bar bar = new Bar(generalReposStub);
        SharedRegionInterface sharedRegionInterface = new BarMessageExchange(bar);
        

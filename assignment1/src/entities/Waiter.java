@@ -14,7 +14,7 @@ public class Waiter extends Thread
     /**
     *       Waiter State
     */
-    private WaiterState state;
+    private int state;
     /**
     *       Reference to the kitchen
     */
@@ -32,7 +32,7 @@ public class Waiter extends Thread
     */
     private Table table;
 
-    public Waiter(WaiterState state, Kitchen kitchen, Bar bar, Table table)
+    public Waiter(int state, Kitchen kitchen, Bar bar, Table table)
     {
         this.state = state;
         this.kitchen = kitchen;
@@ -48,20 +48,14 @@ public class Waiter extends Thread
         this.canGoHome = true;
     }
 
-    public void setState(WaiterState state)
+    public void setState(int state)
     {
         this.state = state;
     }
 
-    public WaiterState getWaiterState()
+    public int getWaiterState()
     {
         return this.state;
-    }
-
-    @Override
-    public String toString() 
-    {
-        return this.state.toString(); 
     }
 
     @Override

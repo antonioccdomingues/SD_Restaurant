@@ -17,11 +17,11 @@ public class MainProgram
         Kitchen kitchen = new Kitchen(repos);
         Table table = new Table(repos);
 
-        Chef chef = new Chef(ChefState.WAITING_FOR_AN_ORDER, kitchen, bar);
-        Waiter waiter = new Waiter(WaiterState.APPRAISING_SITUATION, kitchen, bar, table);
+        Chef chef = new Chef(0, kitchen, bar);
+        Waiter waiter = new Waiter(0, kitchen, bar, table);
         Student[] students = new Student[Constants.students_number];
         for(int i=0;i<students.length;i++)
-            students[i] = new Student(i,StudentState.GOING_TO_THE_RESTAURANT, bar, table);
+            students[i] = new Student(i,0, bar, table);
         
         chef.start();
         chef.setName("Chef");

@@ -15,13 +15,13 @@ public class GeneralRepos
     private final String logFileName;
 
     //state of the pilot
-    private ChefState chefState;
+    private int chefState;
 
     //state of the waiter
-    private WaiterState waiterState;
+    private int waiterState;
 
     //state of the students
-    private StudentState[] studentState;
+    private int[] studentState;
 
     //Number of the course
     private int NCourse = 0;
@@ -56,7 +56,7 @@ public class GeneralRepos
 
         waiterState = WaiterState.APPRAISING_SITUATION;
         chefState = ChefState.WAITING_FOR_AN_ORDER;
-        studentState = new StudentState[Constants.students_number];
+        studentState = new int[Constants.students_number];
         for (int i= 0; i < Constants.students_number;i ++)
             studentState[i] = StudentState.GOING_TO_THE_RESTAURANT;
 
@@ -70,7 +70,7 @@ public class GeneralRepos
 	 *     @param state waiter state
 	 */
 
-	public synchronized void setWaiterState (WaiterState state)
+	public synchronized void setWaiterState (int state)
     {
 		waiterState = state;
 		reportStatus ();
@@ -83,7 +83,7 @@ public class GeneralRepos
 	 *     @param state student state
 	 */
 
-    public synchronized void setStudentState (int id, StudentState state)
+    public synchronized void setStudentState (int id, int state)
     {
         //System.out.println(state);
         if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE)
@@ -127,7 +127,7 @@ public class GeneralRepos
 	 *     @param state chef state
 	 */
 
-	public synchronized void setChefState (ChefState state)
+	public synchronized void setChefState (int state)
     {
 		chefState = state;
 		reportStatus ();
@@ -214,35 +214,35 @@ public class GeneralRepos
 
         switch (chefState)
         { 
-        case WAITING_FOR_AN_ORDER:     lineStatus += "WAFOR ";break;
-        case PREPARING_THE_COURSE:   lineStatus += "PRPCS ";break;
-        case DISHING_THE_PORTIONS: lineStatus += "DSHPT ";break;
-        case DELIVERING_THE_PORTIONS:      lineStatus += "DLVPT ";break;
-        case CLOSING_SERVICE:         lineStatus += "CLSSV ";break;
+        case 0:     lineStatus += "WAFOR ";break;
+        case 1:   lineStatus += "PRPCS ";break;
+        case 2: lineStatus += "DSHPT ";break;
+        case 3:      lineStatus += "DLVPT ";break;
+        case 4:         lineStatus += "CLSSV ";break;
         }
 
         switch (waiterState)
         { 
-        case APPRAISING_SITUATION:     lineStatus += " APPST ";break;
-        case PRESENTING_THE_MENU:   lineStatus += " PRSMN ";break;
-        case TAKING_THE_ORDER:         lineStatus += " TKODR ";break;
-        case PLACING_THE_ORDER:      lineStatus += " PCODR ";break;
-        case WAITING_FOR_PORTION:     lineStatus += " WTFPT ";break;
-        case PROCESSING_THE_BILL:   lineStatus += " PRCBL ";break;
-        case RECEIVING_PAYMENT:         lineStatus += " RECPM ";break;
+        case 0:     lineStatus += " APPST ";break;
+        case 1:   lineStatus += " PRSMN ";break;
+        case 2:         lineStatus += " TKODR ";break;
+        case 3:      lineStatus += " PCODR ";break;
+        case 4:     lineStatus += " WTFPT ";break;
+        case 5:   lineStatus += " PRCBL ";break;
+        case 6:         lineStatus += " RECPM ";break;
         }
 
         for (int i = 0; i < Constants.students_number; i++)
             switch (studentState[i])
             { 
-            case GOING_TO_THE_RESTAURANT:  lineStatus += " GGTRT ";break;
-            case TAKING_A_SEAT_AT_THE_TABLE:         lineStatus += " TKSTT ";break;
-            case SELECTING_THE_COURSES:        lineStatus += " SELCS ";break;
-            case ORGANIZING_THE_ORDER:   lineStatus += " OGODR ";break;
-            case CHATTING_WITH_COMPANIONS:  lineStatus += " CHTWC ";break;
-            case ENJOYING_THE_MEAL:         lineStatus += " EJYML ";break;
-            case PAYING_THE_BILL:        lineStatus += " PYTBL ";break;
-            case GOING_HOME:   lineStatus += " GGHOM ";break;
+            case 0:  lineStatus += " GGTRT ";break;
+            case 1:         lineStatus += " TKSTT ";break;
+            case 2:        lineStatus += " SELCS ";break;
+            case 3:   lineStatus += " OGODR ";break;
+            case 4:  lineStatus += " CHTWC ";break;
+            case 5:         lineStatus += " EJYML ";break;
+            case 7:        lineStatus += " PYTBL ";break;
+            case 8:   lineStatus += " GGHOM ";break;
             }
 
         lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;

@@ -1,32 +1,25 @@
-package clientSide.entities;
+package entities;
 
-public enum StudentState {
+public final class StudentState {
     
-    GOING_TO_THE_RESTAURANT("GGTRT"),
+    public static final int GOING_TO_THE_RESTAURANT = 0;
 
-    TAKING_A_SEAT_AT_THE_TABLE("TKSTT"),
+    public static final int TAKING_A_SEAT_AT_THE_TABLE = 1;
 
-    SELECTING_THE_COURSES("SELCS"),
+    public static final int SELECTING_THE_COURSES = 2;
 
-    ORGANIZING_THE_ORDER("OGODR"),
+    public static final int ORGANIZING_THE_ORDER = 3;
 
-    CHATTING_WITH_COMPANIONS("CHTWC"),
+    public static final int CHATTING_WITH_COMPANIONS = 4;
 
-    ENJOYING_THE_MEAL("EJYML"),
+    public static final int ENJOYING_THE_MEAL = 5;
 
-    PAYING_THE_BILL("PYTBL"),
+    public static final int PAYING_THE_BILL = 6;
 
-    GOING_HOME("GGHOM");
+    public static final int GOING_HOME = 7;
 
-    private StudentState(String description){
-        this.description = description;
+    private StudentState()
+    {
     }
 
-    private final String description; 
-
-    @Override
-    public String toString() {
-        // Auto-generated method stub
-        return this.description;
-    }
 }

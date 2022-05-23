@@ -1,49 +1,30 @@
-package clientSide.entities;
+package entities;
 
 import genclass.*;
-import clientSide.stubs.BarStub;
-import clientSide.stubs.KitchenStub;
+import sharedRegions.Bar;
+import sharedRegions.Kitchen;
 
 public class Chef extends Thread
 {
-    /**
-    *       Chef id
-    */
-    private int chefID;
+    private int state;
+    private Bar bar;
+    private Kitchen kitchen;
 
-    private ChefState state;
-    private BarStub bar;
-    private KitchenStub kitchen;
-
-    public Chef(int chefID, ChefState state, KitchenStub kitchen, BarStub bar)
+    public Chef(int state, Kitchen kitchen, Bar bar)
     {
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
     }
 
-    public int getChefID() {
-        return chefID;
-    }
-
-    public void setChefID(int chefID) {
-        this.chefID = chefID;
-    }
-
-    public void setState(ChefState state)
+    public void setState(int state)
     {
         this.state = state;
     }
 
-    public ChefState getChefState()
+    public int getChefState()
     {
         return this.state;
-    }
-
-    @Override
-    public String toString() 
-    {
-        return this.state.toString();
     }
 
     @Override
@@ -74,7 +55,5 @@ public class Chef extends Thread
         }while(!kitchen.hasTheOrderBeenCompleted());
         kitchen.cleanUp();
         GenericIO.writelnString("\033[41m Chef End Of Life \033[0m");
-
-        //NÃO ESQUECER DE DAR SHUTDOWN
     }
 }

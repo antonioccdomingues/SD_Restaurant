@@ -1,6 +1,6 @@
-package clientSide.entities;
+package entities;
 
-import clientSide.stubs.*;
+import sharedRegions.*;
 import genclass.*;
 
     /**
@@ -11,20 +11,14 @@ import genclass.*;
     */
 public class Waiter extends Thread
 {
-
-    /**
-    *       Waiter id
-    */
-    private int waiterID;
-
     /**
     *       Waiter State
     */
-    private WaiterState state;
+    private int state;
     /**
     *       Reference to the kitchen
     */
-    private KitchenStub kitchen;
+    private Kitchen kitchen;
     /**
     *       Flag to determine if the waiter can close the restaurant or not
     */
@@ -32,27 +26,18 @@ public class Waiter extends Thread
     /**
     *       Reference to the Bar
     */
-    private BarStub bar;
+    private Bar bar;
     /**
     *       Reference to the Table
     */
-    private TableStub table;
+    private Table table;
 
-    public Waiter(int waiterID, WaiterState state, KitchenStub kitchen, BarStub bar, TableStub table)
+    public Waiter(int state, Kitchen kitchen, Bar bar, Table table)
     {
-        this.setWaiterID(waiterID);
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
         this.table = table;
-    }
-
-    public int getWaiterID() {
-        return waiterID;
-    }
-
-    public void setWaiterID(int waiterID) {
-        this.waiterID = waiterID;
     }
 
     public boolean CanGoHome() {
@@ -63,20 +48,14 @@ public class Waiter extends Thread
         this.canGoHome = true;
     }
 
-    public void setState(WaiterState state)
+    public void setState(int state)
     {
         this.state = state;
     }
 
-    public WaiterState getWaiterState()
+    public int getWaiterState()
     {
         return this.state;
-    }
-
-    @Override
-    public String toString() 
-    {
-        return this.state.toString(); 
     }
 
     @Override

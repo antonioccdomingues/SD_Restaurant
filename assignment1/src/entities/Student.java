@@ -16,7 +16,7 @@ public class Student extends Thread
     /**
     *       Student State
     */
-    private StudentState state;
+    private int state;
     /**
     *       Flag to determine if the student has been saluted by the waiter
     */
@@ -58,7 +58,7 @@ public class Student extends Thread
     *     @param bar reference to the bar 
     *     @param table reference to the table
     */
-    public Student(int id, StudentState state, Bar bar, Table table)
+    public Student(int id, int state, Bar bar, Table table)
     {
         this.sID=id;
         this.state = state;
@@ -139,7 +139,7 @@ public class Student extends Thread
     /**
     *   Set Student state 
     */
-    public void setState(StudentState state)
+    public void setState(int state)
     {
         this.state = state;
     }
@@ -147,7 +147,7 @@ public class Student extends Thread
     /**
     *   Get Student state 
     */
-    public StudentState getStudentState()
+    public int getStudentState()
     {
         return this.state; 
     }
@@ -158,12 +158,6 @@ public class Student extends Thread
     public int getID()
     {
         return this.sID;
-    }
-    
-    @Override
-    public String toString() 
-    {
-        return this.state.toString();
     }
 
     /**

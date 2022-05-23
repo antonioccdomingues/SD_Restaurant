@@ -1,26 +1,17 @@
-package serverSide.entities;
+package entities;
 
-public enum ChefState {
+public final class ChefState {
     
-    WAITING_FOR_AN_ORDER("WAFOR"),
+    public static final int WAITING_FOR_AN_ORDER = 0;
 
-    PREPARING_THE_COURSE("PRPCS"),
+    public static final int PREPARING_THE_COURSE = 1;
 
-    DISHING_THE_PORTIONS("DSHPT"),
+    public static final int DISHING_THE_PORTIONS = 2;
 
-    DELIVERING_THE_PORTIONS("DLVPT"),
+    public static final int DELIVERING_THE_PORTIONS = 3;
 
-    CLOSING_SERVICE("CLSSV");
-
-    private final String description;
+    public static final int CLOSING_SERVICE = 4;
     
-    private ChefState(String description){
-        this.description = description;
+    private ChefState(){
     }
-
-    @Override
-    public String toString() {
-        return this.description;
-    }
-
 }

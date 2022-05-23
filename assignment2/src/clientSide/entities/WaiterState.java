@@ -1,29 +1,22 @@
-package clientSide.entities;
+package entities;
 
-public enum WaiterState {
+public final class WaiterState {
     
-    APPRAISING_SITUATION("APPST"),
+    public static final int APPRAISING_SITUATION = 0;
 
-    PRESENTING_THE_MENU("PRSMN"),
+    public static final int PRESENTING_THE_MENU = 1;
 
-    TAKING_THE_ORDER("TKODR"),
+    public static final int TAKING_THE_ORDER = 2;
 
-    PLACING_THE_ORDER("PCODR"),
+    public static final int PLACING_THE_ORDER = 3;
 
-    WAITING_FOR_PORTION("WTFPT"),
+    public static final int WAITING_FOR_PORTION = 4;
 
-    PROCESSING_THE_BILL("PRCBL"),
+    public static final int PROCESSING_THE_BILL = 5;
 
-    RECEIVING_PAYMENT("RECPM");
+    public static final int RECEIVING_PAYMENT = 6;
 
-    private WaiterState(String description){
-        this.description = description;
-    }
-    private final String description;
-
-    @Override
-    public String toString() {
-        // Auto-generated method stub
-        return this.description;
+    private WaiterState()
+    {
     }
 }
