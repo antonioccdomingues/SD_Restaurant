@@ -17,8 +17,8 @@ public interface Waiter
 
     public void setCanGoHome();
 
-    public void setState(WaiterState state);
+    public void setWaiterState(int state);
 
-    public WaiterState getWaiterState();
+    public int getWaiterState();
 
 }

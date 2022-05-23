@@ -6,8 +6,8 @@ public interface Chef
 
     public int getChefID();
 
-    public void setState(ChefState state);
+    public void setChefState(int state);
 
-    public ChefState getChefState();
+    public int getChefState();
 
 }

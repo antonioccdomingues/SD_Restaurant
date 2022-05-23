@@ -1,4 +1,4 @@
-package entities;
+package serverSide.entities;
 
 public final class WaiterState {
     

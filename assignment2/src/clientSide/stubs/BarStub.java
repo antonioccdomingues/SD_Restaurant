@@ -65,7 +65,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     
@@ -98,7 +98,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        c.setState((clientSide.entities.ChefState) m_fromServer.getStateFields()[1]);
+        c.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -130,7 +130,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -162,7 +162,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -195,7 +195,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         int result = (int) m_fromServer.getReturnValue();
         com.close ();
 
@@ -229,7 +229,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -262,7 +262,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -295,7 +295,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -328,7 +328,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -345,6 +345,7 @@ public class BarStub
     	Object[] params = new Object[0];
     	Object[] state_fields = new Object[2];
     	state_fields[0] = s.getID();
+        System.out.println("Id do estudante a ser passado: " + state_fields[0]);
     	state_fields[1] = s.getStudentState();
     	
         Message m_toServer = new Message(9, params, 0, state_fields, 2, null);                                                          
@@ -361,7 +362,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         boolean result = (Boolean) m_fromServer.getReturnValue();
         
         com.close ();
@@ -396,7 +397,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -428,7 +429,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         boolean result = (Boolean) m_fromServer.getReturnValue();
         
         com.close ();
@@ -463,7 +464,7 @@ public class BarStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }

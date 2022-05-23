@@ -65,7 +65,7 @@ public class Bar extends Thread
             e.printStackTrace();
         }
 
-        ((Waiter) Thread.currentThread()).setState(WaiterState.PRESENTING_THE_MENU);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.PRESENTING_THE_MENU);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         students[student_saluted].setSalutedByWaiter();
@@ -92,7 +92,7 @@ public class Bar extends Thread
 
     public synchronized void alertTheWaiter()
     {
-        ((Chef) Thread.currentThread()).setState(ChefState.DELIVERING_THE_PORTIONS);
+        ((Chef) Thread.currentThread()).setChefState(ChefState.DELIVERING_THE_PORTIONS);
         repos.setChefState(((Chef) Thread.currentThread()).getChefState());
         this.portionReady++;
         this.waiterIsRequested++; 
@@ -101,19 +101,19 @@ public class Bar extends Thread
 
     public synchronized void returningToTheBar()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
     }
 
     public synchronized void prepareTheBill()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.PROCESSING_THE_BILL);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.PROCESSING_THE_BILL);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
     }
 
     public synchronized int lookAround()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         // while the waiter is not called to be 
@@ -167,7 +167,7 @@ public class Bar extends Thread
 
     public synchronized void sayGoodbye()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.APPRAISING_SITUATION);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         // While we haven't said goodbye to all students
         // If we've said goodbye to everyone, the waiter can go home
@@ -176,7 +176,7 @@ public class Bar extends Thread
 
     public synchronized void signalTheWaiter(int sID)
     {
-        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         boolean last = ((Student) Thread.currentThread()).isLastStudent();
@@ -195,7 +195,7 @@ public class Bar extends Thread
 
     public synchronized void callTheWaiter()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDone = true;
@@ -247,7 +247,7 @@ public class Bar extends Thread
         }
 
         // Update the state
-        students[sID].setState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
+        students[sID].setStudentState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
     }
 
@@ -263,7 +263,7 @@ public class Bar extends Thread
 
     public synchronized void exit()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.GOING_HOME);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.GOING_HOME);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.studentsDone++;
@@ -280,7 +280,7 @@ public class Bar extends Thread
     {
         if(this.lastStudentID == sID)
         {
-            ((Student) Thread.currentThread()).setState(StudentState.PAYING_THE_BILL);
+            ((Student) Thread.currentThread()).setStudentState(StudentState.PAYING_THE_BILL);
             int studentId = ((Student) Thread.currentThread ()).getID();
             repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
             this.waiterIsRequested++;
@@ -301,7 +301,7 @@ public class Bar extends Thread
 
         notifyAll();
 
-        ((Student) Thread.currentThread()).setState(StudentState.SELECTING_THE_COURSES);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.SELECTING_THE_COURSES);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
     }
 }

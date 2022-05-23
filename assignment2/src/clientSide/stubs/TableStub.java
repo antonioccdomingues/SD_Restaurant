@@ -57,7 +57,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -85,7 +85,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -118,7 +118,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         boolean result = (Boolean) m_fromServer.getReturnValue();
         
         com.close ();
@@ -152,7 +152,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
 
-        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        w.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -185,7 +185,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -218,7 +218,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -251,7 +251,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -284,7 +284,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -317,7 +317,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -350,7 +350,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -379,7 +379,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -412,7 +412,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -441,7 +441,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         boolean result = (Boolean) m_fromServer.getReturnValue();
         
@@ -477,7 +477,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }
@@ -506,7 +506,7 @@ public class TableStub
         
         m_fromServer = (Message) com.readObject();                 
        
-        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        s.setState((int) m_fromServer.getStateFields()[1]);
         
         com.close ();
     }

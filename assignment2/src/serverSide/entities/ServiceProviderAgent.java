@@ -61,7 +61,7 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
      * 
     *       Student State
     */
-    private StudentState studentState;
+    private int studentState;
     /**
     *       Flag to determine if the student has been saluted by the waiter
     */
@@ -158,7 +158,7 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
     /**
     *   Set Student state 
     */
-    public void setState(StudentState state)
+    public void setStudentState(int state)
     {
         this.studentState = state;
     }
@@ -166,7 +166,7 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
     /**
     *   Get Student state 
     */
-    public StudentState getStudentState()
+    public int getStudentState()
     {
         return this.studentState; 
     }
@@ -206,7 +206,7 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
     /**
     *       Waiter State
     */
-    private WaiterState waiterState;
+    private int waiterState;
     /**
     *       Flag to determine if the waiter can close the restaurant or not
     */
@@ -228,12 +228,12 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
         this.canGoHome = true;
     }
 
-    public void setState(WaiterState state)
+    public void setWaiterState(int state)
     {
         this.waiterState = state;
     }
 
-    public WaiterState getWaiterState()
+    public int getWaiterState()
     {
         return this.waiterState;
     }
@@ -245,7 +245,7 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
 
     private int chefID;
 
-    private ChefState chefState;
+    private int chefState;
 
     public int getChefID() {
         return chefID;
@@ -255,12 +255,12 @@ public class ServiceProviderAgent extends Thread implements Chef, Waiter, Studen
         this.chefID = chefID;
     }
 
-    public void setState(ChefState state)
+    public void setChefState(int state)
     {
         this.chefState = state;
     }
 
-    public ChefState getChefState()
+    public int getChefState()
     {
         return this.chefState;
     }

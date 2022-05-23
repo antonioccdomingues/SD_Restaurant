@@ -1,4 +1,4 @@
-package entities;
+package clientSide.entities;
 
 public final class StudentState {
     

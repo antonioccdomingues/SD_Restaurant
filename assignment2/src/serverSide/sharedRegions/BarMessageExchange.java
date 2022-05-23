@@ -30,7 +30,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 0:
                 waiter = (Waiter) Thread.currentThread();
                 waiter.setWaiterID((int) message.getStateFields()[0]);
-                waiter.setState((WaiterState) message.getStateFields()[1]);
+                waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.saluteTheClient();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
@@ -38,7 +38,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 1:
                 chef = (Chef) Thread.currentThread();
                 chef.setChefID((int) message.getStateFields()[0]);
-                chef.setState((ChefState) message.getStateFields()[1]);
+                chef.setChefState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.alertTheWaiter();
                 state = new Object[]{chef.getChefID(),chef.getChefState()};
@@ -46,7 +46,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 2:
                 waiter = (Waiter) Thread.currentThread();
                 waiter.setWaiterID((int) message.getStateFields()[0]);
-                waiter.setState((WaiterState) message.getStateFields()[1]);
+                waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.returningToTheBar();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
@@ -54,7 +54,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 3:
                 waiter = (Waiter) Thread.currentThread();
                 waiter.setWaiterID((int) message.getStateFields()[0]);
-                waiter.setState((WaiterState) message.getStateFields()[1]);
+                waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.prepareTheBill();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
@@ -62,7 +62,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 4:
                 waiter = (Waiter) Thread.currentThread();
                 waiter.setWaiterID((int) message.getStateFields()[0]);
-                waiter.setState((WaiterState) message.getStateFields()[1]);
+                waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 res = bar.lookAround();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
@@ -70,7 +70,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 5:
                 waiter = (Waiter) Thread.currentThread();
                 waiter.setWaiterID((int) message.getStateFields()[0]);
-                waiter.setState((WaiterState) message.getStateFields()[1]);
+                waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.sayGoodbye();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
@@ -78,7 +78,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 6:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.signalTheWaiter(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};
@@ -86,7 +86,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 7:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.callTheWaiter();
                 state = new Object[]{student.getID(),student.getStudentState()};
@@ -94,7 +94,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 8:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.enter();
                 state = new Object[]{student.getID(),student.getStudentState()};
@@ -102,15 +102,16 @@ public class BarMessageExchange implements SharedRegionInterface
             case 9:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
+                System.out.println("ID do student que entrou aqui: " + student.getID());
                 bar.FirstStudent(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};
                 break;
             case 10:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.exit();
                 state = new Object[]{student.getID(),student.getStudentState()};
@@ -118,7 +119,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 11:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.shouldHaveArrivedEarlier(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};
@@ -126,7 +127,7 @@ public class BarMessageExchange implements SharedRegionInterface
             case 12:
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
-                student.setState((StudentState) message.getStateFields()[1]);
+                student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 bar.readTheMenu();
                 state = new Object[]{student.getID(),student.getStudentState()};

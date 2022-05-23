@@ -1,8 +1,8 @@
-package entities;
+package clientSide.entities;
 
-import sharedRegions.Bar;
-import sharedRegions.Table;
-import main.Constants;
+import clientSide.stubs.BarStub;
+import clientSide.stubs.TableStub;
+import clientSide.main.Constants;
 
     /**
     *       Student Thread.
@@ -44,11 +44,11 @@ public class Student extends Thread
     /**
     *       Reference to the shared region "Bar"
     */
-    private Bar bar;
+    private BarStub bar;
     /**
     *       Reference to the shared region "Table"
     */
-    private Table table;
+    private TableStub table;
 
     /**
     *   Instantiation of a Student thread.
@@ -58,7 +58,7 @@ public class Student extends Thread
     *     @param bar reference to the bar 
     *     @param table reference to the table
     */
-    public Student(int id, int state, Bar bar, Table table)
+    public Student(int id, int state, BarStub bar, TableStub table)
     {
         this.sID=id;
         this.state = state;
@@ -158,6 +158,11 @@ public class Student extends Thread
     public int getID()
     {
         return this.sID;
+    }
+    
+    public void setID(int id)
+    {
+        this.sID = id;
     }
 
     /**

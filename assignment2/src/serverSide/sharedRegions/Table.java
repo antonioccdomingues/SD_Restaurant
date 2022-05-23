@@ -49,7 +49,7 @@ public class Table extends Thread
 
     public synchronized void getThePad()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.TAKING_THE_ORDER);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.TAKING_THE_ORDER);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         while(!this.orderDescribed)
@@ -90,7 +90,7 @@ public class Table extends Thread
 
     public synchronized boolean haveAllClientsBeenServed()
     {
-        ((Waiter) Thread.currentThread()).setState(WaiterState.WAITING_FOR_PORTION);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.WAITING_FOR_PORTION);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         if(this.studentServed==Constants.students_number)
         {
@@ -106,7 +106,7 @@ public class Table extends Thread
         this.billIsReady = true;
         // wake up the student waiting for the biill
         notifyAll();
-        ((Waiter) Thread.currentThread()).setState(WaiterState.RECEIVING_PAYMENT);
+        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.RECEIVING_PAYMENT);
         repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         // wait while the bill is not paid
@@ -125,7 +125,7 @@ public class Table extends Thread
         int sID;
         sID = ((Student) Thread.currentThread()).getID();
         students[sID] =  ((Student) Thread.currentThread());
-        students[sID].setState(StudentState.CHATTING_WITH_COMPANIONS);
+        students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
         
         this.studentSelectedCourses++;
@@ -146,7 +146,7 @@ public class Table extends Thread
 
     public synchronized void prepareTheOrder()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.studentSelectedCourses++;
@@ -157,7 +157,7 @@ public class Table extends Thread
         int sID;
         sID = ((Student) Thread.currentThread()).getID();
         students[sID] =  ((Student) Thread.currentThread());
-        students[sID].setState(StudentState.CHATTING_WITH_COMPANIONS);
+        students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
 
         this.firstStudentJoinedTalk = true;
@@ -168,7 +168,7 @@ public class Table extends Thread
 
     public synchronized void hasEverbodyFinished()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
 
         while(!this.everyBodyFinished) 
         {
@@ -182,7 +182,7 @@ public class Table extends Thread
 
     public synchronized void startEating()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.ENJOYING_THE_MEAL);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.ENJOYING_THE_MEAL);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         // Simulate eating
@@ -191,7 +191,7 @@ public class Table extends Thread
 
     public synchronized void endEating()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.CHATTING_WITH_COMPANIONS);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         int sID = ((Student) Thread.currentThread()).getID();
@@ -229,7 +229,7 @@ public class Table extends Thread
 
     public synchronized void addUpOnesChoice()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
 
@@ -258,7 +258,7 @@ public class Table extends Thread
 
     public synchronized void describeTheOrder()
     {
-        ((Student) Thread.currentThread()).setState(StudentState.ORGANIZING_THE_ORDER);
+        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
         repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDescribed = true;

@@ -1,4 +1,4 @@
-# xterm  -T "General Repository" -hold -e "./GeneralReposDeployAndRun.sh" &
+xterm  -T "General Repository" -hold -e "./GeneralReposDeployAndRun.sh" &
 xterm  -T "Bar" -hold -e "./BarDeployAndRun.sh" &
 xterm  -T "Table" -hold -e "./TableDeployAndRun.sh" &
 xterm  -T "Kitchen" -hold -e "./KitchenDeployAndRun.sh" &

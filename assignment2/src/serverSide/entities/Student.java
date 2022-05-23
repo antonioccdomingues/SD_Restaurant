@@ -52,12 +52,12 @@ public interface Student
     /**
     *   Set Student state 
     */
-    public void setState(StudentState state);
+    public void setStudentState(int state);
 
     /**
     *   Get Student state 
     */
-    public StudentState getStudentState();
+    public int getStudentState();
 
     /**
     *   Get Student ID 

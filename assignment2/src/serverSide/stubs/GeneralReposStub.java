@@ -38,7 +38,7 @@ public class GeneralReposStub
 	 *     @param state waiter state
 	 */
 
-	public synchronized void setWaiterState (WaiterState state)
+	public synchronized void setWaiterState (int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -69,7 +69,7 @@ public class GeneralReposStub
 	 *     @param state student state
 	 */
 
-    public synchronized void setStudentState (int id, StudentState state)
+    public synchronized void setStudentState (int id, int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[2];
@@ -100,7 +100,7 @@ public class GeneralReposStub
 	 *     @param state chef state
 	 */
 
-	public synchronized void setChefState (ChefState state)
+	public synchronized void setChefState (int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];

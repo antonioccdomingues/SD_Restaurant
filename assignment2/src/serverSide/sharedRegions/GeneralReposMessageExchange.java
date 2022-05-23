@@ -2,7 +2,6 @@ package serverSide.sharedRegions;
 
 import genclass.GenericIO;
 import commInfra.Message;
-import serverSide.entities.*;;
 
 public class GeneralReposMessageExchange implements SharedRegionInterface
 {
@@ -25,15 +24,15 @@ public class GeneralReposMessageExchange implements SharedRegionInterface
         {
             case 39:
 			    GenericIO.writelnString ("-> setWaiterState");
-			    generalRepos.setWaiterState((WaiterState) message.getParams()[0]);
+			    generalRepos.setWaiterState((int) message.getParams()[0]);
 			    break;
             case 40:
 			    GenericIO.writelnString ("-> setStudentState");
-			    generalRepos.setStudentState((int) message.getParams()[0],(StudentState) message.getParams()[1]);
+			    generalRepos.setStudentState((int) message.getParams()[0],(int) message.getParams()[1]);
 			    break;
             case 41:
 			    GenericIO.writelnString ("-> setChefState");
-			    generalRepos.setChefState((ChefState) message.getParams()[0]);
+			    generalRepos.setChefState((int) message.getParams()[0]);
 			    break;
             case 42:
 			    GenericIO.writelnString ("-> setNCourse");

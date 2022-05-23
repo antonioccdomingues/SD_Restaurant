@@ -1,20 +1,30 @@
-package entities;
+package clientSide.entities;
 
 import genclass.*;
-import sharedRegions.Bar;
-import sharedRegions.Kitchen;
+import clientSide.stubs.BarStub;
+import clientSide.stubs.KitchenStub;
 
 public class Chef extends Thread
 {
+    private int chefID;
     private int state;
-    private Bar bar;
-    private Kitchen kitchen;
+    private BarStub bar;
+    private KitchenStub kitchen;
 
-    public Chef(int state, Kitchen kitchen, Bar bar)
+    public Chef(int chefID, int state, KitchenStub kitchen, BarStub bar)
     {
+        this.setChefID(chefID);
         this.state = state;
         this.kitchen = kitchen;
         this.bar = bar;
+    }
+
+    public int getChefID() {
+        return chefID;
+    }
+
+    public void setChefID(int chefID) {
+        this.chefID = chefID;
     }
 
     public void setState(int state)

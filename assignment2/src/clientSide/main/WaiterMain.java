@@ -20,7 +20,7 @@ public class WaiterMain
         bar = new BarStub("l040101-ws01.ua.pt", 22340);
         table = new TableStub("l040101-ws03.ua.pt", 22341);
 
-        waiter = new Waiter(0, 0,kitchen, bar,table);
+        waiter = new Waiter(0, WaiterState.APPRAISING_SITUATION,kitchen, bar,table);
 
         waiter.start();
 

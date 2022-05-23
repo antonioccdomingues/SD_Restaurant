@@ -1,9 +1,9 @@
-package sharedRegions;
+package serverSide.sharedRegions;
 
 import java.util.Objects;
 
-import main.Constants;
-import entities.*;
+import serverSide.main.Constants;
+import serverSide.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
