@@ -3,7 +3,7 @@ package serverSide.sharedRegions;
 import serverSide.entities.*;
 import commInfra.*;
 import serverSide.main.Constants;
-import serverSide.stub.*;;
+import serverSide.stubs.*;;
 
 public class Bar extends Thread
 {

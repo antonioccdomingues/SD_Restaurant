@@ -8,7 +8,7 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.Kitchen;
 import serverSide.sharedRegions.KitchenMessageExchange;
 import serverSide.sharedRegions.SharedRegionInterface;
-import serverSide.stub.GeneralReposStub;
+import serverSide.stubs.GeneralReposStub;
 import serverSide.entities.ServiceProviderAgent;
 
 /**
@@ -39,7 +39,7 @@ public class KitchenMain
        GenericIO.writelnString ("Service is established!");
        GenericIO.writelnString ("Server is listening for service requests.");
 
-       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22340);
+       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22341);
        Kitchen kitchen = new Kitchen(generalReposStub);
        SharedRegionInterface sharedRegionInterface = new KitchenMessageExchange(kitchen);
        

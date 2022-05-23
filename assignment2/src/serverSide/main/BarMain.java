@@ -8,7 +8,7 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.Bar;
 import serverSide.sharedRegions.BarMessageExchange;
 import serverSide.sharedRegions.SharedRegionInterface;
-import serverSide.stub.GeneralReposStub;
+import serverSide.stubs.GeneralReposStub;
 import serverSide.entities.ServiceProviderAgent;
 
 /**
@@ -39,7 +39,7 @@ public class BarMain
        GenericIO.writelnString ("Service is established!");
        GenericIO.writelnString ("Server is listening for service requests.");
 
-       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22340);
+       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22341);
        Bar bar = new Bar(generalReposStub);
        SharedRegionInterface sharedRegionInterface = new BarMessageExchange(bar);
        

@@ -1,4 +1,4 @@
-package serverSide.stub;
+package serverSide.stubs;
 
 import commInfra.Message;
 import commInfra.CommunicationChannel;

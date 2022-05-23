@@ -2,8 +2,8 @@ package serverSide.sharedRegions;
 
 import serverSide.entities.*;
 import serverSide.main.Constants;
+import serverSide.stubs.*;
 import commInfra.*;
-import serverSide.stub.*;
 
 
 public class Table extends Thread

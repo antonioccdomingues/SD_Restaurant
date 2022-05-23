@@ -2,7 +2,7 @@ package serverSide.sharedRegions;
 
 import serverSide.entities.*;
 import serverSide.main.Constants;
-import serverSide.stub.*;
+import serverSide.stubs.*;
 
 public class Kitchen extends Thread 
 {

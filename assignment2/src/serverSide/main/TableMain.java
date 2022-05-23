@@ -7,8 +7,8 @@ import commInfra.ServerCom;
 import genclass.GenericIO;
 import serverSide.sharedRegions.Table;
 import serverSide.sharedRegions.TableMessageExchange;
+import serverSide.stubs.GeneralReposStub;
 import serverSide.sharedRegions.SharedRegionInterface;
-import serverSide.stub.GeneralReposStub;
 import serverSide.entities.ServiceProviderAgent;
 
 /**
@@ -39,7 +39,7 @@ public class TableMain
        GenericIO.writelnString ("Service is established!");
        GenericIO.writelnString ("Server is listening for service requests.");
 
-       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22340);
+       GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22341);
        Table kitchen = new Table(generalReposStub);
        SharedRegionInterface sharedRegionInterface = new TableMessageExchange(kitchen);
        
