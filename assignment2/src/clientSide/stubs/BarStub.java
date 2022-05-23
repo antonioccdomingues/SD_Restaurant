@@ -38,6 +38,10 @@ public class BarStub
        serverPortNumb = port;
     }
 
+    /**
+    *	 Transitions the Waiter from the 'appraising situation' state to the 'presenting the menu' state
+    */
+
     public synchronized void saluteTheClient()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -67,6 +71,10 @@ public class BarStub
     
     }
 
+    /**
+    *	 Transitions the Chef from the 'dishing the portions' state to the 'delivering portions' state
+    */
+
     public synchronized void alertTheWaiter()
     {
         Chef c = (Chef) Thread.currentThread();
@@ -94,6 +102,10 @@ public class BarStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student from the 'waiting for portion' state to the 'appraising situation' state
+    */
 
     public synchronized void returningToTheBar()
     {
@@ -123,6 +135,10 @@ public class BarStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Student from the 'appraising situation' state to the 'processing the bill' state
+    */
+
     public synchronized void prepareTheBill()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -151,7 +167,11 @@ public class BarStub
         com.close ();
     }
 
-    // Nao sei bem como retornar o valor
+    /**
+    *	 Waiter appraiseing situation
+    *     @return integer that specifies what is happening
+    */
+
     public synchronized int lookAround()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -182,6 +202,10 @@ public class BarStub
         return result;
     }
 
+    /**
+    *	 Method to say godbye to the waiter 
+    */
+
     public synchronized void sayGoodbye()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -209,6 +233,10 @@ public class BarStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
+    */
 
     public synchronized void signalTheWaiter(int sID)
     {
@@ -239,6 +267,10 @@ public class BarStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Student from the 'organizing the order' state to the 'organizing the order' state
+    */
+
     public synchronized void callTheWaiter()
     {
         Student s = (Student) Thread.currentThread();
@@ -268,6 +300,10 @@ public class BarStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Student from the 'going to the restaurant' state to the 'taking a seat at the table' state
+    */
+
     public synchronized void enter()
     {
         Student s = (Student) Thread.currentThread();
@@ -296,6 +332,11 @@ public class BarStub
         
         com.close ();
     }
+
+    /**
+    *	 Method that indicates if is the first student or not
+    *     @return boolean that check if is the first student or not
+    */
 
     public synchronized boolean FirstStudent(int sID)
     {
@@ -327,6 +368,10 @@ public class BarStub
         return result;
     }
 
+    /**
+    *	 Transitions the Student to the 'going home' state
+    */
+
     public synchronized void exit()
     {
         Student s = (Student) Thread.currentThread();
@@ -355,6 +400,10 @@ public class BarStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student from the 'chatting with companions' state to the 'paying the bill' state
+    */
 
     public synchronized boolean shouldHaveArrivedEarlier(int sID)
     {
@@ -386,6 +435,10 @@ public class BarStub
         return result;
     }
 
+    /**
+    *	 Transitions the Student from the 'taking a seat at the table' state to the 'selecting the courses' state
+    */
+
     public synchronized void readTheMenu()
     {
         Student s = (Student) Thread.currentThread();
@@ -414,6 +467,12 @@ public class BarStub
         
         com.close ();
     }
+
+    /**
+    *
+    *Method called to shutdown the Bar server
+    *
+    */
 
     public void shutdown()
     {

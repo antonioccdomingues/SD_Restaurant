@@ -30,6 +30,10 @@ public class TableStub
        serverPortNumb = port;
     }
 
+    /**
+    *	 Transitions the Waiter from the 'appraising situation' state to the 'taking the order' state
+    */
+
     public synchronized void getThePad()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -62,6 +66,11 @@ public class TableStub
     {
     }
 
+    /**
+    *	 Method to verify if all Students have been served
+    *    @return boolean that indicates true if all have been served or false if not
+    */
+
     public synchronized boolean haveAllClientsBeenServed()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -92,6 +101,10 @@ public class TableStub
         return result;
     }
 
+    /**
+    *	 Transitions the Waiter from the 'processing the bill' state to the 'receiving payment' state
+    */
+
     public synchronized void presentTheBill()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -119,6 +132,10 @@ public class TableStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student to the 'chatting with companions' state
+    */
 
     public synchronized void informCompanion()
     {
@@ -149,6 +166,10 @@ public class TableStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Student from the 'selecting the courses' state to the 'organizing the order' state
+    */
+
     public synchronized void prepareTheOrder()
     {
         Student s = (Student) Thread.currentThread();
@@ -178,6 +199,10 @@ public class TableStub
         com.close ();
     }
     
+    /**
+    *	 Transitions the Student from the 'organizing the order' state to the 'chatting with companions' state
+    */
+
     public synchronized void joinTheTalk()
     {
         Student s = (Student) Thread.currentThread();
@@ -206,6 +231,10 @@ public class TableStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student from the 'chatting with companions' state to the 'chatting with companions' state
+    */
 
     public synchronized void hasEverbodyFinished()
     {
@@ -236,6 +265,10 @@ public class TableStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
+    */
+
     public synchronized void startEating()
     {
         Student s = (Student) Thread.currentThread();
@@ -264,6 +297,10 @@ public class TableStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Student from the 'enjoying the meal' state to the 'chatting with companions' state
+    */
 
     public synchronized void endEating()
     {
@@ -298,6 +335,10 @@ public class TableStub
     {
         //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
     }
+
+    /**
+    *	 Transitions the Student to the 'organizing the order' state
+    */
 
     public synchronized void addUpOnesChoice()
     {
@@ -334,6 +375,10 @@ public class TableStub
         return true;
     }
 
+    /**
+    *	 Transitions the Student the 'describing the order' state
+    */
+
     public synchronized void describeTheOrder()
     {
         Student s = (Student) Thread.currentThread();
@@ -367,6 +412,12 @@ public class TableStub
     {
         //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
     }
+
+    /**
+    *
+    *Method called to shutdown the Table server
+    *
+    */
 
     public void shutdown()
     {

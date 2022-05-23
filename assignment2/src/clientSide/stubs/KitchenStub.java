@@ -30,6 +30,10 @@ public class KitchenStub
        serverPortNumb = port;
     }
 
+    /**
+    *	 Transitions the Chef from the 'waiting for an order' state to the 'preparing a course' state
+    */
+
     public synchronized void startPreparation()
     {
         Chef c = (Chef) Thread.currentThread();
@@ -57,6 +61,10 @@ public class KitchenStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Chef from the 'preparing a course' state to the 'dishing the portions' state
+    */
 
     public synchronized void proceedToPresentation()
     {
@@ -86,6 +94,10 @@ public class KitchenStub
         com.close ();
     }
 
+    /**
+    *	 Transitions the Chef from the 'delivering the portions' state to the 'dishing the portions' state
+    */
+
     public synchronized void haveNextPortionReady()
     {
         Chef c = (Chef) Thread.currentThread();
@@ -113,6 +125,10 @@ public class KitchenStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Chef from the 'delivering the portions' state to the 'preparing a course' state
+    */
     
     public synchronized void continuePreparation()
     {
@@ -141,6 +157,10 @@ public class KitchenStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Chef from the 'delivering the portions' state to the 'closing service' state
+    */
 
     public synchronized void cleanUp()
     {
@@ -184,6 +204,10 @@ public class KitchenStub
         return true;
     }
 
+    /**
+    *	 Transitions the Waiter from the 'taking the order' state to the 'placing the order' state
+    */
+
     public synchronized void handNoteToTheChef()
     {
         Waiter w = (Waiter) Thread.currentThread();
@@ -211,6 +235,10 @@ public class KitchenStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Waiter from the 'appraising situation' state to the 'waiting for portion' state
+    */
 
     public synchronized void collectPortion()
     {
@@ -240,6 +268,10 @@ public class KitchenStub
         com.close ();
     }
 
+    /**
+    *	 Chef Watching the news state
+    */
+
     public synchronized void watchTheNews()
     {
         Chef c = (Chef) Thread.currentThread();
@@ -267,6 +299,11 @@ public class KitchenStub
         
         com.close ();
     }
+
+    /**
+    *	 Transitions the Waiter to the 'waiting for portion' state
+    *     @return boolean that indicates if all clients were served
+    */
 
     public synchronized boolean haveAllClientsBeenServed()
     {
@@ -297,6 +334,12 @@ public class KitchenStub
 
         return result;
     }
+
+    /**
+    *
+    *Method called to shutdown the Kitchen server
+    *
+    */
 
     public void shutdown()
     {
