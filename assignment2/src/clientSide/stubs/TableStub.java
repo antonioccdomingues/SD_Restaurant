@@ -43,7 +43,7 @@ public class TableStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(13, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -64,6 +64,30 @@ public class TableStub
 
     public synchronized void deliverPortion()
     {
+        Waiter w = (Waiter) Thread.currentThread();
+        CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
+        Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+        state_fields[0] = w.getWaiterID();
+    	state_fields[1] = w.getWaiterState();
+
+        Message m_toServer = new Message(14, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;
+
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+
+        w.setState((clientSide.entities.WaiterState) m_fromServer.getStateFields()[1]);
+        
+        com.close ();
     }
 
     /**
@@ -80,7 +104,7 @@ public class TableStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(15, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -114,7 +138,7 @@ public class TableStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(16, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -147,7 +171,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(17, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -180,7 +204,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(18, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -213,7 +237,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(19, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -246,7 +270,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(20, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -279,7 +303,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(21, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -312,7 +336,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(22, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -333,7 +357,31 @@ public class TableStub
 
     public synchronized void honourTheBill()
     {
-        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
+        Student s = (Student) Thread.currentThread();
+
+    	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+    	state_fields[0] = s.getID();
+    	state_fields[1] = s.getStudentState();
+    	
+        Message m_toServer = new Message(23, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+       
+        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        
+        com.close ();
     }
 
     /**
@@ -350,7 +398,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(24, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -371,8 +419,34 @@ public class TableStub
 
     public synchronized boolean hasEverybodyChosen()
     {
-        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
-        return true;
+        Student s = (Student) Thread.currentThread();
+
+    	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+    	state_fields[0] = s.getID();
+    	state_fields[1] = s.getStudentState();
+    	
+        Message m_toServer = new Message(25, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+       
+        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        
+        boolean result = (Boolean) m_fromServer.getReturnValue();
+        
+        com.close ();
+        return result;
     }
 
     /**
@@ -389,7 +463,7 @@ public class TableStub
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
     	
-        Message m_toServer = new Message(12, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(26, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -410,7 +484,31 @@ public class TableStub
 
     public synchronized void waitingToBeServed(int sID)
     {
-        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
+        Student s = (Student) Thread.currentThread();
+
+    	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+    	Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+    	state_fields[0] = s.getID();
+    	state_fields[1] = s.getStudentState();
+    	
+        Message m_toServer = new Message(27, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+       
+        s.setState((clientSide.entities.StudentState) m_fromServer.getStateFields()[1]);
+        
+        com.close ();
     }
 
     /**
@@ -425,7 +523,7 @@ public class TableStub
         Object[] params = new Object[0];
         Object[] state_fields = new Object[0];
      
-        Message m_toServer = new Message(24, params, 0, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(99, params, 0, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      

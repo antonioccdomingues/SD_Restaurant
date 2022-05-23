@@ -1,11 +1,7 @@
 package serverSide.stub;
 
-import java.util.Objects;
-
 import commInfra.Message;
 import commInfra.CommunicationChannel;
-import genclass.GenericIO;
-import genclass.TextFile;
 import serverSide.entities.*;
 
 
@@ -49,7 +45,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = state;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(39, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -76,11 +72,12 @@ public class GeneralReposStub
     public synchronized void setStudentState (int id, StudentState state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
-    	Object[] params = new Object[1];
+    	Object[] params = new Object[2];
     	Object[] state_fields = new Object[0];
-    	params[0] = state;
+    	params[0] = id;
+    	params[1] = state;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(40, params, 2, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -110,7 +107,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = state;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(41, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -140,7 +137,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = number;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(42, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -170,7 +167,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = number;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(43, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -200,7 +197,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = id;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(44, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -219,25 +216,7 @@ public class GeneralReposStub
 
     private void reportInitialStatus ()
    {
-        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
-    	Object[] params = new Object[0];
-    	Object[] state_fields = new Object[0];
-    	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
-        Message m_fromServer;            
-        
-        while (!com.open ())                                                      
-        { try
-          { Thread.currentThread ().sleep ((long) (10));
-          }
-          catch (InterruptedException e) {}
-        }
-        
-        com.writeObject (m_toServer);
-        
-        m_fromServer = (Message) com.readObject();                 
-        
-        com.close ();                                  
+       // Este é comentado acho
    }
 
 
@@ -248,7 +227,7 @@ public class GeneralReposStub
     	Object[] params = new Object[0];
     	Object[] state_fields = new Object[0];
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(46, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -278,7 +257,7 @@ public class GeneralReposStub
     	Object[] state_fields = new Object[0];
     	params[0] = message;
     	
-        Message m_toServer = new Message(16, params, 1, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(47, params, 1, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -294,6 +273,33 @@ public class GeneralReposStub
         
         com.close ();                                  
 	}
+
+    /**
+    *
+    *Method called to shutdown the General Repository server
+    *
+    */
+
+    public void shutdown()
+    {
+        CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
+        Object[] params = new Object[0];
+        Object[] state_fields = new Object[0];
+     
+        Message m_toServer = new Message(99, params, 0, state_fields, 0, null);                                                          
+        Message m_fromServer;            
+        
+        while (!com.open ())                                                      
+        { try
+        { Thread.currentThread ().sleep ((long) (10));
+        }
+        catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        com.close ();
+    }
 }
 
 

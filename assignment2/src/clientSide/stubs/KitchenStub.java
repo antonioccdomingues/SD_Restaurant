@@ -43,7 +43,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(28, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -75,7 +75,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(29, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -107,7 +107,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(30, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -139,7 +139,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(31, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -171,7 +171,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(32, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -194,14 +194,62 @@ public class KitchenStub
 
     public synchronized boolean hasTheOrderBeenCompleted()
     {
-        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
-        return true;
+        Chef c = (Chef) Thread.currentThread();
+        CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
+        Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+        state_fields[0] = c.getChefID();
+    	state_fields[1] = c.getChefState();
+
+        Message m_toServer = new Message(33, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;
+
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+
+        c.setState((clientSide.entities.ChefState) m_fromServer.getStateFields()[1]);
+        boolean result = (Boolean) m_fromServer.getReturnValue();
+        com.close ();
+
+        return result;
     }
 
     public synchronized boolean haveAllPortionsBeenDelivered()
     {
-        //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
-        return true;
+        Chef c = (Chef) Thread.currentThread();
+        CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
+        Object[] params = new Object[0];
+    	Object[] state_fields = new Object[2];
+        state_fields[0] = c.getChefID();
+    	state_fields[1] = c.getChefState();
+
+        Message m_toServer = new Message(34, params, 0, state_fields, 2, null);                                                          
+        Message m_fromServer;
+
+        while (!com.open ())                                                      
+        { try
+          { Thread.currentThread ().sleep ((long) (10));
+          }
+          catch (InterruptedException e) {}
+        }
+        
+        com.writeObject (m_toServer);
+        
+        m_fromServer = (Message) com.readObject();                 
+
+        c.setState((clientSide.entities.ChefState) m_fromServer.getStateFields()[1]);
+        boolean result = (Boolean) m_fromServer.getReturnValue();
+        com.close ();
+
+        return result;
     }
 
     /**
@@ -217,7 +265,7 @@ public class KitchenStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(35, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -249,7 +297,7 @@ public class KitchenStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(36, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -281,7 +329,7 @@ public class KitchenStub
         state_fields[0] = c.getChefID();
     	state_fields[1] = c.getChefState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(37, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -314,7 +362,7 @@ public class KitchenStub
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
-        Message m_toServer = new Message(10, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(38, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
         while (!com.open ())                                                      
@@ -347,7 +395,7 @@ public class KitchenStub
         Object[] params = new Object[0];
         Object[] state_fields = new Object[0];
      
-        Message m_toServer = new Message(24, params, 0, state_fields, 0, null);                                                          
+        Message m_toServer = new Message(99, params, 0, state_fields, 0, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
