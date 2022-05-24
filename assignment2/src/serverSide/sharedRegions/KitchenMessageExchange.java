@@ -111,7 +111,7 @@ public class KitchenMessageExchange implements SharedRegionInterface
                 waiter.setWaiterID((int) message.getStateFields()[0]);
                 waiter.setWaiterState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
-                kitchen.haveAllClientsBeenServed();
+                res = kitchen.haveAllClientsBeenServed();
                 state = new Object[]{waiter.getWaiterID(),waiter.getWaiterState()};
                 break;
             case 99:

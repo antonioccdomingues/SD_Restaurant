@@ -31,7 +31,7 @@ public class TableMain
       /* service is established */
 
        ServerCom serverCom, sconi;                                        // communication channels
-       int portNumb = 22341;                                          // port nunber for listening to service requests
+       int portNumb = 22343;                                          // port nunber for listening to service requests
 
        serverCom = new ServerCom (portNumb);
        serverCom.start ();                             // service is instantiated

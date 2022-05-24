@@ -364,6 +364,8 @@ public class BarStub
        
         s.setState((int) m_fromServer.getStateFields()[1]);
         boolean result = (Boolean) m_fromServer.getReturnValue();
+        if(result)
+            System.out.println("Este é o primeiro estudante " + s.getID());
         
         com.close ();
         return result;

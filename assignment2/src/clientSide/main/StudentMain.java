@@ -14,8 +14,8 @@ public class StudentMain
         TableStub table;
         BarStub bar;
 
-        table = new TableStub("l040101-ws03.ua.pt", 22341);
-        bar = new BarStub("l040101-ws01.ua.pt", 22340);
+        table = new TableStub("l040101-ws03.ua.pt", 22343);
+        bar = new BarStub("l040101-ws01.ua.pt", 22341);
         
         for(int i = 0; i< Constants.students_number; i++)
         {

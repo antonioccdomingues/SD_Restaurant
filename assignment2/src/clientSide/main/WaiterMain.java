@@ -17,8 +17,8 @@ public class WaiterMain
         TableStub table;
 
         kitchen = new KitchenStub("l040101-ws02.ua.pt", 22342);
-        bar = new BarStub("l040101-ws01.ua.pt", 22340);
-        table = new TableStub("l040101-ws03.ua.pt", 22341);
+        bar = new BarStub("l040101-ws01.ua.pt", 22341);
+        table = new TableStub("l040101-ws03.ua.pt", 22343);
 
         waiter = new Waiter(0, WaiterState.APPRAISING_SITUATION,kitchen, bar,table);
 

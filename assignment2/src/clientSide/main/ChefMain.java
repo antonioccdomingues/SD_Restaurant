@@ -15,7 +15,7 @@ public class ChefMain
         BarStub bar;
 
         kitchen = new KitchenStub("l040101-ws02.ua.pt", 22342);
-        bar = new BarStub("l040101-ws01.ua.pt", 22340);
+        bar = new BarStub("l040101-ws01.ua.pt", 22341);
 
         chef = new Chef(0, ChefState.WAITING_FOR_AN_ORDER, kitchen, bar);
 

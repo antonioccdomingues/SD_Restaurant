@@ -104,8 +104,7 @@ public class BarMessageExchange implements SharedRegionInterface
                 student.setID((int) message.getStateFields()[0]);
                 student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
-                System.out.println("ID do student que entrou aqui: " + student.getID());
-                bar.FirstStudent(student.getID());
+                res = bar.FirstStudent(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};
                 break;
             case 10:
@@ -121,7 +120,7 @@ public class BarMessageExchange implements SharedRegionInterface
                 student.setID((int) message.getStateFields()[0]);
                 student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
-                bar.shouldHaveArrivedEarlier(student.getID());
+                res = bar.shouldHaveArrivedEarlier(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};
                 break;
             case 12:

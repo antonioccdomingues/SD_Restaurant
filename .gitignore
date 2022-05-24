@@ -77,3 +77,4 @@ nb-configuration.xml
 ##############################
 .vscode/
 .code-workspace
+assignment2/src/*.zip
