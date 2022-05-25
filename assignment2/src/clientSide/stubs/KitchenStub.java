@@ -34,7 +34,7 @@ public class KitchenStub
     *	 Transitions the Chef from the 'waiting for an order' state to the 'preparing a course' state
     */
 
-    public synchronized void startPreparation()
+    public void startPreparation()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -66,7 +66,7 @@ public class KitchenStub
     *	 Transitions the Chef from the 'preparing a course' state to the 'dishing the portions' state
     */
 
-    public synchronized void proceedToPresentation()
+    public void proceedToPresentation()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -98,7 +98,7 @@ public class KitchenStub
     *	 Transitions the Chef from the 'delivering the portions' state to the 'dishing the portions' state
     */
 
-    public synchronized void haveNextPortionReady()
+    public void haveNextPortionReady()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -130,7 +130,7 @@ public class KitchenStub
     *	 Transitions the Chef from the 'delivering the portions' state to the 'preparing a course' state
     */
     
-    public synchronized void continuePreparation()
+    public void continuePreparation()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -162,7 +162,7 @@ public class KitchenStub
     *	 Transitions the Chef from the 'delivering the portions' state to the 'closing service' state
     */
 
-    public synchronized void cleanUp()
+    public void cleanUp()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -192,7 +192,7 @@ public class KitchenStub
 
     //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
 
-    public synchronized boolean hasTheOrderBeenCompleted()
+    public boolean hasTheOrderBeenCompleted()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -222,7 +222,7 @@ public class KitchenStub
         return result;
     }
 
-    public synchronized boolean haveAllPortionsBeenDelivered()
+    public boolean haveAllPortionsBeenDelivered()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -256,7 +256,7 @@ public class KitchenStub
     *	 Transitions the Waiter from the 'taking the order' state to the 'placing the order' state
     */
 
-    public synchronized void handNoteToTheChef()
+    public void handNoteToTheChef()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -288,7 +288,7 @@ public class KitchenStub
     *	 Transitions the Waiter from the 'appraising situation' state to the 'waiting for portion' state
     */
 
-    public synchronized void collectPortion()
+    public void collectPortion()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -320,7 +320,7 @@ public class KitchenStub
     *	 Chef Watching the news state
     */
 
-    public synchronized void watchTheNews()
+    public void watchTheNews()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -353,7 +353,7 @@ public class KitchenStub
     *     @return boolean that indicates if all clients were served
     */
 
-    public synchronized boolean haveAllClientsBeenServed()
+    public boolean haveAllClientsBeenServed()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);

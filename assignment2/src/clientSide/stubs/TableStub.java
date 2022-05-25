@@ -34,7 +34,7 @@ public class TableStub
     *	 Transitions the Waiter from the 'appraising situation' state to the 'taking the order' state
     */
 
-    public synchronized void getThePad()
+    public void getThePad()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -62,7 +62,7 @@ public class TableStub
         com.close ();
     }
 
-    public synchronized void deliverPortion()
+    public void deliverPortion()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -95,7 +95,7 @@ public class TableStub
     *    @return boolean that indicates true if all have been served or false if not
     */
 
-    public synchronized boolean haveAllClientsBeenServed()
+    public boolean haveAllClientsBeenServed()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -129,7 +129,7 @@ public class TableStub
     *	 Transitions the Waiter from the 'processing the bill' state to the 'receiving payment' state
     */
 
-    public synchronized void presentTheBill()
+    public void presentTheBill()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -161,7 +161,7 @@ public class TableStub
     *	 Transitions the Student to the 'chatting with companions' state
     */
 
-    public synchronized void informCompanion()
+    public void informCompanion()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -194,7 +194,7 @@ public class TableStub
     *	 Transitions the Student from the 'selecting the courses' state to the 'organizing the order' state
     */
 
-    public synchronized void prepareTheOrder()
+    public void prepareTheOrder()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -227,7 +227,7 @@ public class TableStub
     *	 Transitions the Student from the 'organizing the order' state to the 'chatting with companions' state
     */
 
-    public synchronized void joinTheTalk()
+    public void joinTheTalk()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -260,7 +260,7 @@ public class TableStub
     *	 Transitions the Student from the 'chatting with companions' state to the 'chatting with companions' state
     */
 
-    public synchronized void hasEverbodyFinished()
+    public void hasEverbodyFinished()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -293,7 +293,7 @@ public class TableStub
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public synchronized void startEating()
+    public void startEating()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -326,17 +326,18 @@ public class TableStub
     *	 Transitions the Student from the 'enjoying the meal' state to the 'chatting with companions' state
     */
 
-    public synchronized void endEating()
+    public void endEating()
     {
         Student s = (Student) Thread.currentThread();
 
     	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[0];
-    	Object[] state_fields = new Object[2];
+    	Object[] state_fields = new Object[3];
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
+    	state_fields[2] = s.isLastStudent();
     	
-        Message m_toServer = new Message(22, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(22, params, 0, state_fields, 3, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -351,11 +352,13 @@ public class TableStub
         m_fromServer = (Message) com.readObject();                 
        
         s.setState((int) m_fromServer.getStateFields()[1]);
+        s.setLastStudent((boolean) m_fromServer.getStateFields()[2]);
+        System.out.printf("[Table Stub] Student[%d] has varible last as %b\n", s.getID(),s.isLastStudent());
         
         com.close ();
     }
 
-    public synchronized void honourTheBill()
+    public void honourTheBill()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -388,7 +391,7 @@ public class TableStub
     *	 Transitions the Student to the 'organizing the order' state
     */
 
-    public synchronized void addUpOnesChoice()
+    public void addUpOnesChoice()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -417,7 +420,7 @@ public class TableStub
         com.close ();
     }
 
-    public synchronized boolean hasEverybodyChosen()
+    public boolean hasEverybodyChosen()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -453,7 +456,7 @@ public class TableStub
     *	 Transitions the Student the 'describing the order' state
     */
 
-    public synchronized void describeTheOrder()
+    public void describeTheOrder()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -482,7 +485,7 @@ public class TableStub
         com.close ();
     }
 
-    public synchronized void waitingToBeServed(int sID)
+    public void waitingToBeServed(int sID)
     {
         Student s = (Student) Thread.currentThread();
 

@@ -42,7 +42,7 @@ public class BarStub
     *	 Transitions the Waiter from the 'appraising situation' state to the 'presenting the menu' state
     */
 
-    public synchronized void saluteTheClient()
+    public void saluteTheClient()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -75,7 +75,7 @@ public class BarStub
     *	 Transitions the Chef from the 'dishing the portions' state to the 'delivering portions' state
     */
 
-    public synchronized void alertTheWaiter()
+    public void alertTheWaiter()
     {
         Chef c = (Chef) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -107,7 +107,7 @@ public class BarStub
     *	 Transitions the Student from the 'waiting for portion' state to the 'appraising situation' state
     */
 
-    public synchronized void returningToTheBar()
+    public void returningToTheBar()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -139,7 +139,7 @@ public class BarStub
     *	 Transitions the Student from the 'appraising situation' state to the 'processing the bill' state
     */
 
-    public synchronized void prepareTheBill()
+    public void prepareTheBill()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -172,7 +172,7 @@ public class BarStub
     *     @return integer that specifies what is happening
     */
 
-    public synchronized int lookAround()
+    public int lookAround()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -206,7 +206,7 @@ public class BarStub
     *	 Method to say godbye to the waiter 
     */
 
-    public synchronized void sayGoodbye()
+    public void sayGoodbye()
     {
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
@@ -238,17 +238,18 @@ public class BarStub
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public synchronized void signalTheWaiter(int sID)
+    public void signalTheWaiter(int sID)
     {
         Student s = (Student) Thread.currentThread();
 
     	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[0];
-    	Object[] state_fields = new Object[2];
+    	Object[] state_fields = new Object[3];
     	state_fields[0] = s.getID();
     	state_fields[1] = s.getStudentState();
+    	state_fields[2] = s.isLastStudent();
     	
-        Message m_toServer = new Message(6, params, 0, state_fields, 2, null);                                                          
+        Message m_toServer = new Message(6, params, 0, state_fields, 3, null);                                                          
         Message m_fromServer;            
         
         while (!com.open ())                                                      
@@ -271,7 +272,7 @@ public class BarStub
     *	 Transitions the Student from the 'organizing the order' state to the 'organizing the order' state
     */
 
-    public synchronized void callTheWaiter()
+    public void callTheWaiter()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -304,7 +305,7 @@ public class BarStub
     *	 Transitions the Student from the 'going to the restaurant' state to the 'taking a seat at the table' state
     */
 
-    public synchronized void enter()
+    public void enter()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -338,14 +339,13 @@ public class BarStub
     *     @return boolean that check if is the first student or not
     */
 
-    public synchronized boolean FirstStudent(int sID)
+    public boolean FirstStudent(int sID)
     {
         Student s = (Student) Thread.currentThread();
     	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[0];
     	Object[] state_fields = new Object[2];
     	state_fields[0] = s.getID();
-        System.out.println("Id do estudante a ser passado: " + state_fields[0]);
     	state_fields[1] = s.getStudentState();
     	
         Message m_toServer = new Message(9, params, 0, state_fields, 2, null);                                                          
@@ -364,8 +364,6 @@ public class BarStub
        
         s.setState((int) m_fromServer.getStateFields()[1]);
         boolean result = (Boolean) m_fromServer.getReturnValue();
-        if(result)
-            System.out.println("Este é o primeiro estudante " + s.getID());
         
         com.close ();
         return result;
@@ -375,7 +373,7 @@ public class BarStub
     *	 Transitions the Student to the 'going home' state
     */
 
-    public synchronized void exit()
+    public void exit()
     {
         Student s = (Student) Thread.currentThread();
 
@@ -408,7 +406,7 @@ public class BarStub
     *	 Transitions the Student from the 'chatting with companions' state to the 'paying the bill' state
     */
 
-    public synchronized boolean shouldHaveArrivedEarlier(int sID)
+    public boolean shouldHaveArrivedEarlier(int sID)
     {
         Student s = (Student) Thread.currentThread();
     	CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
@@ -442,7 +440,7 @@ public class BarStub
     *	 Transitions the Student from the 'taking a seat at the table' state to the 'selecting the courses' state
     */
 
-    public synchronized void readTheMenu()
+    public void readTheMenu()
     {
         Student s = (Student) Thread.currentThread();
 

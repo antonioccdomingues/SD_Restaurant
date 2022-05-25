@@ -38,7 +38,7 @@ public class GeneralReposStub
 	 *     @param state waiter state
 	 */
 
-	public synchronized void setWaiterState (int state)
+	public void setWaiterState (int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -69,7 +69,7 @@ public class GeneralReposStub
 	 *     @param state student state
 	 */
 
-    public synchronized void setStudentState (int id, int state)
+    public void setStudentState (int id, int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[2];
@@ -100,7 +100,7 @@ public class GeneralReposStub
 	 *     @param state chef state
 	 */
 
-	public synchronized void setChefState (int state)
+	public void setChefState (int state)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -130,7 +130,7 @@ public class GeneralReposStub
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNCourse (int number)
+	public void setNCourse (int number)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -160,7 +160,7 @@ public class GeneralReposStub
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNPortion (int number)
+	public void setNPortion (int number)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -190,7 +190,7 @@ public class GeneralReposStub
 	 *     @param id passenger id
 	 */
 
-	public synchronized void setStudentsOrder (int id)
+	public void setStudentsOrder (int id)
     {
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
@@ -251,7 +251,7 @@ public class GeneralReposStub
 	 *     @param message message to write in the logging file
 	 */
 
-	public synchronized void reportSpecificStatus (String message){
+	public void reportSpecificStatus (String message){
         CommunicationChannel com = new CommunicationChannel (serverHostName, serverPortNumb);
     	Object[] params = new Object[1];
     	Object[] state_fields = new Object[0];

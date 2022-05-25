@@ -79,6 +79,7 @@ public class BarMessageExchange implements SharedRegionInterface
                 student = (Student) Thread.currentThread();
                 student.setID((int) message.getStateFields()[0]);
                 student.setStudentState((int) message.getStateFields()[1]);
+                student.setLastStudent((boolean) message.getStateFields()[2]);
                 // Falta colocar a linha do logger
                 bar.signalTheWaiter(student.getID());
                 state = new Object[]{student.getID(),student.getStudentState()};

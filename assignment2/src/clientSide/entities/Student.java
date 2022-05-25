@@ -177,7 +177,6 @@ public class Student extends Thread
 
         if(bar.FirstStudent(this.sID))
         {
-            System.out.println("Student is preparing the order");
             table.prepareTheOrder();
             while(!table.hasEverybodyChosen())
             {
@@ -190,11 +189,9 @@ public class Student extends Thread
         }
         else
         {
-            System.out.println("Student is informing");
             table.informCompanion();
         }
 
-        System.out.println("Student will start eating");
         int courses = 0;
         while(courses < Constants.courses_number)//while(!table.isOrderDone());
         {
