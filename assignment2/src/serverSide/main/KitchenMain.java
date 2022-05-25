@@ -54,6 +54,6 @@ public class KitchenMain
     	 catch(SocketTimeoutException ste) {}
        }
        
-       GenericIO.writelnString ("Service is closed!");
+        GenericIO.writelnString("\033[41m Service is closed! \033[0m");
     }
 }

@@ -104,7 +104,6 @@ public class TableMessageExchange implements SharedRegionInterface
                 student.setStudentState((int) message.getStateFields()[1]);
                 // Falta colocar a linha do logger
                 table.endEating();
-                System.out.printf("[Table ME] Student[%d] has varible last as %b\n", student.getID(),student.isLastStudent());
                 state = new Object[]{student.getID(),student.getStudentState(),student.isLastStudent()};
                 break;
             case 23:

@@ -218,7 +218,6 @@ public class BarStub
         Message m_toServer = new Message(5, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
-        System.out.println("say goodbye!!");
         while (!com.open ())                                                      
         { try
           { Thread.currentThread ().sleep ((long) (10));

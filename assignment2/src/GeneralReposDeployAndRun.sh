@@ -7,3 +7,4 @@ echo "Decompressing data sent to the bar node."
 sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'unzip -qo generalRepos.zip'
 echo "Executing program at the customers node."
 sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'java -classpath "genclass.jar:." serverSide.main.GeneralReposMain' 
+sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'cat logger' 

@@ -53,7 +53,10 @@ public class BarMain
     	 } 
     	 catch(SocketTimeoutException ste) {}
        }
-       
-       GenericIO.writelnString ("Service is closed!");
+
+
+       // The bar is the last region to be shutdown
+      generalReposStub.shutdown();
+      GenericIO.writelnString("\033[41m Service is closed! \033[0m");
     }
 }

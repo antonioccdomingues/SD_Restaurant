@@ -353,7 +353,6 @@ public class TableStub
        
         s.setState((int) m_fromServer.getStateFields()[1]);
         s.setLastStudent((boolean) m_fromServer.getStateFields()[2]);
-        System.out.printf("[Table Stub] Student[%d] has varible last as %b\n", s.getID(),s.isLastStudent());
         
         com.close ();
     }

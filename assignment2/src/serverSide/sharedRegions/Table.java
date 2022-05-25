@@ -50,7 +50,7 @@ public class Table extends Thread
     public synchronized void getThePad()
     {
         ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.TAKING_THE_ORDER);
-        //repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         while(!this.orderDescribed)
         {
@@ -91,7 +91,7 @@ public class Table extends Thread
     public synchronized boolean haveAllClientsBeenServed()
     {
         ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.WAITING_FOR_PORTION);
-        //repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
         if(this.studentServed==Constants.students_number)
         {
             this.studentServed=0;
@@ -107,7 +107,7 @@ public class Table extends Thread
         // wake up the student waiting for the biill
         notifyAll();
         ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.RECEIVING_PAYMENT);
-        //repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
 
         // wait while the bill is not paid
         while(!this.billIsPaid)
@@ -126,7 +126,7 @@ public class Table extends Thread
         sID = ((Student) Thread.currentThread()).getID();
         students[sID] =  ((Student) Thread.currentThread());
         students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        //repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
         
         this.studentSelectedCourses++;
         // Wake the student taking the order
@@ -148,7 +148,7 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
-        //repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.studentSelectedCourses++;
     }
     
@@ -158,7 +158,7 @@ public class Table extends Thread
         sID = ((Student) Thread.currentThread()).getID();
         students[sID] =  ((Student) Thread.currentThread());
         students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        //repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
 
         this.firstStudentJoinedTalk = true;
         // Has to be waiting here 
@@ -184,7 +184,7 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setStudentState(StudentState.ENJOYING_THE_MEAL);
         int studentId = ((Student) Thread.currentThread ()).getID();
-        //repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         // Simulate eating
         ((Student) Thread.currentThread()).studentEating();
     }
@@ -193,10 +193,10 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
         int studentId = ((Student) Thread.currentThread ()).getID();
-        //repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         int sID = ((Student) Thread.currentThread()).getID();
         this.studentFinishedEating++;
-        //repos.setNPortion(1);
+        repos.setNPortion(1);
         students[sID].setServedByWaiter(false);
 
         if(this.studentFinishedEating==Constants.students_number)
@@ -232,7 +232,7 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
-        //repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
 
         
         while(this.studentSelectedCourses < Constants.students_number)
@@ -261,7 +261,7 @@ public class Table extends Thread
     {
         ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
         int studentId = ((Student) Thread.currentThread ()).getID();
-        //repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
         this.orderDescribed = true;
         notifyAll();
     }
@@ -288,6 +288,6 @@ public class Table extends Thread
         }
         this.everyBodyFinished = false;
         this.studentServed++;
-        //repos.setNPortion(1);
+        repos.setNPortion(1);
     }
 }
