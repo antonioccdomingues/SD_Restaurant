@@ -40,8 +40,8 @@ public class TableMain
        GenericIO.writelnString ("Server is listening for service requests.");
 
        GeneralReposStub generalReposStub = new GeneralReposStub("l040101-ws10.ua.pt", 22345);
-       Table kitchen = new Table(generalReposStub);
-       SharedRegionInterface sharedRegionInterface = new TableMessageExchange(kitchen);
+       Table table = new Table(generalReposStub);
+       SharedRegionInterface sharedRegionInterface = new TableMessageExchange(table);
        
       /* service request processing */
                                         // service provider agent

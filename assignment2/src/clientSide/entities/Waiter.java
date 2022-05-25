@@ -106,6 +106,9 @@ public class Waiter extends Thread
             }
         }
         System.out.println("Waiter fechou o estabelecimento");
+        kitchen.shutdown();
+        table.shutdown();
+        bar.shutdown();
         GenericIO.writelnString("\033[41m Waiter End Of Life \033[0m");
     }
 }

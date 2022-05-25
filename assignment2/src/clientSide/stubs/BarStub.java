@@ -211,13 +211,14 @@ public class BarStub
         Waiter w = (Waiter) Thread.currentThread();
         CommunicationChannel com = new CommunicationChannel(serverHostName, serverPortNumb);
         Object[] params = new Object[0];
-    	Object[] state_fields = new Object[2];
+    	Object[] state_fields = new Object[3];
         state_fields[0] = w.getWaiterID();
     	state_fields[1] = w.getWaiterState();
 
         Message m_toServer = new Message(5, params, 0, state_fields, 2, null);                                                          
         Message m_fromServer;
 
+        System.out.println("say goodbye!!");
         while (!com.open ())                                                      
         { try
           { Thread.currentThread ().sleep ((long) (10));
@@ -230,6 +231,8 @@ public class BarStub
         m_fromServer = (Message) com.readObject();                 
 
         w.setState((int) m_fromServer.getStateFields()[1]);
+        // If it enters this method, it means the waiter can go home
+        w.setCanGoHome();
         
         com.close ();
     }
