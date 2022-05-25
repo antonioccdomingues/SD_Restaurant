@@ -241,8 +241,8 @@ public class GeneralRepos
             case 3:   lineStatus += " OGODR ";break;
             case 4:  lineStatus += " CHTWC ";break;
             case 5:         lineStatus += " EJYML ";break;
-            case 7:        lineStatus += " PYTBL ";break;
-            case 8:   lineStatus += " GGHOM ";break;
+            case 6:        lineStatus += " PYTBL ";break;
+            case 7:   lineStatus += " GGHOM ";break;
             }
 
         lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
