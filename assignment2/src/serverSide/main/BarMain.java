@@ -11,7 +11,7 @@ import serverSide.stubs.GeneralReposStub;
 import serverSide.entities.ServiceProviderAgent;
 
 /**
- *    Server side of the Departure Airport Shared Region.
+ *    Server side of the Bar Shared Region.
  *
  *    Request serialization variant.
  *    It waits for the start of the message exchange.

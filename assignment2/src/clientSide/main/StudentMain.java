@@ -5,8 +5,21 @@ import clientSide.entities.StudentState;
 import clientSide.stubs.BarStub;
 import clientSide.stubs.TableStub;
 
+/**
+ *    Client side of the Assignment 2 - Student.
+ *    Static solution Attempt (number of threads controlled by global constants - ExecConst)
+ *    Implementation of a client-server model of type 2 (server replication).
+ *    Communication is based on a communication channel under the TCP protocol.
+ */
+
 public class StudentMain 
 {
+     /**
+     *    Main method.
+     *
+     *    @param args runtime arguments
+     */
+    
     public static void main(String[] args)
     {
         Student[] students = new Student[Constants.students_number];

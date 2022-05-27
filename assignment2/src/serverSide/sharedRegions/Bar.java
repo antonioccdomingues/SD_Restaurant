@@ -5,6 +5,14 @@ import commInfra.*;
 import serverSide.main.Constants;
 import serverSide.stubs.*;;
 
+/**
+ *    Bar.
+ *
+ *    It is responsible for the the synchronization of the Waiter, Chef and student
+ *    and is implemented as an implicit monitor.
+ *    
+ */
+
 public class Bar extends Thread
 {
     private int firstStudentID;
@@ -52,6 +60,12 @@ public class Bar extends Thread
         this.delay = 300 * Math.random();
     }
 
+    /**
+     *  
+     *  It is called to salute all students
+     *
+     */
+
     public synchronized void saluteTheClient()
     {
         //Dequeue the student from the fifo and salute him
@@ -89,6 +103,11 @@ public class Bar extends Thread
         }
     }
 
+    /**
+     *  
+     *  It is called by the Chef to wake the thread
+     *
+     */
     public synchronized void alertTheWaiter()
     {
         ((Chef) Thread.currentThread()).setChefState(ChefState.DELIVERING_THE_PORTIONS);
@@ -98,6 +117,7 @@ public class Bar extends Thread
         notifyAll();
     }
 
+    
     public synchronized void returningToTheBar()
     {
         ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);

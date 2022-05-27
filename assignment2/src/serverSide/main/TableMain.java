@@ -11,7 +11,7 @@ import serverSide.sharedRegions.SharedRegionInterface;
 import serverSide.entities.ServiceProviderAgent;
 
 /**
- *    Server side of the Departure Airport Shared Region.
+ *    Server side of the Table Shared Region.
  *
  *    Request serialization variant.
  *    It waits for the start of the message exchange.

@@ -33,6 +33,16 @@ public class Waiter extends Thread
     */
     private TableStub table;
 
+    /**
+     *   Instantiation of a Waiter thread.
+     *
+     *     @param waiterID Waiter id
+     *     @param state State
+     *     @param kitchen reference to the Kitchen
+     *     @param bar reference to the Bar
+     *     @param table reference to the table
+     */
+
     public Waiter(int waiterID, int state, KitchenStub kitchen, BarStub bar, TableStub table)
     {
         this.setWaiterID(waiterID);
@@ -42,13 +52,27 @@ public class Waiter extends Thread
         this.table = table;
     }
 
+    /** 
+     * Get waiter id
+     * @return int
+     */
+
     public int getWaiterID() {
         return waiterID;
     }
 
+    /** 
+     * Set Waiter id
+     */
+
     public void setWaiterID(int waiterID) {
         this.waiterID = waiterID;
     }
+
+    /** 
+     * canGoHome
+     * @return boolean saying if can go home or not
+     */
 
     public boolean CanGoHome() {
         return canGoHome;
@@ -58,15 +82,31 @@ public class Waiter extends Thread
         this.canGoHome = true;
     }
 
+    /** 
+     * Set Waiter state
+     */
+
     public void setState(int state)
     {
         this.state = state;
     }
 
+    /** 
+     * Get Waiter State
+     * @return int
+     */
+
     public int getWaiterState()
     {
         return this.state;
     }
+
+    /**
+     *   Life cycle of the Waiter.
+     *   
+     *   Starts at the state appraisingSituation
+     *   Ends when all the N Students left the restaurant
+     */
 
     @Override
     public void run()
