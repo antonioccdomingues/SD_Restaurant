@@ -5,7 +5,13 @@ import serverSide.main.Constants;
 import serverSide.stubs.*;
 import commInfra.*;
 
-
+/**
+ *    Table.
+ *
+ *    It is responsible for the the synchronization of the Waiter and Student
+ *    and is implemented as an implicit monitor.
+ *    
+ */
 public class Table extends Thread
 {
     private boolean orderDescribed = false;

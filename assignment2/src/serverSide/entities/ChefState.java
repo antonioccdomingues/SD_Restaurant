@@ -1,5 +1,9 @@
 package serverSide.entities;
 
+/**
+ *    Definition of the internal states of the Chef during his life cycle.
+ */
+
 public final class ChefState {
     
     public static final int WAITING_FOR_AN_ORDER = 0;

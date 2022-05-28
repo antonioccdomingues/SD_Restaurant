@@ -66,10 +66,21 @@ public class Student extends Thread
         this.table = table;
     }
 
+    /**
+     *   Verify if LastStudent.
+     *
+     */
+
     public boolean isLastStudent()
     {
         return lastStudent;
     }
+
+    /**
+     *   Set the last student.
+     *
+     *     @param lastStudent true or false
+     */
 
     public void setLastStudent(boolean lastStudent) 
     {
