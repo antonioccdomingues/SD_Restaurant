@@ -1,9 +1,18 @@
-package serverSide.sharedRegions;
+package serverSide.objects;
 
-import serverSide.entities.*;
 import commInfra.*;
+import clientSide.entities.WaiterState;
+import clientSide.entities.StudentState;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import genclass.GenericIO;
+
+import clientSide.entities.ChefState;
+import interfaces.GeneralReposInterface;
 import serverSide.main.Constants;
-import serverSide.stubs.*;;
+import serverSide.main.BarMain;
+import interfaces.*;
 
 /**
  *    Bar.
@@ -13,7 +22,7 @@ import serverSide.stubs.*;;
  *    
  */
 
-public class Bar extends Thread
+public class Bar implements BarInterface 
 {
     private int firstStudentID;
     private int lastStudentID=-1;
@@ -34,14 +43,14 @@ public class Bar extends Thread
     //private boolean studentAtDoor = false;
     private final Student[] students;
     private MemFIFO<Integer> queue;
-    private final GeneralReposStub repos;   //references to general repository
+    private final GeneralReposInterface repos;   //references to general repository
 
     /**
 	*  Bar instantiation.
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Bar(GeneralReposStub repos)
+    public Bar(GeneralReposInterface repos)
     {
         students = new Student[Constants.students_number];
         for(int i=0; i<Constants.students_number;i++)
@@ -322,5 +331,22 @@ public class Bar extends Thread
 
         ((Student) Thread.currentThread()).setStudentState(StudentState.SELECTING_THE_COURSES);
         repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+    }
+
+    public synchronized void shutdown () throws RemoteException
+    {
+        //nEntities += 1;
+        //if (nEntities >= ExecConst.E_DepAir) {
+        	
+        	try
+        	{ repos.shutdown();
+        	}
+        	catch (RemoteException e)
+        	{ GenericIO.writelnString ("Customer generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
+	          System.exit (1);
+        	}
+        	BarMain.shutdown ();
+        //}
+        notifyAll ();                                       // the barber may now terminate
     }
 }

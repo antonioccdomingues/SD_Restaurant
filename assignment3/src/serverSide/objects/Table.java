@@ -1,9 +1,10 @@
-package serverSide.sharedRegions;
+package serverSide.objects;
 
 import serverSide.entities.*;
 import serverSide.main.Constants;
 import serverSide.stubs.*;
 import commInfra.*;
+import interfaces.GeneralReposInterface;
 
 /**
  *    Table.
@@ -27,7 +28,7 @@ public class Table extends Thread
     private double delay = 0;
     private final Student[] students;
     private MemFIFO<Integer> queue;
-    private final GeneralReposStub repos;   //references to general repository    
+    private final GeneralReposInterface repos;   //references to general repository    
 
     /**
 	*  Table instantiation.

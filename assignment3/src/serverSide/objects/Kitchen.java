@@ -1,5 +1,6 @@
-package serverSide.sharedRegions;
+package serverSide.objects;
 
+import interfaces.GeneralReposInterface;
 import serverSide.entities.*;
 import serverSide.main.Constants;
 import serverSide.stubs.*;
@@ -22,7 +23,7 @@ public class Kitchen extends Thread
     private boolean portionCollected = false;
     private boolean orderDone = false;
     private boolean notifyWaiter = false;
-    private final GeneralReposStub repos;   //references to general repository
+    private final GeneralReposInterface repos;   //references to general repository
 
     /**
 	*  Kitchen instantiation.
