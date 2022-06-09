@@ -29,16 +29,23 @@ public class ReturnValue implements Serializable
 	   private int state;
 
 	  /**
+	   *  Return integer value.
+	   */
+
+	   private int integer;
+
+	  /**
 	   *  Return Boolean instantiation.
 	   *
 	   *     @param value boolean value
 	   *     @param state integer state value
 	   */
 
-	   public ReturnValue (boolean value, int state)
+	   public ReturnValue (boolean value, int state, int integer)
 	   {
 	      this.value = value;
 	      this.state = state;
+		  this.integer = integer;
 	   }
 
 	  /**
@@ -61,6 +68,11 @@ public class ReturnValue implements Serializable
 	   public int getStateValue ()
 	   {
 	      return (state);
+	   }
+
+	   public int getIntValue()
+	   {
+		   return (this.integer);
 	   }
 
 }
