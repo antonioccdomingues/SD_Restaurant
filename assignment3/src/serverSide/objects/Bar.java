@@ -3,12 +3,14 @@ package serverSide.objects;
 import commInfra.*;
 import clientSide.entities.WaiterState;
 import clientSide.entities.StudentState;
+import clientSide.entities.Waiter;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import genclass.GenericIO;
 
 import clientSide.entities.ChefState;
+import clientSide.entities.Student;
 import interfaces.GeneralReposInterface;
 import serverSide.main.Constants;
 import serverSide.main.BarMain;
@@ -26,22 +28,18 @@ public class Bar implements BarInterface
 {
     private int firstStudentID;
     private int lastStudentID=-1;
-    private int studentsSeat=0;
     private int studentsEntered;
     private int studentsDone;
     private int waiterIsRequested = 0;
     private int studentAtDoor = 0;
     private int portionReady = 0;
     private int courses = 0;
-    private double delay = 0;
     private boolean firstStudent = true;
     private boolean orderDone = false;
     private boolean payBill = false;
-    //private boolean portionReady = false;
-    //private boolean waiterIsRequested = false;
     private boolean allStudentsLeft = false;
-    //private boolean studentAtDoor = false;
-    private final Student[] students;
+    private final boolean[] students_saluted;
+    private final boolean[] students_menu;
     private MemFIFO<Integer> queue;
     private final GeneralReposInterface repos;   //references to general repository
 
@@ -52,10 +50,12 @@ public class Bar implements BarInterface
 	*/
     public Bar(GeneralReposInterface repos)
     {
-        students = new Student[Constants.students_number];
+        students_saluted = new boolean[Constants.students_number];
+        students_menu = new boolean[Constants.students_number];
         for(int i=0; i<Constants.students_number;i++)
         {
-            students[i] = null;
+            students_saluted[i] = false;
+            students_menu[i] = false;
         }
 
         try 
@@ -66,7 +66,6 @@ public class Bar implements BarInterface
             e.printStackTrace();
         }
         this.repos = repos;
-        this.delay = 300 * Math.random();
     }
 
     /**
@@ -75,34 +74,33 @@ public class Bar implements BarInterface
      *
      */
 
-    public synchronized void saluteTheClient()
+    public synchronized ReturnValue saluteTheClient() throws RemoteException
     {
         //Dequeue the student from the fifo and salute him
         // so he can transition to the next state
-        int student_saluted=0;
+        int student=0;
 
         // Dequeue the student
         try {
-            student_saluted = queue.read();
+            student = queue.read();
         } catch (MemException e) {
             e.printStackTrace();
         }
 
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.PRESENTING_THE_MENU);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.PRESENTING_THE_MENU);
 
-        students[student_saluted].setSalutedByWaiter();
+        students_saluted[student] = true;
         // wake student
         notifyAll();
 
         // set the seat of the student upon being saluted
-        students[student_saluted].setTableSeat(this.studentsSeat);
-        this.studentsSeat++;
+        //students[student_saluted].setTableSeat(this.studentsSeat);
+        //this.studentsSeat++;
 
         // After being in presenting the menu state
         // we wait here, before returning to the bar
         // untill the student has read the menu
-        while(!students[student_saluted].getReadTheMenu())
+        while(!students_menu[student] == false)
         {
             try {
                 wait();
@@ -110,6 +108,8 @@ public class Bar implements BarInterface
                 e.printStackTrace();
             }
         }
+        
+        return new ReturnValue(false, WaiterState.PRESENTING_THE_MENU, 0);
     }
 
     /**
@@ -117,32 +117,31 @@ public class Bar implements BarInterface
      *  It is called by the Chef to wake the thread
      *
      */
-    public synchronized void alertTheWaiter()
+    public synchronized ReturnValue alertTheWaiter() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.DELIVERING_THE_PORTIONS);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.DELIVERING_THE_PORTIONS);
         this.portionReady++;
         this.waiterIsRequested++; 
         notifyAll();
+        return new ReturnValue(false, ChefState.DELIVERING_THE_PORTIONS, 0);
     }
 
     
-    public synchronized void returningToTheBar()
+    public synchronized ReturnValue returningToTheBar() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.APPRAISING_SITUATION);
+        return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 0);
     }
 
-    public synchronized void prepareTheBill()
+    public synchronized ReturnValue prepareTheBill() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.PROCESSING_THE_BILL);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.PROCESSING_THE_BILL);
+        return new ReturnValue(false, WaiterState.PROCESSING_THE_BILL, 0);
     }
 
-    public synchronized int lookAround()
+    public synchronized ReturnValue lookAround() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.APPRAISING_SITUATION);
 
         // while the waiter is not called to be 
         // awakened by other events, he simply waits here
@@ -165,78 +164,74 @@ public class Bar implements BarInterface
         if(this.studentAtDoor > 0)
         {
             this.studentAtDoor--; 
-            return 0;
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 0);
         }
         else if(this.orderDone)
         {
             this.orderDone = false;
-            return 1;
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 1);
         }
         else if(this.portionReady > 0)// && this.waitingForCourse)
         {
             this.portionReady--; 
-            return 2;
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 2);
         }
         else if(this.payBill == true)
         {
             this.payBill = false;
-            return 3;
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 3);
         }
         else if(this.allStudentsLeft)
         {
-            ((Waiter) Thread.currentThread()).setCanGoHome();
-            return 4;
+            //((Waiter) Thread.currentThread()).setCanGoHome();
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 4);
         }
         else
         {
-            return -1;
+            return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, -1);
         }
     }
 
-    public synchronized void sayGoodbye()
+    public synchronized ReturnValue sayGoodbye() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.APPRAISING_SITUATION);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.APPRAISING_SITUATION);
         // While we haven't said goodbye to all students
         // If we've said goodbye to everyone, the waiter can go home
-        ((Waiter) Thread.currentThread()).setCanGoHome();
+        //((Waiter) Thread.currentThread()).setCanGoHome();
+        return new ReturnValue(false, WaiterState.APPRAISING_SITUATION, 0);
     }
 
-    public synchronized void signalTheWaiter(int sID)
+    public synchronized ReturnValue signalTheWaiter(int sID, boolean last) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
-        boolean last = ((Student) Thread.currentThread()).isLastStudent();
+        repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
         // last student notified the waiter, and thus
         // wont be waiting in the cycle
         if(last)
         {
-            ((Student) Thread.currentThread()).setLastStudent(false);
+            //((Student) Thread.currentThread()).setLastStudent(false);
             System.out.printf("Student[%d] was last to eat, will alert the waiter\n", sID);
             //notify the waiter
             this.courses ++;
             this.waiterIsRequested++; 
             notifyAll();
+            return new ReturnValue(true, StudentState.CHATTING_WITH_COMPANIONS, 0);
         }
+
+        return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
 
-    public synchronized void callTheWaiter()
+    public synchronized ReturnValue callTheWaiter(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.ORGANIZING_THE_ORDER); 
         this.orderDone = true;
         // wake up waiter
         this.waiterIsRequested++;
         notifyAll();
+        return new ReturnValue(false, StudentState.ORGANIZING_THE_ORDER, 0);
     }
 
-    public synchronized void enter()
+    public synchronized ReturnValue enter(int sID) throws RemoteException
     {
-        int sID;
-        sID = ((Student) Thread.currentThread()).getID();
-        students[sID] =  ((Student) Thread.currentThread());
 
         try {
             queue.write(sID);
@@ -265,7 +260,7 @@ public class Bar implements BarInterface
 
 
         // block while it is not saluted
-        while(!students[sID].getSalutedByWaiter())
+        while(!students_saluted[sID] == false)
         {
             try {
                 wait();
@@ -275,25 +270,23 @@ public class Bar implements BarInterface
         }
 
         // Update the state
-        students[sID].setStudentState(StudentState.TAKING_A_SEAT_AT_THE_TABLE);
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.TAKING_A_SEAT_AT_THE_TABLE); 
+        return new ReturnValue(false, StudentState.TAKING_A_SEAT_AT_THE_TABLE, 0);
     }
 
-    public synchronized boolean FirstStudent(int sID)
+    public synchronized ReturnValue FirstStudent(int sID) throws RemoteException
     {
         if(this.firstStudentID == sID)
         {
-            return true;
+            return new ReturnValue(true, 0, 0);
         }
         else
-            return false;
+            return new ReturnValue(false, 0, 0);
     }
 
-    public synchronized void exit()
+    public synchronized ReturnValue exit(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.GOING_HOME);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.GOING_HOME);
         this.studentsDone++;
 
         if(this.studentsDone==Constants.students_number)
@@ -302,35 +295,31 @@ public class Bar implements BarInterface
             this.waiterIsRequested++; 
             notifyAll();
         }
+        return new ReturnValue(false, StudentState.GOING_HOME, 0);
     }
 
-    public synchronized boolean shouldHaveArrivedEarlier(int sID)
+    public synchronized ReturnValue shouldHaveArrivedEarlier(int sID) throws RemoteException
     {
         if(this.lastStudentID == sID)
         {
-            ((Student) Thread.currentThread()).setStudentState(StudentState.PAYING_THE_BILL);
-            int studentId = ((Student) Thread.currentThread ()).getID();
-            repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+            repos.setStudentState(sID, StudentState.PAYING_THE_BILL);
             this.waiterIsRequested++;
             this.payBill = true;
             notifyAll();
-            return true; 
+            return new ReturnValue(true, StudentState.PAYING_THE_BILL, 0);
         }
         else
-            return false;
+            return new ReturnValue(false, StudentState.PAYING_THE_BILL, 0);
     }
 
-    public synchronized void readTheMenu()
+    public synchronized ReturnValue readTheMenu(int sID) throws RemoteException
     {
         // Means he transitioned from previous state, having selected the course
-        int sID;
-        sID = ((Student) Thread.currentThread()).getID();
-        students[sID].setReadTheMenu();
-
+        students_menu[sID] = true;
         notifyAll();
 
-        ((Student) Thread.currentThread()).setStudentState(StudentState.SELECTING_THE_COURSES);
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.SELECTING_THE_COURSES);
+        return new ReturnValue(false, StudentState.SELECTING_THE_COURSES, 0);
     }
 
     public synchronized void shutdown () throws RemoteException

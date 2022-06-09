@@ -170,7 +170,7 @@ public class Waiter extends Thread
           System.exit (1);
         }
     	this.state = ret.getStateValue();
-        return ret.getIntValue();           //NÃO ESQUECER DE IMPLEMENTAR ESTE MÉTODO
+        return ret.getWaiterAction();           //NÃO ESQUECER DE IMPLEMENTAR ESTE MÉTODO
     }
 
     /**
@@ -342,5 +342,6 @@ public class Waiter extends Thread
           System.exit (1);
         }
     	this.state = ret.getStateValue();
+        this.setCanGoHome();
     }
 }

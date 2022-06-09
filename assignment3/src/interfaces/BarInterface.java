@@ -57,19 +57,19 @@ public interface BarInterface extends Remote
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public ReturnValue signalTheWaiter(int sID) throws RemoteException;
+    public ReturnValue signalTheWaiter(int sID, boolean last) throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'organizing the order' state to the 'organizing the order' state
     */
 
-    public ReturnValue callTheWaiter() throws RemoteException;
+    public ReturnValue callTheWaiter(int sID) throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'going to the restaurant' state to the 'taking a seat at the table' state
     */
 
-    public ReturnValue enter() throws RemoteException;
+    public ReturnValue enter(int sID) throws RemoteException;
 
     /**
     *	 Method that indicates if is the first student or not
@@ -82,7 +82,7 @@ public interface BarInterface extends Remote
     *	 Transitions the Student to the 'going home' state
     */
 
-    public ReturnValue exit() throws RemoteException;
+    public ReturnValue exit(int sID) throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'chatting with companions' state to the 'paying the bill' state
@@ -94,7 +94,7 @@ public interface BarInterface extends Remote
     *	 Transitions the Student from the 'taking a seat at the table' state to the 'selecting the courses' state
     */
 
-    public ReturnValue readTheMenu() throws RemoteException;
+    public ReturnValue readTheMenu(int sID) throws RemoteException;
 
     /**
     *

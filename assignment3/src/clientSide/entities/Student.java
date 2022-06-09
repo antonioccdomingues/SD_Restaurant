@@ -197,7 +197,7 @@ public class Student extends Thread
                 addUpOnesChoice();
             }
             // Means the first student has registered everybody choice
-            callTheWaiter();
+            callTheWaiter(this.sID);
             describeTheOrder();
             joinTheTalk();
         }
@@ -216,7 +216,7 @@ public class Student extends Thread
             //System.out.printf("Student[%d] finshed eating\n", this.sID);
 
             hasEverbodyFinished();
-            signalTheWaiter(this.sID);
+            signalTheWaiter(this.sID, this.lastStudent);
             courses++;
         }
 
@@ -226,7 +226,7 @@ public class Student extends Thread
             System.out.printf("Student[%d] payed the bill !!!\n", this.sID);
         }
 
-        exit();
+        exit(this.sID);
         System.out.printf("\033[41m Student[ " + this.sID + "] End Of Life \033[0m\n");
     }    
     
@@ -262,7 +262,7 @@ public class Student extends Thread
     private void enter() {
     	ReturnValue ret = null;
     	try
-        { ret = bar.enter();
+        { ret = bar.enter(this.sID);
         }
         catch (RemoteException e)
         { 
@@ -279,7 +279,7 @@ public class Student extends Thread
     private void readTheMenu() {
     	ReturnValue ret = null;
     	try
-        { ret = bar.readTheMenu();
+        { ret = bar.readTheMenu(this.sID);
         }
         catch (RemoteException e)
         { 
@@ -363,10 +363,10 @@ public class Student extends Thread
      *     
      */
 
-    private void callTheWaiter() {
+    private void callTheWaiter(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = bar.callTheWaiter();
+        { ret = bar.callTheWaiter(sID);
         }
         catch (RemoteException e)
         { 
@@ -499,16 +499,22 @@ public class Student extends Thread
      *     
      */
 
-    private void signalTheWaiter(int sID) {
+    private void signalTheWaiter(int sID, boolean last) {
     	ReturnValue ret = null;
     	try
-        { ret = bar.signalTheWaiter(sID);
+        { ret = bar.signalTheWaiter(sID, last);
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
     	this.state = ret.getStateValue();
+
+        // means he was the last to eat, and need to have it's last flag reset
+        if(ret.getBooleanValue() == true)
+        {
+            this.setLastStudent(false);
+        }
     }
 
     /**
@@ -551,10 +557,10 @@ public class Student extends Thread
      *     
      */
 
-    private void exit() {
+    private void exit(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = bar.exit();
+        { ret = bar.exit(sID);
         }
         catch (RemoteException e)
         { 

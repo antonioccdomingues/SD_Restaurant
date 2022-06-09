@@ -29,10 +29,11 @@ public class ReturnValue implements Serializable
 	   private int state;
 
 	  /**
-	   *  Return integer value.
+	   *  Return waiter_action value.
 	   */
 
-	   private int integer;
+	   private int waiter_action;
+
 
 	  /**
 	   *  Return Boolean instantiation.
@@ -41,11 +42,11 @@ public class ReturnValue implements Serializable
 	   *     @param state integer state value
 	   */
 
-	   public ReturnValue (boolean value, int state, int integer)
+	   public ReturnValue (boolean value, int state, int waiter_action)
 	   {
 	      this.value = value;
 	      this.state = state;
-		  this.integer = integer;
+		  this.waiter_action = waiter_action;
 	   }
 
 	  /**
@@ -70,9 +71,9 @@ public class ReturnValue implements Serializable
 	      return (state);
 	   }
 
-	   public int getIntValue()
+	   public int getWaiterAction()
 	   {
-		   return (this.integer);
+		   return (this.waiter_action);
 	   }
 
 }

@@ -1,14 +1,18 @@
-package serverSide.sharedRegions;
+package serverSide.objects;
 
+import java.rmi.RemoteException;
 import java.util.Objects;
 
 import serverSide.main.Constants;
-import serverSide.entities.*;
+import clientSide.entities.WaiterState;
+import clientSide.entities.StudentState;
+import clientSide.entities.ChefState;
 import genclass.GenericIO;
 import genclass.TextFile;
+import interfaces.GeneralReposInterface;
 
 
-public class GeneralRepos 
+public class GeneralRepos implements GeneralReposInterface
 {
     
     //name of logFile
@@ -70,7 +74,7 @@ public class GeneralRepos
 	 *     @param state waiter state
 	 */
 
-	public synchronized void setWaiterState (int state)
+	public synchronized void setWaiterState (int state) throws RemoteException
     {
 		waiterState = state;
 		reportStatus ();
@@ -83,7 +87,7 @@ public class GeneralRepos
 	 *     @param state student state
 	 */
 
-    public synchronized void setStudentState (int id, int state)
+    public synchronized void setStudentState (int id, int state) throws RemoteException
     {
         //System.out.println(state);
         if(state == StudentState.TAKING_A_SEAT_AT_THE_TABLE)
@@ -127,7 +131,7 @@ public class GeneralRepos
 	 *     @param state chef state
 	 */
 
-	public synchronized void setChefState (int state)
+	public synchronized void setChefState (int state) throws RemoteException
     {
 		chefState = state;
 		reportStatus ();
@@ -139,7 +143,7 @@ public class GeneralRepos
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNCourse (int number){NCourse += number;}
+	public synchronized void setNCourse (int number) throws RemoteException {NCourse += number;}
 
     /**
 	 *   Set Nportion number.
@@ -147,7 +151,7 @@ public class GeneralRepos
 	 *     @param number number to add to Ncourse
 	 */
 
-	public synchronized void setNPortion (int number)
+	public synchronized void setNPortion (int number) throws RemoteException
     {
 
          if(NCourse == 0 && NPortion == 0 && number == 1){
@@ -168,7 +172,8 @@ public class GeneralRepos
 	 *     @param id passenger id
 	 */
 
-	public synchronized void setStudentsOrder (int id){
+	public synchronized void setStudentsOrder (int id)  throws RemoteException
+    {
 		if (id != orderID)
         {
             String s=Integer.toString(id);  
@@ -267,7 +272,8 @@ public class GeneralRepos
 	 *     @param message message to write in the logging file
 	 */
 
-	public synchronized void reportSpecificStatus (String message){
+	public synchronized void reportSpecificStatus (String message)  throws RemoteException
+    {
 		TextFile log = new TextFile ();                      // instantiation of a text file handler
 
 		if (!log.openForAppending (".", logFileName)){
@@ -282,6 +288,11 @@ public class GeneralRepos
 		}
 
 	}
+
+    public void shutdown() throws RemoteException
+    {
+
+    }
 }
 
 
