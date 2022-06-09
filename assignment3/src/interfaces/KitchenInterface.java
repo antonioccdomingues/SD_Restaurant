@@ -8,35 +8,35 @@ import commInfra.ReturnValue;
 public interface KitchenInterface extends Remote 
 {
 
-    public void startPreparation() throws RemoteException;
+    public ReturnValue startPreparation() throws RemoteException;
     
 
     /**
     *	 Transitions the Chef from the 'preparing a course' state to the 'dishing the portions' state
     */
 
-    public void proceedToPresentation() throws RemoteException;
+    public ReturnValue proceedToPresentation() throws RemoteException;
     
 
     /**
     *	 Transitions the Chef from the 'delivering the portions' state to the 'dishing the portions' state
     */
 
-    public void haveNextPortionReady() throws RemoteException;
+    public ReturnValue haveNextPortionReady() throws RemoteException;
     
 
     /**
     *	 Transitions the Chef from the 'delivering the portions' state to the 'preparing a course' state
     */
     
-    public void continuePreparation() throws RemoteException;
+    public ReturnValue continuePreparation() throws RemoteException;
     
 
     /**
     *	 Transitions the Chef from the 'delivering the portions' state to the 'closing service' state
     */
 
-    public void cleanUp() throws RemoteException;
+    public ReturnValue cleanUp() throws RemoteException;
     
 
     //NÃO SEI SE SÃO NECESSÁRIAS. SE FOREM, N SEI BEM COMO IMPLEMENTAR!!!
@@ -51,21 +51,21 @@ public interface KitchenInterface extends Remote
     *	 Transitions the Waiter from the 'taking the order' state to the 'placing the order' state
     */
 
-    public void handNoteToTheChef() throws RemoteException;
+    public ReturnValue handNoteToTheChef() throws RemoteException;
     
 
     /**
     *	 Transitions the Waiter from the 'appraising situation' state to the 'waiting for portion' state
     */
 
-    public void collectPortion() throws RemoteException;
+    public ReturnValue collectPortion() throws RemoteException;
     
 
     /**
     *	 Chef Watching the news state
     */
 
-    public void watchTheNews() throws RemoteException;
+    public ReturnValue watchTheNews() throws RemoteException;
     
 
     /**
@@ -82,5 +82,5 @@ public interface KitchenInterface extends Remote
     *
     */
 
-    public void shutdown() throws RemoteException;
+    public ReturnValue shutdown() throws RemoteException;
 }

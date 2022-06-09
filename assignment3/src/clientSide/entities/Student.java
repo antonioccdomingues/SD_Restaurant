@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import commInfra.ReturnValue;
 import clientSide.main.Constants;
 import interfaces.TableInterface;
-import interfaces.barInterface;
+import interfaces.BarInterface;
 
     /**
     *       Student Thread.

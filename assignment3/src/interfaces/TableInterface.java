@@ -8,10 +8,10 @@ import commInfra.ReturnValue;
 public interface TableInterface extends Remote
 {
 
-    public void getThePad() throws RemoteException;
+    public ReturnValue getThePad() throws RemoteException;
     
 
-    public void deliverPortion() throws RemoteException;
+    public ReturnValue deliverPortion() throws RemoteException;
     
 
     /**
@@ -26,59 +26,59 @@ public interface TableInterface extends Remote
     *	 Transitions the Waiter from the 'processing the bill' state to the 'receiving payment' state
     */
 
-    public void presentTheBill() throws RemoteException;
+    public ReturnValue presentTheBill() throws RemoteException;
     
 
     /**
     *	 Transitions the Student to the 'chatting with companions' state
     */
 
-    public void informCompanion() throws RemoteException;
+    public ReturnValue informCompanion() throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'selecting the courses' state to the 'organizing the order' state
     */
 
-    public void prepareTheOrder() throws RemoteException;
+    public ReturnValue prepareTheOrder() throws RemoteException;
     
     
     /**
     *	 Transitions the Student from the 'organizing the order' state to the 'chatting with companions' state
     */
 
-    public void joinTheTalk() throws RemoteException;
+    public ReturnValue joinTheTalk() throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'chatting with companions' state to the 'chatting with companions' state
     */
 
-    public void hasEverbodyFinished() throws RemoteException;
+    public ReturnValue hasEverbodyFinished() throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public void startEating() throws RemoteException;
+    public ReturnValue startEating() throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'enjoying the meal' state to the 'chatting with companions' state
     */
 
-    public void endEating() throws RemoteException;
+    public ReturnValue endEating() throws RemoteException;
     
 
-    public void honourTheBill() throws RemoteException;
+    public ReturnValue honourTheBill() throws RemoteException;
     
 
     /**
     *	 Transitions the Student to the 'organizing the order' state
     */
 
-    public void addUpOnesChoice() throws RemoteException;
+    public ReturnValue addUpOnesChoice() throws RemoteException;
     
 
     public ReturnValue hasEverybodyChosen() throws RemoteException;
@@ -88,10 +88,10 @@ public interface TableInterface extends Remote
     *	 Transitions the Student the 'describing the order' state
     */
 
-    public void describeTheOrder() throws RemoteException;
+    public ReturnValue describeTheOrder() throws RemoteException;
     
 
-    public void waitingToBeServed(int sID) throws RemoteException;
+    public ReturnValue waitingToBeServed(int sID) throws RemoteException;
     
 
     /**

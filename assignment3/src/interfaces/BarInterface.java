@@ -20,25 +20,25 @@ public interface BarInterface extends Remote
     *	 Transitions the Waiter from the 'appraising situation' state to the 'presenting the menu' state
     */
 
-    public void saluteTheClient() throws RemoteException;
+    public ReturnValue saluteTheClient() throws RemoteException;
 
     /**
     *	 Transitions the Chef from the 'dishing the portions' state to the 'delivering portions' state
     */
 
-    public void alertTheWaiter() throws RemoteException;
+    public ReturnValue alertTheWaiter() throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'waiting for portion' state to the 'appraising situation' state
     */
 
-    public void returningToTheBar() throws RemoteException;
+    public ReturnValue returningToTheBar() throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'appraising situation' state to the 'processing the bill' state
     */
 
-    public void prepareTheBill() throws RemoteException;
+    public ReturnValue prepareTheBill() throws RemoteException;
 
     /**
     *	 Waiter appraiseing situation
@@ -57,19 +57,19 @@ public interface BarInterface extends Remote
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public void signalTheWaiter(int sID) throws RemoteException;
+    public ReturnValue signalTheWaiter(int sID) throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'organizing the order' state to the 'organizing the order' state
     */
 
-    public void callTheWaiter() throws RemoteException;
+    public ReturnValue callTheWaiter() throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'going to the restaurant' state to the 'taking a seat at the table' state
     */
 
-    public void enter() throws RemoteException;
+    public ReturnValue enter() throws RemoteException;
 
     /**
     *	 Method that indicates if is the first student or not
@@ -82,7 +82,7 @@ public interface BarInterface extends Remote
     *	 Transitions the Student to the 'going home' state
     */
 
-    public void exit() throws RemoteException;
+    public ReturnValue exit() throws RemoteException;
 
     /**
     *	 Transitions the Student from the 'chatting with companions' state to the 'paying the bill' state
@@ -94,7 +94,7 @@ public interface BarInterface extends Remote
     *	 Transitions the Student from the 'taking a seat at the table' state to the 'selecting the courses' state
     */
 
-    public void readTheMenu() throws RemoteException;
+    public ReturnValue readTheMenu() throws RemoteException;
 
     /**
     *

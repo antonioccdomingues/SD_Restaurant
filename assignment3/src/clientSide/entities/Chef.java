@@ -1,10 +1,10 @@
 package clientSide.entities;
 
 import java.rmi.RemoteException;
-
+import genclass.*;
 import commInfra.ReturnValue;
-import interfaces.kitchenInterface;
-import interfaces.barInterface;
+import interfaces.KitchenInterface;
+import interfaces.BarInterface;
 
 /**
  *   Chef thread.
@@ -122,11 +122,11 @@ public class Chef extends Thread
 
             while(!haveAllPortionsBeenDelivered())
             {
-                kitchen.haveNextPortionReady();
-                bar.alertTheWaiter();
+                haveNextPortionReady();
+                alertTheWaiter();
             }
-        }while(!kitchen.hasTheOrderBeenCompleted());
-        kitchen.cleanUp();
+        }while(!hasTheOrderBeenCompleted());
+        cleanUp();
         GenericIO.writelnString("\033[41m Chef End Of Life \033[0m");
     }
 
