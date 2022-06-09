@@ -23,59 +23,61 @@ cp commInfra/* dirGeneralRepos/commInfra
 cp serverSide/main/GeneralReposMain.class dirGeneralRepos/serverSide/main
 cp serverSide/objects/GeneralRepos.class dirGeneralRepos/serverSide/objects
 cp interfaces/RegisterInterface.class interfaces/GeneralReposInterface.class dirGeneralRepos/interfaces
-cp clientSide/entities/PassengerStates.class clientSide/entities/HostessStates.class clientSide/entities/PilotStates.class dirGeneralRepos/clientSide/entities
-echo "  Departure Airport"
-rm -rf dirDepartureAirport/serverSide dirDepartureAirport/clientSide dirDepartureAirport/interfaces dirDepartureAirport/commInfra
-mkdir -p dirDepartureAirport/serverSide dirDepartureAirport/serverSide/main dirDepartureAirport/serverSide/objects dirDepartureAirport/interfaces \
-         dirDepartureAirport/clientSide dirDepartureAirport/clientSide/entities dirDepartureAirport/commInfra
-cp serverSide/main/DepartureAirportMain.class dirDepartureAirport/serverSide/main
-cp serverSide/objects/DepartureAirport.class dirDepartureAirport/serverSide/objects
-cp interfaces/*.class dirDepartureAirport/interfaces
-cp clientSide/entities/PassengerStates.class clientSide/entities/HostessStates.class clientSide/entities/PilotStates.class dirDepartureAirport/clientSide/entities
-cp commInfra/* dirDepartureAirport/commInfra
-echo "  Destination Airport"
-rm -rf dirDestinationAirport/serverSide dirDestinationAirport/clientSide dirDestinationAirport/interfaces dirDestinationAirport/commInfra
-mkdir -p dirDestinationAirport/serverSide dirDestinationAirport/serverSide/main dirDestinationAirport/serverSide/objects dirDestinationAirport/interfaces \
-         dirDestinationAirport/clientSide dirDestinationAirport/clientSide/entities dirDestinationAirport/commInfra
-cp commInfra/* dirDestinationAirport/commInfra
-cp serverSide/main/DestinationAirportMain.class dirDestinationAirport/serverSide/main
-cp serverSide/objects/DestinationAirport.class dirDestinationAirport/serverSide/objects
-cp interfaces/*.class dirDestinationAirport/interfaces
-cp clientSide/entities/PassengerStates.class clientSide/entities/PilotStates.class dirDestinationAirport/clientSide/entities
-cp commInfra/*.class dirDestinationAirport/commInfra
-echo "  Plane"
-rm -rf dirPlane/serverSide dirPlane/clientSide dirPlane/interfaces dirPlane/commInfra
-mkdir -p dirPlane/serverSide dirPlane/serverSide/main dirPlane/serverSide/objects dirPlane/interfaces \
-         dirPlane/clientSide dirPlane/clientSide/entities dirPlane/commInfra
-cp serverSide/main/PlaneMain.class dirPlane/serverSide/main
-cp serverSide/objects/Plane.class dirPlane/serverSide/objects
-cp interfaces/*.class dirPlane/interfaces
-cp clientSide/entities/PassengerStates.class clientSide/entities/HostessStates.class clientSide/entities/PilotStates.class dirPlane/clientSide/entities
-cp commInfra/*.class dirPlane/commInfra
-echo "  Passenger"
-rm -rf dirPassenger/clientSide dirPassenger/interfaces
-mkdir -p dirPassenger/clientSide dirPassenger/clientSide/main dirPassenger/clientSide/entities \
-         dirPassenger/interfaces dirPassenger/commInfra
-cp clientSide/main/PassengerMain.class dirPassenger/clientSide/main
-cp clientSide/entities/Passenger.class clientSide/entities/PassengerStates.class dirPassenger/clientSide/entities
-cp interfaces/* dirPassenger/interfaces
-cp commInfra/*.class dirPassenger/commInfra
-echo "  Hostess"
-rm -rf dirHostess/serverSide dirHostess/clientSide dirHostess/interfaces
-mkdir -p dirHostess/clientSide dirHostess/clientSide/main dirHostess/clientSide/entities \
-         dirHostess/interfaces dirHostess/commInfra
-cp clientSide/main/HostessMain.class dirHostess/clientSide/main
-cp clientSide/entities/Hostess.class clientSide/entities/HostessStates.class dirHostess/clientSide/entities
-cp interfaces/* dirHostess/interfaces
-cp commInfra/*.class dirHostess/commInfra
-echo "  Pilot"
-rm -rf dirPilot/clientSide dirPilot/interfaces
-mkdir -p dirPilot/clientSide dirPilot/clientSide/main dirPilot/clientSide/entities \
-         dirPilot/interfaces dirPilot/commInfra
-cp clientSide/main/PilotMain.class dirPilot/clientSide/main
-cp clientSide/entities/Pilot.class clientSide/entities/PilotStates.class dirPilot/clientSide/entities
-cp interfaces/* dirPilot/interfaces
-cp commInfra/*.class dirPilot/commInfra
+cp clientSide/entities/StudentState.class clientSide/entities/WaiterState.class clientSide/entities/ChefState.class dirGeneralRepos/clientSide/entities
+echo "  Bar"
+rm -rf dirBar/serverSide dirBar/clientSide dirBar/interfaces dirBar/commInfra
+mkdir -p dirBar/serverSide dirBar/serverSide/main dirBar/serverSide/objects dirBar/interfaces \
+         dirBar/clientSide dirBar/clientSide/entities dirBar/commInfra
+cp commInfra/* dirBar/commInfra
+cp serverSide/main/BarMain.class dirBar/serverSide/main
+cp serverSide/objects/Bar.class dirBar/serverSide/objects
+cp interfaces/*.class dirBar/interfaces
+cp clientSide/entities/StudentState.class clientSide/entities/WaiterState.class clientSide/entities/ChefState.class dirBar/clientSide/entities
+cp commInfra/*.class dirBar/commInfra
+echo "  Table"
+rm -rf dirTable/serverSide dirTable/clientSide dirTable/interfaces dirTable/commInfra
+mkdir -p dirTable/serverSide dirTable/serverSide/main dirTable/serverSide/objects dirTable/interfaces \
+         dirTable/clientSide dirTable/clientSide/entities dirTable/commInfra
+cp commInfra/* dirTable/commInfra
+cp serverSide/main/TableMain.class dirTable/serverSide/main
+cp serverSide/objects/Table.class dirTable/serverSide/objects
+cp interfaces/*.class dirTable/interfaces
+cp clientSide/entities/StudentState.class clientSide/entities/WaiterState.class dirTable/clientSide/entities
+cp commInfra/*.class dirTable/commInfra
+echo "  Kitchen"
+rm -rf dirKitchen/serverSide dirKitchen/clientSide dirKitchen/interfaces dirKitchen/commInfra
+mkdir -p dirKitchen/serverSide dirKitchen/serverSide/main dirKitchen/serverSide/objects dirKitchen/interfaces \
+         dirKitchen/clientSide dirKitchen/clientSide/entities dirKitchen/commInfra
+cp commInfra/* dirKitchen/commInfra
+cp serverSide/main/KitchenMain.class dirKitchen/serverSide/main
+cp serverSide/objects/Kitchen.class dirKitchen/serverSide/objects
+cp interfaces/*.class dirKitchen/interfaces
+cp clientSide/entities/WaiterState.class clientSide/entities/ChefState.class dirKitchen/clientSide/entities
+cp commInfra/*.class dirKitchen/commInfra
+echo "  Student"
+rm -rf dirStudent/clientSide dirStudent/interfaces
+mkdir -p dirStudent/clientSide dirStudent/clientSide/main dirStudent/clientSide/entities \
+         dirStudent/interfaces dirStudent/commInfra
+cp clientSide/main/StudentMain.class dirStudent/clientSide/main
+cp clientSide/entities/Student.class clientSide/entities/StudentState.class dirStudent/clientSide/entities
+cp interfaces/* dirStudent/interfaces
+cp commInfra/*.class dirStudent/commInfra
+echo "  Waiter"
+rm -rf dirWaiter/serverSide dirWaiter/clientSide dirWaiter/interfaces
+mkdir -p dirWaiter/clientSide dirWaiter/clientSide/main dirWaiter/clientSide/entities \
+         dirWaiter/interfaces dirWaiter/commInfra
+cp clientSide/main/WaiterMain.class dirWaiter/clientSide/main
+cp clientSide/entities/Waiter.class clientSide/entities/WaiterState.class dirWaiter/clientSide/entities
+cp interfaces/* dirWaiter/interfaces
+cp commInfra/*.class dirWaiter/commInfra
+echo "  Chef"
+rm -rf dirChef/clientSide dirChef/interfaces
+mkdir -p dirChef/clientSide dirChef/clientSide/main dirChef/clientSide/entities \
+         dirChef/interfaces dirChef/commInfra
+cp clientSide/main/ChefMain.class dirChef/clientSide/main
+cp clientSide/entities/Chef.class clientSide/entities/ChefState.class dirChef/clientSide/entities
+cp interfaces/* dirChef/interfaces
+cp commInfra/*.class dirChef/commInfra
 echo "Compressing execution environments."
 echo "  RMI registry"
 rm -f  dirRMIRegistry.zip
@@ -86,21 +88,21 @@ zip -rq dirRegistry.zip dirRegistry
 echo "  General Repository of Information"
 rm -f  dirGeneralRepos.zip
 zip -rq dirGeneralRepos.zip dirGeneralRepos
-echo "  Departure Airport"
-rm -f  dirDepartureAirport.zip
-zip -rq dirDepartureAirport.zip dirDepartureAirport
-echo "  Destination Airport"
-rm -f  dirDestinationAirport.zip
-zip -rq dirDestinationAirport.zip dirDestinationAirport
-echo "  Plane"
-rm -f  dirPlane.zip
-zip -rq dirPlane.zip dirPlane
-echo "  Passenger"
-rm -f  dirPassenger.zip
-zip -rq dirPassenger.zip dirPassenger
-echo "  Hostess"
-rm -f  dirHostess.zip
-zip -rq dirHostess.zip dirHostess
-echo "  Pilot"
-rm -f  dirPilot.zip
-zip -rq dirPilot.zip dirPilot
+echo "  Bar"
+rm -f  dirBar.zip
+zip -rq dirBar.zip dirBar
+echo "  Table"
+rm -f  dirTable.zip
+zip -rq dirTable.zip dirTable
+echo "  Kitchen"
+rm -f  dirKitchen.zip
+zip -rq dirKitchen.zip dirKitchen
+echo "  Student"
+rm -f  dirStudent.zip
+zip -rq dirStudent.zip dirStudent
+echo "  Waiter"
+rm -f  dirWaiter.zip
+zip -rq dirWaiter.zip dirWaiter
+echo "  Chef"
+rm -f  dirChef.zip
+zip -rq dirChef.zip dirChef
