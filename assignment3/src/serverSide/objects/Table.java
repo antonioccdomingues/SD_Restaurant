@@ -33,6 +33,7 @@ public class Table implements TableInterface
     private int studentFinishedEating;
     private int coursesDelivered = 0;
     private int studentWaiting = 0;
+    private int nEntities=0;
     private double delay = 0;
     private final boolean[] students;
     private MemFIFO<Integer> queue;
@@ -201,7 +202,7 @@ public class Table implements TableInterface
     {
         repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
         this.studentFinishedEating++;
-        repos.setNPortion(1);
+        //repos.setNPortion(1);
         // served is false
         students[sID] = false;
 
@@ -299,8 +300,8 @@ public class Table implements TableInterface
 
     public synchronized void shutdown () throws RemoteException
     {
-        //nEntities += 1;
-        //if (nEntities >= ExecConst.E_DepAir) {
+        nEntities += 1;
+        if (nEntities >= Constants.E_Table) {
         	
         	try
         	{ repos.shutdown();
@@ -310,7 +311,7 @@ public class Table implements TableInterface
 	          System.exit (1);
         	}
         	BarMain.shutdown ();
-        //}
+        }
         notifyAll ();                                       // the barber may now terminate
     }
 }

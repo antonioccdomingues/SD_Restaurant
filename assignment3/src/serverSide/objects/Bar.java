@@ -32,6 +32,7 @@ public class Bar implements BarInterface
     private int studentAtDoor = 0;
     private int portionReady = 0;
     private int courses = 0;
+    private int nEntities=0;
     private boolean firstStudent = true;
     private boolean orderDone = false;
     private boolean payBill = false;
@@ -322,8 +323,8 @@ public class Bar implements BarInterface
 
     public synchronized void shutdown () throws RemoteException
     {
-        //nEntities += 1;
-        //if (nEntities >= ExecConst.E_DepAir) {
+        nEntities += 1;
+        if (nEntities >= Constants.E_Bar) {
         	
         	try
         	{ repos.shutdown();
@@ -333,7 +334,7 @@ public class Bar implements BarInterface
 	          System.exit (1);
         	}
         	BarMain.shutdown ();
-        //}
+        }
         notifyAll ();                                       // the barber may now terminate
     }
 }

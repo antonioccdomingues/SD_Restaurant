@@ -17,6 +17,26 @@ public final class Constants
      */
     public static final int courses_number = 3;
 
+        public static final int E_Bar = 3;
+     
+	 /**
+	  *   Number of entities requesting shutdown.
+	  */
+	
+	  public static final int E_Kitchen = 2;
+	  
+	  /**
+	   *   Number of entities requesting shutdown.
+	   */
+	
+	   public static final int E_Table = 2;
+	   
+	   /**
+	    *   Number of entities requesting shutdown.
+	    */
+	
+	    public static final int E_Repos = 3;
+
     private Constants()
     { }
 }

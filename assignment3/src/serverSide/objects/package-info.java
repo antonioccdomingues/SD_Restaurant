@@ -3,4 +3,4 @@
  *  Communication is based on message passing over sockets using the TCP protocol.
  */
 
-package serverSide.sharedRegions;
+package serverSide.objects;

@@ -146,7 +146,7 @@ public class KitchenMain {
 	      }
 
 	      try
-	      { reg.bind (nameEntryObject, departureAirportStub);
+	      { reg.bind (nameEntryObject, kitchenStub);
 	      }
 	      catch (RemoteException e)
 	      { GenericIO.writelnString ("Departure Airport registration exception: " + e.getMessage ());
@@ -200,7 +200,7 @@ public class KitchenMain {
 	      GenericIO.writelnString ("Departure Airport was deregistered!");
 
 	      try
-	      { shutdownDone = UnicastRemoteObject.unexportObject (departureAirport, true);
+	      { shutdownDone = UnicastRemoteObject.unexportObject (kitchen, true);
 	      }
 	      catch (NoSuchObjectException e)
 	      { GenericIO.writelnString ("Departure Airport unexport exception: " + e.getMessage ());
