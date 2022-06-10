@@ -191,19 +191,19 @@ public class Student extends Thread
 
         if(FirstStudent(this.sID))
         {
-            prepareTheOrder();
+            prepareTheOrder(this.sID);
             while(!hasEverybodyChosen())
             {
-                addUpOnesChoice();
+                addUpOnesChoice(this.sID);
             }
             // Means the first student has registered everybody choice
             callTheWaiter(this.sID);
-            describeTheOrder();
-            joinTheTalk();
+            describeTheOrder(this.sID);
+            joinTheTalk(this.sID);
         }
         else
         {
-            informCompanion();
+            informCompanion(this.sID);
         }
 
         int courses = 0;
@@ -211,8 +211,8 @@ public class Student extends Thread
         {
             // wait while it's not served
             waitingToBeServed(this.sID);
-            startEating();
-            endEating();
+            startEating(this.sID);
+            endEating(this.sID);
             //System.out.printf("Student[%d] finshed eating\n", this.sID);
 
             hasEverbodyFinished();
@@ -311,10 +311,10 @@ public class Student extends Thread
      *     
      */
 
-    private void prepareTheOrder() {
+    private void prepareTheOrder(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.prepareTheOrder();
+        { ret = table.prepareTheOrder(sID);
         }
         catch (RemoteException e)
         { 
@@ -337,7 +337,6 @@ public class Student extends Thread
         { 
           System.exit (1);
         }
-    	this.state = ret.getStateValue();
         return ret.getBooleanValue();
     }
 
@@ -346,10 +345,10 @@ public class Student extends Thread
      *     
      */
 
-    private void addUpOnesChoice() {
+    private void addUpOnesChoice(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.addUpOnesChoice();
+        { ret = table.addUpOnesChoice(sID);
         }
         catch (RemoteException e)
         { 
@@ -380,10 +379,10 @@ public class Student extends Thread
      *     
      */
 
-    private void describeTheOrder() {
+    private void describeTheOrder(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.describeTheOrder();
+        { ret = table.describeTheOrder(sID);
         }
         catch (RemoteException e)
         { 
@@ -397,10 +396,10 @@ public class Student extends Thread
      *     
      */
 
-    private void joinTheTalk() {
+    private void joinTheTalk(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.joinTheTalk();
+        { ret = table.joinTheTalk(sID);
         }
         catch (RemoteException e)
         { 
@@ -414,10 +413,10 @@ public class Student extends Thread
      *     
      */
 
-    private void informCompanion() {
+    private void informCompanion(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.informCompanion();
+        { ret = table.informCompanion(sID);
         }
         catch (RemoteException e)
         { 
@@ -432,15 +431,14 @@ public class Student extends Thread
      */
 
     private void waitingToBeServed(int sID) {
-    	ReturnValue ret = null;
     	try
-        { ret = table.waitingToBeServed(sID);
+        {
+            table.waitingToBeServed(sID);
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
-    	this.state = ret.getStateValue();
     }
 
     /**
@@ -448,16 +446,19 @@ public class Student extends Thread
      *     
      */
 
-    private void startEating() {
+    private void startEating(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.startEating();
+        { ret = table.startEating(sID);
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
     	this.state = ret.getStateValue();
+
+        // Simulate student eating
+        this.studentEating();
     }
 
     /**
@@ -465,16 +466,22 @@ public class Student extends Thread
      *     
      */
 
-    private void endEating() {
+    private void endEating(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = table.endEating();
+        { ret = table.endEating(sID);
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
     	this.state = ret.getStateValue();
+
+        // means he was the last to eat
+        if(ret.getBooleanValue() == true)
+        {
+            this.setLastStudent(true);
+        }
     }
 
     /**
@@ -541,15 +548,14 @@ public class Student extends Thread
      */
 
     private void honourTheBill() {
-    	ReturnValue ret = null;
     	try
-        { ret = table.honourTheBill();
+        {
+             table.honourTheBill();
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
-    	this.state = ret.getStateValue();
     }
 
     /**

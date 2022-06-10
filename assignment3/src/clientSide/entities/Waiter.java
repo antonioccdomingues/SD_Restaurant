@@ -3,7 +3,6 @@ package clientSide.entities;
 import java.rmi.RemoteException;
 import genclass.*;
 import commInfra.ReturnValue;
-import clientSide.main.Constants;
 import interfaces.*;
 
     /**
@@ -282,15 +281,13 @@ public class Waiter extends Thread
      */
 
     private void deliverPortion() {
-    	ReturnValue ret = null;
     	try
-        { ret = table.deliverPortion();
+        { table.deliverPortion();
         }
         catch (RemoteException e)
         { 
           System.exit (1);
         }
-    	this.state = ret.getStateValue();
     }
 
     /**

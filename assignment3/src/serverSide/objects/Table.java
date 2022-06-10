@@ -1,10 +1,18 @@
 package serverSide.objects;
 
-import serverSide.entities.*;
-import serverSide.main.Constants;
-import serverSide.stubs.*;
 import commInfra.*;
+import clientSide.entities.WaiterState;
+import clientSide.entities.StudentState;
+import clientSide.entities.Student;
+
+import java.rmi.RemoteException;
+
+import genclass.GenericIO;
+
 import interfaces.GeneralReposInterface;
+import serverSide.main.Constants;
+import serverSide.main.BarMain;
+import interfaces.*;
 
 /**
  *    Table.
@@ -13,7 +21,7 @@ import interfaces.GeneralReposInterface;
  *    and is implemented as an implicit monitor.
  *    
  */
-public class Table extends Thread
+public class Table implements TableInterface
 {
     private boolean orderDescribed = false;
     public boolean everyBodyFinished = false;
@@ -26,7 +34,7 @@ public class Table extends Thread
     private int coursesDelivered = 0;
     private int studentWaiting = 0;
     private double delay = 0;
-    private final Student[] students;
+    private final boolean[] students;
     private MemFIFO<Integer> queue;
     private final GeneralReposInterface repos;   //references to general repository    
 
@@ -35,12 +43,12 @@ public class Table extends Thread
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Table(GeneralReposStub repos)
+    public Table(GeneralReposInterface repos)
     {
-        students = new Student[Constants.students_number];
+        students = new boolean[Constants.students_number];
         for(int i=0; i<Constants.students_number;i++)
         {
-            students[i] = null;
+            students[i] = false;
         }
 
         try 
@@ -54,10 +62,9 @@ public class Table extends Thread
         this.delay = 300 * Math.random();
     } 
 
-    public synchronized void getThePad()
+    public synchronized ReturnValue getThePad() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.TAKING_THE_ORDER);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.TAKING_THE_ORDER);
 
         while(!this.orderDescribed)
         {
@@ -67,9 +74,11 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+
+        return new ReturnValue(false, WaiterState.TAKING_THE_ORDER, 0);
     }
 
-    public synchronized void deliverPortion()
+    public synchronized void deliverPortion() throws RemoteException
     {
         int student_served=0;
 
@@ -91,30 +100,28 @@ public class Table extends Thread
             System.out.println("But counted one as delivered");
         }
 
-        students[student_served].setServedByWaiter(true);
+        students[student_served] = true;
         notifyAll();
     }
 
-    public synchronized boolean haveAllClientsBeenServed()
+    public synchronized ReturnValue haveAllClientsBeenServed() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.WAITING_FOR_PORTION);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.WAITING_FOR_PORTION);
         if(this.studentServed==Constants.students_number)
         {
             this.studentServed=0;
-            return true;
+            return new ReturnValue(true, WaiterState.WAITING_FOR_PORTION, 0);
         }
         else
-            return false;
+            return new ReturnValue(false, WaiterState.WAITING_FOR_PORTION, 0);
     }
 
-    public synchronized void presentTheBill()
+    public synchronized ReturnValue presentTheBill() throws RemoteException
     {
         this.billIsReady = true;
         // wake up the student waiting for the biill
         notifyAll();
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.RECEIVING_PAYMENT);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.RECEIVING_PAYMENT);
 
         // wait while the bill is not paid
         while(!this.billIsPaid)
@@ -125,15 +132,13 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+
+        return new ReturnValue(false, WaiterState.RECEIVING_PAYMENT, 0);
     }
 
-    public synchronized void informCompanion()
+    public synchronized ReturnValue informCompanion(int sID) throws RemoteException
     {
-        int sID;
-        sID = ((Student) Thread.currentThread()).getID();
-        students[sID] =  ((Student) Thread.currentThread());
-        students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
         
         this.studentSelectedCourses++;
         // Wake the student taking the order
@@ -149,34 +154,30 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+
+        return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
 
-    public synchronized void prepareTheOrder()
+    public synchronized ReturnValue prepareTheOrder(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.ORGANIZING_THE_ORDER);
         this.studentSelectedCourses++;
+        return new ReturnValue(false, StudentState.ORGANIZING_THE_ORDER, 0);
     }
     
-    public synchronized void joinTheTalk()
+    public synchronized ReturnValue joinTheTalk(int sID) throws RemoteException
     {
-        int sID;
-        sID = ((Student) Thread.currentThread()).getID();
-        students[sID] =  ((Student) Thread.currentThread());
-        students[sID].setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
 
         this.firstStudentJoinedTalk = true;
         // Has to be waiting here 
         // for everybody to be served
         notifyAll();
+        return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
 
-    public synchronized void hasEverbodyFinished()
+    public synchronized ReturnValue hasEverbodyFinished() throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-
         while(!this.everyBodyFinished) 
         {
             try {
@@ -185,40 +186,40 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+        return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
 
-    public synchronized void startEating()
+    public synchronized ReturnValue startEating(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.ENJOYING_THE_MEAL);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.ENJOYING_THE_MEAL);
         // Simulate eating
-        ((Student) Thread.currentThread()).studentEating();
+        //((Student) Thread.currentThread()).studentEating();
+        return new ReturnValue(false, StudentState.ENJOYING_THE_MEAL, 0);
     }
 
-    public synchronized void endEating()
+    public synchronized ReturnValue endEating(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.CHATTING_WITH_COMPANIONS);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
-        int sID = ((Student) Thread.currentThread()).getID();
+        repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
         this.studentFinishedEating++;
         repos.setNPortion(1);
-        students[sID].setServedByWaiter(false);
+        // served is false
+        students[sID] = false;
 
         if(this.studentFinishedEating==Constants.students_number)
         {
             // means he was the last one
-            ((Student) Thread.currentThread()).setLastStudent(true);
+            // ((Student) Thread.currentThread()).setLastStudent(true);
             System.out.printf("Student[%d] was last to eat\n", sID);
             this.everyBodyFinished = true;
             this.studentFinishedEating=0;
             notifyAll();
+            return new ReturnValue(true, StudentState.CHATTING_WITH_COMPANIONS, 0);
         }
         
+        return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
 
-    public synchronized void honourTheBill()
+    public synchronized void honourTheBill() throws RemoteException
     {
         // wait untill the bill is ready
         while(!this.billIsReady)
@@ -235,13 +236,10 @@ public class Table extends Thread
         notifyAll();
     }
 
-    public synchronized void addUpOnesChoice()
+    public synchronized ReturnValue addUpOnesChoice(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, StudentState.ORGANIZING_THE_ORDER);
 
-        
         while(this.studentSelectedCourses < Constants.students_number)
         {
             try {
@@ -250,30 +248,31 @@ public class Table extends Thread
                 e.printStackTrace();
             }
         }
+
+        return new ReturnValue(false, StudentState.ORGANIZING_THE_ORDER, 0);
     }
 
-    public synchronized boolean hasEverybodyChosen()
+    public synchronized ReturnValue hasEverybodyChosen() throws RemoteException
     {
         if(this.studentSelectedCourses==Constants.students_number)
         {
-            return true;
+            return new ReturnValue(true, 0, 0);
         }
         else
         {
-            return false;
+            return new ReturnValue(false, 0 , 0);
         }
     }
 
-    public synchronized void describeTheOrder()
+    public synchronized ReturnValue describeTheOrder(int sID) throws RemoteException
     {
-        ((Student) Thread.currentThread()).setStudentState(StudentState.ORGANIZING_THE_ORDER);
-        int studentId = ((Student) Thread.currentThread ()).getID();
-        repos.setStudentState(studentId, ((Student) Thread.currentThread()).getStudentState());
+        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
         this.orderDescribed = true;
         notifyAll();
+        return new ReturnValue(false, StudentState.ORGANIZING_THE_ORDER , 0);
     }
 
-    public synchronized void waitingToBeServed(int sID)
+    public synchronized void waitingToBeServed(int sID) throws RemoteException
     {
         // Add the student to the waiting to be served queue 
         try {
@@ -285,7 +284,7 @@ public class Table extends Thread
         // wake waiter waiting to serve 
         notifyAll();
         // block while it is not served
-        while(!students[sID].servedByWaiter())
+        while(!students[sID] == false)
         {
             try {
                 wait();
@@ -296,5 +295,22 @@ public class Table extends Thread
         this.everyBodyFinished = false;
         this.studentServed++;
         repos.setNPortion(1);
+    }
+
+    public synchronized void shutdown () throws RemoteException
+    {
+        //nEntities += 1;
+        //if (nEntities >= ExecConst.E_DepAir) {
+        	
+        	try
+        	{ repos.shutdown();
+        	}
+        	catch (RemoteException e)
+        	{ GenericIO.writelnString ("Customer generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
+	          System.exit (1);
+        	}
+        	BarMain.shutdown ();
+        //}
+        notifyAll ();                                       // the barber may now terminate
     }
 }

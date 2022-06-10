@@ -11,7 +11,7 @@ public interface TableInterface extends Remote
     public ReturnValue getThePad() throws RemoteException;
     
 
-    public ReturnValue deliverPortion() throws RemoteException;
+    public void deliverPortion() throws RemoteException;
     
 
     /**
@@ -33,21 +33,21 @@ public interface TableInterface extends Remote
     *	 Transitions the Student to the 'chatting with companions' state
     */
 
-    public ReturnValue informCompanion() throws RemoteException;
+    public ReturnValue informCompanion(int sID) throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'selecting the courses' state to the 'organizing the order' state
     */
 
-    public ReturnValue prepareTheOrder() throws RemoteException;
+    public ReturnValue prepareTheOrder(int sID) throws RemoteException;
     
     
     /**
     *	 Transitions the Student from the 'organizing the order' state to the 'chatting with companions' state
     */
 
-    public ReturnValue joinTheTalk() throws RemoteException;
+    public ReturnValue joinTheTalk(int sID) throws RemoteException;
     
 
     /**
@@ -61,24 +61,24 @@ public interface TableInterface extends Remote
     *	 Transitions the Student from the 'chatting with companions' state to the 'enjoying the meal' state
     */
 
-    public ReturnValue startEating() throws RemoteException;
+    public ReturnValue startEating(int sID) throws RemoteException;
     
 
     /**
     *	 Transitions the Student from the 'enjoying the meal' state to the 'chatting with companions' state
     */
 
-    public ReturnValue endEating() throws RemoteException;
+    public ReturnValue endEating(int sID) throws RemoteException;
     
 
-    public ReturnValue honourTheBill() throws RemoteException;
+    public void honourTheBill() throws RemoteException;
     
 
     /**
     *	 Transitions the Student to the 'organizing the order' state
     */
 
-    public ReturnValue addUpOnesChoice() throws RemoteException;
+    public ReturnValue addUpOnesChoice(int sID) throws RemoteException;
     
 
     public ReturnValue hasEverybodyChosen() throws RemoteException;
@@ -88,10 +88,10 @@ public interface TableInterface extends Remote
     *	 Transitions the Student the 'describing the order' state
     */
 
-    public ReturnValue describeTheOrder() throws RemoteException;
+    public ReturnValue describeTheOrder(int sID) throws RemoteException;
     
 
-    public ReturnValue waitingToBeServed(int sID) throws RemoteException;
+    public void waitingToBeServed(int sID) throws RemoteException;
     
 
     /**
