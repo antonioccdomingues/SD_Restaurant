@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Objects;
 
 import serverSide.main.Constants;
+import serverSide.main.GeneralReposMain;
 import clientSide.entities.WaiterState;
 import clientSide.entities.StudentState;
 import clientSide.entities.ChefState;
@@ -36,6 +37,7 @@ public class GeneralRepos implements GeneralReposInterface
     //flag for students order
     private int orderID = -1;
 
+    private int nEntities = 0;
     //array with seat order
     private String[] order = new String[Constants.students_number];
     private int orderFlag = 0;
@@ -289,10 +291,10 @@ public class GeneralRepos implements GeneralReposInterface
 
 	}
 
-    public void shutdown() throws RemoteException
+    public synchronized void shutdown () throws RemoteException
     {
-
+        nEntities += 1;
+        if (nEntities >= Constants.E_Repos)
+           GeneralReposMain.shutdown ();
     }
 }
-
-

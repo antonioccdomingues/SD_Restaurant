@@ -1,9 +1,18 @@
 package serverSide.objects;
 
+import commInfra.*;
+import clientSide.entities.WaiterState;
+import clientSide.entities.ChefState;
+
+import java.rmi.RemoteException;
+
+import genclass.GenericIO;
+
 import interfaces.GeneralReposInterface;
-import serverSide.entities.*;
 import serverSide.main.Constants;
-import serverSide.stubs.*;
+import serverSide.main.BarMain;
+import interfaces.*;
+
 
 /**
  *    Kitchen.
@@ -13,11 +22,11 @@ import serverSide.stubs.*;
  *    
  */
 
-public class Kitchen extends Thread 
+public class Kitchen implements KitchenInterface 
 {
     private int portionsDelivered;
     private int coursesDelievered=0;
-    private double delay = 0;
+    private int nEntities=0;
     private boolean StartedPrep = false; 
     private boolean handedNoteToChef = false;
     private boolean portionCollected = false;
@@ -30,64 +39,64 @@ public class Kitchen extends Thread
 	*
 	*    @param repos reference to the general repository
 	*/
-    public Kitchen(GeneralReposStub repos)
+    public Kitchen(GeneralReposInterface repos)
     {
         this.repos = repos;
-        this.delay = 300 * Math.random();
     }
 
-    public synchronized void startPreparation()
+    public synchronized ReturnValue startPreparation() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.PREPARING_THE_COURSE);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.PREPARING_THE_COURSE);
         this.StartedPrep = true;
         notifyAll();
+        return new ReturnValue(false, ChefState.PREPARING_THE_COURSE, 0);
     }
 
-    public synchronized void proceedToPresentation()
+    public synchronized ReturnValue proceedToPresentation() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.DISHING_THE_PORTIONS);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.DISHING_THE_PORTIONS);
         this.portionsDelivered = 0;
+        return new ReturnValue(false, ChefState.DISHING_THE_PORTIONS, 0);
     }
 
-    public synchronized void haveNextPortionReady()
+    public synchronized ReturnValue haveNextPortionReady() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.DISHING_THE_PORTIONS);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.DISHING_THE_PORTIONS);
         this.portionCollected = false;
+        return new ReturnValue(false, ChefState.DISHING_THE_PORTIONS, 0);
     }
     
-    public synchronized void continuePreparation()
+    public synchronized ReturnValue continuePreparation() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.PREPARING_THE_COURSE);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.PREPARING_THE_COURSE);
         this.coursesDelievered++;
         if(this.coursesDelievered==(Constants.courses_number-1))
         {
             this.orderDone = true;
         }
+
+        return new ReturnValue(false, ChefState.PREPARING_THE_COURSE, 0);
     }
 
-    public synchronized void cleanUp()
+    public synchronized ReturnValue cleanUp() throws RemoteException
     {
-        ((Chef) Thread.currentThread()).setChefState(ChefState.CLOSING_SERVICE);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.CLOSING_SERVICE);
         // END
+        return new ReturnValue(false, ChefState.CLOSING_SERVICE, 0);
     }
 
-    public synchronized boolean hasTheOrderBeenCompleted()
+    public synchronized ReturnValue hasTheOrderBeenCompleted() throws RemoteException
     {
         // Only when the 3 course meal has been delivered
-        return this.orderDone;
+        return new ReturnValue(this.orderDone, 0, 0);
     }
 
-    public synchronized boolean haveAllPortionsBeenDelivered()
+    public synchronized ReturnValue haveAllPortionsBeenDelivered() throws RemoteException
     {
         //System.out.println(this.portionsDelivered);
         if(this.portionsDelivered == (Constants.students_number-1))
         {
-            return true;
+            return new ReturnValue(true, 0, 0);
         }
         else
         {
@@ -100,14 +109,13 @@ public class Kitchen extends Thread
                 }
             }
             this.portionsDelivered++;
-            return false;
+            return new ReturnValue(false, 0, 0);
         }
     }
 
-    public synchronized void handNoteToTheChef()
+    public synchronized ReturnValue handNoteToTheChef() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.PLACING_THE_ORDER);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.PLACING_THE_ORDER);
 
         this.handedNoteToChef = true;
         notifyAll();
@@ -120,21 +128,20 @@ public class Kitchen extends Thread
                 e.printStackTrace();
             }
         }
+        return new ReturnValue(false, WaiterState.PLACING_THE_ORDER, 0);
     }
 
-    public synchronized void collectPortion()
+    public synchronized ReturnValue collectPortion() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.WAITING_FOR_PORTION);
-
         this.portionCollected = true;
         notifyAll();
+        return new ReturnValue(false, WaiterState.WAITING_FOR_PORTION, 0);
     }
 
-    public synchronized void watchTheNews()
+    public synchronized ReturnValue watchTheNews() throws RemoteException
     {
         // This is a blocking state
-        ((Chef) Thread.currentThread()).setChefState(ChefState.WAITING_FOR_AN_ORDER);
-        repos.setChefState(((Chef) Thread.currentThread()).getChefState());
+        repos.setChefState(ChefState.WAITING_FOR_AN_ORDER);
 
         while(!this.handedNoteToChef)
         {
@@ -144,20 +151,38 @@ public class Kitchen extends Thread
                 e.printStackTrace();
             }
         }
+        return new ReturnValue(false, ChefState.WAITING_FOR_AN_ORDER, 0);
     }
 
-    public synchronized boolean haveAllClientsBeenServed()
+    public synchronized ReturnValue haveAllClientsBeenServed() throws RemoteException
     {
-        ((Waiter) Thread.currentThread()).setWaiterState(WaiterState.WAITING_FOR_PORTION);
-        repos.setWaiterState(((Waiter) Thread.currentThread()).getWaiterState());
+        repos.setWaiterState(WaiterState.WAITING_FOR_PORTION);
         
         if(this.portionsDelivered==(Constants.students_number))
         {
-            return true;
+            return new ReturnValue(true, WaiterState.WAITING_FOR_PORTION, 0);
         }
         else
         {
-            return false;
+            return new ReturnValue(false, WaiterState.WAITING_FOR_PORTION, 0);
         }
+
+    }
+
+    public synchronized void shutdown () throws RemoteException
+    {
+        nEntities += 1;
+        if (nEntities >= Constants.E_Kitchen) {
+        	
+        	try
+        	{ repos.shutdown();
+        	}
+        	catch (RemoteException e)
+        	{ GenericIO.writelnString ("Customer generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
+	          System.exit (1);
+        	}
+        	BarMain.shutdown ();
+        }
+        notifyAll ();                                       // the barber may now terminate
     }
 }

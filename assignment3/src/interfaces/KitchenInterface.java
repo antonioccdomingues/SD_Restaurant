@@ -82,5 +82,5 @@ public interface KitchenInterface extends Remote
     *
     */
 
-    public ReturnValue shutdown() throws RemoteException;
+    public void shutdown() throws RemoteException;
 }

@@ -146,7 +146,7 @@ public class TableMain {
 	      }
 
 	      try
-	      { reg.bind (nameEntryObject, departureAirportStub);
+	      { reg.bind (nameEntryObject, tableStub);
 	      }
 	      catch (RemoteException e)
 	      { GenericIO.writelnString ("Departure Airport registration exception: " + e.getMessage ());
@@ -200,7 +200,7 @@ public class TableMain {
 	      GenericIO.writelnString ("Departure Airport was deregistered!");
 
 	      try
-	      { shutdownDone = UnicastRemoteObject.unexportObject (departureAirport, true);
+	      { shutdownDone = UnicastRemoteObject.unexportObject (table, true);
 	      }
 	      catch (NoSuchObjectException e)
 	      { GenericIO.writelnString ("Departure Airport unexport exception: " + e.getMessage ());
