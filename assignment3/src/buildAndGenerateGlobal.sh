@@ -1,7 +1,7 @@
 echo "Removing directories."
 rm -rf dir*/*/
 echo "Compiling source code."
-javac -cp genclass.jar */*.java */*/*.java
+javac --release 8 -cp genclass.jar */*.java */*/*.java
 echo "Distributing intermediate code to the different execution environments."
 echo "  RMI registry"
 rm -rf dirRMIRegistry/interfaces dirRMIRegistry/commInfra
