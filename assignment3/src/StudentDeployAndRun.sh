@@ -5,4 +5,4 @@ sshpass -p "qwerty" scp genclass.jar student.zip sd205@l040101-ws06.ua.pt:/home/
 echo "Decompressing data sent to the bar node."
 sshpass -p "qwerty" ssh sd205@l040101-ws06.ua.pt 'unzip -qo student.zip'
 echo "Executing program at the customers node."
-sshpass -p "qwerty" ssh sd205@l040101-ws06.ua.pt 'java -classpath "genclass.jar:." clientSide.main.StudentMain' 
+sshpass -p "qwerty" ssh sd205@l040101-ws06.ua.pt './student' 

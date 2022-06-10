@@ -6,4 +6,4 @@ sshpass -p "qwerty" scp genclass.jar kitchen.zip sd205@l040101-ws02.ua.pt:/home/
 echo "Decompressing data sent to the bar node."
 sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'unzip -qo  kitchen.zip'
 echo "Executing program at the customers node."
-sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt 'java -classpath "genclass.jar:." serverSide.main.KitchenMain' 
+sshpass -p "qwerty" ssh sd205@l040101-ws02.ua.pt './kitchen.sh' 

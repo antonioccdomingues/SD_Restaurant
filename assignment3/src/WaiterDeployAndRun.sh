@@ -5,4 +5,4 @@ sshpass -p "qwerty" scp genclass.jar waiter.zip sd205@l040101-ws05.ua.pt:/home/s
 echo "Decompressing data sent to the bar node."
 sshpass -p "qwerty" ssh sd205@l040101-ws05.ua.pt 'unzip -qo waiter.zip'
 echo "Executing program at the customers node."
-sshpass -p "qwerty" ssh sd205@l040101-ws05.ua.pt 'java -classpath "genclass.jar:." clientSide.main.WaiterMain' 
+sshpass -p "qwerty" ssh sd205@l040101-ws05.ua.pt './waiter' 

@@ -5,4 +5,4 @@ sshpass -p "qwerty" scp -r genclass.jar dirRegistry.zip sd205@l040101-ws09.ua.pt
 echo "Decompressing data sent to the registry node."
 sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt "cd test/Restaurant ; unzip -uq dirRegistry.zip"
 echo "Executing program at the registry node."
-sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt 'cd test/Restaurant/dirRegistry ; ./registry.sh'
+sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt './registry.sh'

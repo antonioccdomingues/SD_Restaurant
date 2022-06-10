@@ -10,6 +10,6 @@ echo "Decompressing data sent to the RMIregistry node."
 sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt "cd test/Restaurant ; unzip -uq dirRMIRegistry.zip"
 echo "Executing program at the RMIregistry node."
 sshpass -p "qwerty" ssh sd205@l040101-ws09.ua.pt 'cd test/Restaurant/dirRMIRegistry ; cp interfaces/*.class /home/sd205/Public/classes/interfaces ; cp commInfra/*.class /home/sd205/Public/classes/commInfra ; cp rmiregistry.sh /home/sd205'
-sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt './rmiregistry.sh 22150'
+sshpass -p "qwerty" ssh -q sd205@l040101-ws09.ua.pt './rmiregistry.sh 22340'
 
 
