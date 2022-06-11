@@ -10,6 +10,7 @@ import genclass.GenericIO;
 
 import interfaces.GeneralReposInterface;
 import serverSide.main.Constants;
+import serverSide.main.KitchenMain;
 import serverSide.main.BarMain;
 import interfaces.*;
 
@@ -181,7 +182,7 @@ public class Kitchen implements KitchenInterface
         	{ GenericIO.writelnString ("Customer generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
 	          System.exit (1);
         	}
-        	BarMain.shutdown ();
+        	KitchenMain.shutdown ();
         }
         notifyAll ();                                       // the barber may now terminate
     }

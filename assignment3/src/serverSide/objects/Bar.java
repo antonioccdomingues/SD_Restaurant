@@ -85,7 +85,7 @@ public class Bar implements BarInterface
         } catch (MemException e) {
             e.printStackTrace();
         }
-
+        
         repos.setWaiterState(WaiterState.PRESENTING_THE_MENU);
 
         students_saluted[student] = true;
@@ -99,7 +99,7 @@ public class Bar implements BarInterface
         // After being in presenting the menu state
         // we wait here, before returning to the bar
         // untill the student has read the menu
-        while(!students_menu[student] == false)
+        while((students_menu[student] == false))
         {
             try {
                 wait();
@@ -259,7 +259,7 @@ public class Bar implements BarInterface
 
 
         // block while it is not saluted
-        while(!students_saluted[sID] == false)
+        while((students_saluted[sID] == false))
         {
             try {
                 wait();

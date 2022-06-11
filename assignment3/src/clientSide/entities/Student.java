@@ -186,8 +186,8 @@ public class Student extends Thread
     public void run()
     {
         walkABit();
-        enter();
-        readTheMenu();
+        enter(this.sID);
+        readTheMenu(this.sID);
 
         if(FirstStudent(this.sID))
         {
@@ -198,14 +198,20 @@ public class Student extends Thread
             }
             // Means the first student has registered everybody choice
             callTheWaiter(this.sID);
+            System.out.printf("Student[%d] called the waiter\n", this.sID);
             describeTheOrder(this.sID);
+            System.out.printf("Student[%d] described the order\n", this.sID);
             joinTheTalk(this.sID);
+            System.out.printf("Student[%d] joined the talk\n", this.sID);
         }
         else
         {
             informCompanion(this.sID);
+            System.out.printf("Student[%d] informed companion\n", this.sID);
         }
 
+        
+        System.out.printf("Student[%d] started eating ", this.sID);
         int courses = 0;
         while(courses < Constants.courses_number)//while(!table.isOrderDone());
         {
@@ -259,10 +265,10 @@ public class Student extends Thread
      *     
      */
 
-    private void enter() {
+    private void enter(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = bar.enter(this.sID);
+        { ret = bar.enter(sID);
         }
         catch (RemoteException e)
         { 
@@ -276,10 +282,10 @@ public class Student extends Thread
      *     
      */
 
-    private void readTheMenu() {
+    private void readTheMenu(int sID) {
     	ReturnValue ret = null;
     	try
-        { ret = bar.readTheMenu(this.sID);
+        { ret = bar.readTheMenu(sID);
         }
         catch (RemoteException e)
         { 

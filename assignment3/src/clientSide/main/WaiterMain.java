@@ -141,21 +141,21 @@ public class WaiterMain {
 	      { kitchenStub.shutdown ();
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Customer generator remote exception on Restaurant shutdown: " + e.getMessage ());
+	      { GenericIO.writelnString ("Customer generator remote exception on Kitchen shutdown: " + e.getMessage ());
 	        System.exit (1);
 	      }
 	     try
 	      { barStub.shutdown ();
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Customer generator remote exception on Restaurant shutdown: " + e.getMessage ());
+	      { GenericIO.writelnString ("Customer generator remote exception on Bar shutdown: " + e.getMessage ());
 	        System.exit (1);
 	      }
 	     try
 	      { tableStub.shutdown ();
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Customer generator remote exception on Restaurant shutdown: " + e.getMessage ());
+	      { GenericIO.writelnString ("Customer generator remote exception on Table shutdown: " + e.getMessage ());
 	        System.exit (1);
 	      }
 	      

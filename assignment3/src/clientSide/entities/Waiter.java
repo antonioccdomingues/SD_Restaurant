@@ -126,7 +126,9 @@ public class Waiter extends Thread
                     break;
                 case 1:
                     getThePad();
+                    System.out.println("Waiter got the pad");
                     handNoteToTheChef();
+                    System.out.println("Handed note to chef");
                     returningToTheBar();
                     break;
                 case 2:

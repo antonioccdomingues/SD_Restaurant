@@ -79,7 +79,7 @@ public class GeneralReposMain {
 
 	     /* instantiate a general repository object */
 
-	      GeneralRepos repos = new GeneralRepos ("logger");                      // general repository object
+	      GeneralRepos repos = new GeneralRepos ("log.txt");                      // general repository object
 	      GeneralReposInterface reposStub = null;                        // remote reference to the general repository object
 
 	      try

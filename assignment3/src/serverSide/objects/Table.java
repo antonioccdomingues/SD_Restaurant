@@ -11,6 +11,7 @@ import genclass.GenericIO;
 
 import interfaces.GeneralReposInterface;
 import serverSide.main.Constants;
+import serverSide.main.TableMain;
 import serverSide.main.BarMain;
 import interfaces.*;
 
@@ -66,7 +67,7 @@ public class Table implements TableInterface
     public synchronized ReturnValue getThePad() throws RemoteException
     {
         repos.setWaiterState(WaiterState.TAKING_THE_ORDER);
-
+        System.out.println("WAiter waiting");
         while(!this.orderDescribed)
         {
             try {
@@ -171,8 +172,6 @@ public class Table implements TableInterface
         repos.setStudentState(sID, StudentState.CHATTING_WITH_COMPANIONS);
 
         this.firstStudentJoinedTalk = true;
-        // Has to be waiting here 
-        // for everybody to be served
         notifyAll();
         return new ReturnValue(false, StudentState.CHATTING_WITH_COMPANIONS, 0);
     }
@@ -267,7 +266,8 @@ public class Table implements TableInterface
 
     public synchronized ReturnValue describeTheOrder(int sID) throws RemoteException
     {
-        repos.setStudentState(sID, ((Student) Thread.currentThread()).getStudentState());
+        System.out.println("Student descried order");
+        repos.setStudentState(sID, StudentState.ORGANIZING_THE_ORDER); 
         this.orderDescribed = true;
         notifyAll();
         return new ReturnValue(false, StudentState.ORGANIZING_THE_ORDER , 0);
@@ -285,7 +285,7 @@ public class Table implements TableInterface
         // wake waiter waiting to serve 
         notifyAll();
         // block while it is not served
-        while(!students[sID] == false)
+        while(students[sID] == false)
         {
             try {
                 wait();
@@ -310,7 +310,7 @@ public class Table implements TableInterface
         	{ GenericIO.writelnString ("Customer generator remote exception on GeneralRepos shutdown: " + e.getMessage ());
 	          System.exit (1);
         	}
-        	BarMain.shutdown ();
+        	TableMain.shutdown ();
         }
         notifyAll ();                                       // the barber may now terminate
     }

@@ -7,4 +7,4 @@ echo "Decompressing data sent to the bar node."
 sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'unzip -qo dirGeneralRepos.zip'
 echo "Executing program at the customers node."
 sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'cd dirGeneralRepos ; ./generalRepos.sh' 
-#sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'cat logger' 
+#sshpass -p "qwerty" ssh sd205@l040101-ws10.ua.pt 'cat log.txt' 

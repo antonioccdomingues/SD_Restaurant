@@ -66,7 +66,7 @@ public class StudentMain {
 	     
 	     Registry registry = null;
 	     
-	     Student [] pass = new Student [Constants.students_number];
+	     Student [] students = new Student [Constants.students_number];
 
 	     try
 	     { registry = LocateRegistry.getRegistry (rmiRegHostName, rmiRegPortNumb);
@@ -108,17 +108,17 @@ public class StudentMain {
 	     }
 	    
          for (int i = 0; i < Constants.students_number; i++)
-         pass[i] = new Student (i, StudentState.GOING_TO_THE_RESTAURANT, Bar, Table);
+         students[i] = new Student (i, StudentState.GOING_TO_THE_RESTAURANT, Bar, Table);
 	     
          /* start of the simulation */
          
          for (int i = 0; i < Constants.students_number; i++)
-         pass[i].start ();
+         students[i].start ();
 
 	    /* wait for the end */
         for (int i = 0; i < Constants.students_number; i++)
         { try
-        { pass[i].join ();
+        { students[i].join ();
         }
         catch (InterruptedException e) {}
         System.out.println("The Student "+(i+1)+" just terminated");

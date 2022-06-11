@@ -126,7 +126,7 @@ public class BarMain {
 	     /* register it with the general registry service */
 
 	      String nameEntryBase = "RegisterHandler";                      // public name of the object that enables the registration                                                               // of other remote objects
-	      String nameEntryObject = "DepartureAirport";                   // public name of the barber shop object
+	      String nameEntryObject = "Bar";                   // public name of the barber shop object
 	      
 	      RegisterInterface reg = null;                                           // remote reference to the object that enables the registration
 	                                                                     // of other remote objects
@@ -165,9 +165,9 @@ public class BarMain {
 	      GenericIO.writelnString ("Departure Airport is in operation!");
 	      try
 	      { while (!end)
-	          synchronized (Class.forName ("serverSide.main.DepartureAirportMain"))
+	          synchronized (Class.forName ("serverSide.main.BarMain"))
 	          { try
-	            { (Class.forName ("serverSide.main.DepartureAirportMain")).wait ();
+	            { (Class.forName ("serverSide.main.BarMain")).wait ();
 	            }
 	            catch (InterruptedException e)
 	            { GenericIO.writelnString ("DepartureAirportMain main thread was interrupted!");
@@ -220,8 +220,8 @@ public class BarMain {
 	    {
 	       end = true;
 	       try
-	       { synchronized (Class.forName ("serverSide.main.DepartureAirportMain"))
-	         { (Class.forName ("serverSide.main.DepartureAirportMain")).notify ();
+	       { synchronized (Class.forName ("serverSide.main.BarMain"))
+	         { (Class.forName ("serverSide.main.BarMain")).notify ();
 	         }
 	       }
 	      catch (ClassNotFoundException e)
