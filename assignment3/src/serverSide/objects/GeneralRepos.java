@@ -19,7 +19,7 @@ public class GeneralRepos implements GeneralReposInterface
     //name of logFile
     private final String logFileName;
 
-    //state of the pilot
+    //state of the Chef
     private int chefState;
 
     //state of the waiter
@@ -169,9 +169,9 @@ public class GeneralRepos implements GeneralReposInterface
     }
 
     /**
-	 *   Set passenger state.
+	 *   Set Student order.
 	 *
-	 *     @param id passenger id
+	 *     @param id Student id
 	 */
 
 	public synchronized void setStudentsOrder (int id)  throws RemoteException
@@ -252,10 +252,7 @@ public class GeneralRepos implements GeneralReposInterface
             case 7:   lineStatus += " GGHOM ";break;
             }
 
-        lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);//" " + inQueue + "    " + inFlight + "    " + inDestination;
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
-        // FAZER AQUI A LINE STATUS PARA A ORDEM DE LUGARES DA TABLE!!
+        lineStatus += String.format(" %4s     %4s ", NCourse, NPortion);
 
         lineStatus += String.format("    %4s  %4s  %4s  %4s  %4s  %4s  %4s  ", order[0], order[1], order[2], order[3], order[4], order[5], order[6]);
 
@@ -268,8 +265,7 @@ public class GeneralRepos implements GeneralReposInterface
     }
 
     /**
-	 *   Write a specific state line at the end of the logging file, for example an message informing that
-	 *   the plane has arrived.
+	 *   Write a specific state line at the end of the logging file
 	 *
 	 *     @param message message to write in the logging file
 	 */

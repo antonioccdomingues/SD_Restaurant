@@ -53,16 +53,15 @@ public interface GeneralReposInterface extends Remote
     
 
     /**
-	 *   Set passenger state.
+	 *   Set Student order.
 	 *
-	 *     @param id passenger id
+	 *     @param id Student id
 	 */
 
 	public void setStudentsOrder(int id) throws RemoteException;
     
     /**
-	 *   Write a specific state line at the end of the logging file, for example an message informing that
-	 *   the plane has arrived.
+	 *   Write a specific state line at the end of the logging file
 	 *
 	 *     @param message message to write in the logging file
 	 */

@@ -15,7 +15,7 @@ import interfaces.RegisterInterface;
 import serverSide.objects.Bar;
 
 /**
- *    Instantiation and registering of a departure airport object.
+ *    Instantiation and registering of a Bar object.
  *
  *    Implementation of a client-server model of type 2 (server replication).
  *    Communication is based on Java RMI.
@@ -110,14 +110,14 @@ public class BarMain {
 
 	     /* instantiate a barber shop object */
 
-	      Bar bar = new Bar (reposStub);                 // barber shop object
+	      Bar bar = new Bar (reposStub);                 // Bar object
 	      BarInterface barStub = null;                          // remote reference to the barber shop object
 
 	      try
 	      { barStub = (BarInterface) UnicastRemoteObject.exportObject (bar, portNumb);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport stub generation exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar stub generation exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
@@ -149,20 +149,20 @@ public class BarMain {
 	      { reg.bind (nameEntryObject, barStub);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport registration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar registration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (AlreadyBoundException e)
-	      { GenericIO.writelnString ("Departure Airport already bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar already bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport object was registered!");
+	      GenericIO.writelnString ("Bar object was registered!");
 
 	     /* wait for the end of operations */
 
-	      GenericIO.writelnString ("Departure Airport is in operation!");
+	      GenericIO.writelnString ("Bar is in operation!");
 	      try
 	      { while (!end)
 	          synchronized (Class.forName ("serverSide.main.BarMain"))
@@ -188,28 +188,28 @@ public class BarMain {
 	      { reg.unbind (nameEntryObject);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport deregistration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar deregistration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (NotBoundException e)
-	      { GenericIO.writelnString ("Departure Airport not bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar not bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport was deregistered!");
+	      GenericIO.writelnString ("Bar was deregistered!");
 
 	      try
 	      { shutdownDone = UnicastRemoteObject.unexportObject (bar, true);
 	      }
 	      catch (NoSuchObjectException e)
-	      { GenericIO.writelnString ("Departure Airport unexport exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Bar unexport exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 
 	      if (shutdownDone)
-	         GenericIO.writelnString ("Departure Airport was shutdown!");
+	         GenericIO.writelnString ("Bar was shutdown!");
 	   }
 	   
 	   /**

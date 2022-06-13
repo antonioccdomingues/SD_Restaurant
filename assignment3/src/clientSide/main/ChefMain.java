@@ -125,14 +125,14 @@ public class ChefMain {
 	      { Bar.shutdown ();
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Customer generator remote exception on BarberShop shutdown: " + e.getMessage ());
+	      { GenericIO.writelnString ("Customer generator remote exception on Restaurant shutdown: " + e.getMessage ());
 	        System.exit (1);
 	      }
 	     try
 	      { Kitchen.shutdown ();
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Customer generator remote exception on BarberShop shutdown: " + e.getMessage ());
+	      { GenericIO.writelnString ("Customer generator remote exception on Restaurant shutdown: " + e.getMessage ());
 	        System.exit (1);
 	      }
 	     

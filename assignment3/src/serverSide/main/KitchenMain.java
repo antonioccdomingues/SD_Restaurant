@@ -15,7 +15,7 @@ import interfaces.RegisterInterface;
 import serverSide.objects.Kitchen;
 
 /**
- *    Instantiation and registering of a departure airport object.
+ *    Instantiation and registering of a Kitchen object.
  *
  *    Implementation of a client-server model of type 2 (server replication).
  *    Communication is based on Java RMI.
@@ -117,7 +117,7 @@ public class KitchenMain {
 	      { kitchenStub = (KitchenInterface) UnicastRemoteObject.exportObject (kitchen, portNumb);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport stub generation exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen stub generation exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
@@ -149,20 +149,20 @@ public class KitchenMain {
 	      { reg.bind (nameEntryObject, kitchenStub);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport registration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen registration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (AlreadyBoundException e)
-	      { GenericIO.writelnString ("Departure Airport already bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen already bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport object was registered!");
+	      GenericIO.writelnString ("Kitchen object was registered!");
 
 	     /* wait for the end of operations */
 
-	      GenericIO.writelnString ("Departure Airport is in operation!");
+	      GenericIO.writelnString ("Kitchen is in operation!");
 	      try
 	      { while (!end)
 	          synchronized (Class.forName ("serverSide.main.KitchenMain"))
@@ -188,28 +188,28 @@ public class KitchenMain {
 	      { reg.unbind (nameEntryObject);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport deregistration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen deregistration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (NotBoundException e)
-	      { GenericIO.writelnString ("Departure Airport not bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen not bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport was deregistered!");
+	      GenericIO.writelnString ("Kitchen was deregistered!");
 
 	      try
 	      { shutdownDone = UnicastRemoteObject.unexportObject (kitchen, true);
 	      }
 	      catch (NoSuchObjectException e)
-	      { GenericIO.writelnString ("Departure Airport unexport exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Kitchen unexport exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 
 	      if (shutdownDone)
-	         GenericIO.writelnString ("Departure Airport was shutdown!");
+	         GenericIO.writelnString ("Kitchen was shutdown!");
 	   }
 	   
 	   /**

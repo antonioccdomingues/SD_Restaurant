@@ -15,7 +15,7 @@ import interfaces.RegisterInterface;
 import serverSide.objects.Table;
 
 /**
- *    Instantiation and registering of a departure airport object.
+ *    Instantiation and registering of a Table object.
  *
  *    Implementation of a client-server model of type 2 (server replication).
  *    Communication is based on Java RMI.
@@ -117,7 +117,7 @@ public class TableMain {
 	      { tableStub = (TableInterface) UnicastRemoteObject.exportObject (table, portNumb);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport stub generation exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table stub generation exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
@@ -149,20 +149,20 @@ public class TableMain {
 	      { reg.bind (nameEntryObject, tableStub);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport registration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table registration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (AlreadyBoundException e)
-	      { GenericIO.writelnString ("Departure Airport already bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table already bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport object was registered!");
+	      GenericIO.writelnString ("Table object was registered!");
 
 	     /* wait for the end of operations */
 
-	      GenericIO.writelnString ("Departure Airport is in operation!");
+	      GenericIO.writelnString ("Table is in operation!");
 	      try
 	      { while (!end)
 	          synchronized (Class.forName ("serverSide.main.TableMain"))
@@ -188,28 +188,28 @@ public class TableMain {
 	      { reg.unbind (nameEntryObject);
 	      }
 	      catch (RemoteException e)
-	      { GenericIO.writelnString ("Departure Airport deregistration exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table deregistration exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 	      catch (NotBoundException e)
-	      { GenericIO.writelnString ("Departure Airport not bound exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table not bound exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
-	      GenericIO.writelnString ("Departure Airport was deregistered!");
+	      GenericIO.writelnString ("Table was deregistered!");
 
 	      try
 	      { shutdownDone = UnicastRemoteObject.unexportObject (table, true);
 	      }
 	      catch (NoSuchObjectException e)
-	      { GenericIO.writelnString ("Departure Airport unexport exception: " + e.getMessage ());
+	      { GenericIO.writelnString ("Table unexport exception: " + e.getMessage ());
 	        e.printStackTrace ();
 	        System.exit (1);
 	      }
 
 	      if (shutdownDone)
-	         GenericIO.writelnString ("Departure Airport was shutdown!");
+	         GenericIO.writelnString ("Table was shutdown!");
 	   }
 	   
 	   /**
