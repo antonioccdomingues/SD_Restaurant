@@ -53,7 +53,7 @@ public interface GeneralReposInterface extends Remote
     
 
     /**
-	 *   Set Student state.
+	 *   Set Student order.
 	 *
 	 *     @param id Student id
 	 */

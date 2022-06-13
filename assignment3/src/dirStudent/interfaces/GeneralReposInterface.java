@@ -53,7 +53,7 @@ public interface GeneralReposInterface extends Remote
     
 
     /**
-	 *   Set Student Order.
+	 *   Set Student order.
 	 *
 	 *     @param id Student id
 	 */
@@ -61,7 +61,7 @@ public interface GeneralReposInterface extends Remote
 	public void setStudentsOrder(int id) throws RemoteException;
     
     /**
-	 *   Write a specific state line at the end of the logging file.
+	 *   Write a specific state line at the end of the logging file
 	 *
 	 *     @param message message to write in the logging file
 	 */
