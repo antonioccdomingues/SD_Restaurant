@@ -1,1 +1,1 @@
-javadoc -d ./docs -classpath ./genclass.jar -sourcepath . -subpackages clientSide:commInfra:serverSide
+javadoc -d ./docs -classpath ./genclass.jar -sourcepath . -subpackages clientSide:commInfra:serverSide:interfaces
